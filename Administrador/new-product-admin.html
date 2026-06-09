@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huellitas-Admin</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-primary">
+    <div class="d-flex min-vh-100">
+        <!-- SIDEBAR -->
+        <aside id="sidebar"
+            class="bg-dark text-white d-flex flex-column flex-shrink-0">
+            <ul class="nav nav-pills flex-column gap-1">
+                <li class="nav-item border-bottom">
+                    <div class="nav-link text-white d-flex align-items-center ">
+                        <div class="bg-success p-2 rounded-5 flex-shrink-0">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paw-print-icon lucide-paw-print"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg>
+                        </div>
+                           <div class="sidebar-title ms-3">
+                                <div class="fw-semibold fs-5 lh-1">Huellitas</div>
+                                <div style="font-size:.68rem; color:#b89880">Panel admin</div>
+                            </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard-admin.html" class="nav-link d-flex text-white align-items-center">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                        <span class="menu-text ms-3">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="usuarios-admin.html" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-users fa-fw"></i>
+                        <span class="menu-text ms-3">Usuarios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="categorias-admin.html" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-tags fa-fw"></i> 
+                        <span class="menu-text ms-3">Categorías</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="productos-admin.html" class="nav-link text-white active d-flex align-items-center">
+                        <i class="fa-solid fa-box fa-fw"></i> 
+                        <span class="menu-text ms-3">Productos</span>
+                    </a>
+                </li>
+                <!--<li class="nav-item">
+                    <a href="#" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping fa-fw"></i>
+                        <span class="menu-text ms-3">Pedidos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-gear fa-fw"></i>
+                        <span class="menu-text ms-3">Configuración</span>
+                    </a>
+                </li>-->
+            </ul>
+            <div class=" mt-auto m-2 p-2 border-top">
+                <a href="#" class="nav-link text-danger d-flex align-items-center">
+                    <i class="bi bi-box-arrow-left"></i>
+                        <span class="menu-text ms-3">Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+        <!-- CONTENIDO -->
+        <div id="contenido" class="flex-grow-1 overflow-auto container-fluid ">
+            <!-- NAVBAR SUPERIOR -->
+            <nav class="navbar navbar-expand bg-primary border-bottom px-3 sticky-top">
+                <button id="menuBtn" class="btn btn-outline-secondary me-3"><i class="bi bi-list-stars"></i></button>
+                <form class="flex-grow-1 me-3">
+                    <input type="search" class="form-control" placeholder="Buscar usuarios, productos...">
+                </form>
+                <div class="d-flex align-items-center gap-2 px-2 py-1 rounded-pill" style="cursor:pointer">
+                    <div class="av-circle">AM</div>
+                    <div class="d-none d-sm-block lh-sm">
+                        <div style="font-size:.82rem;font-weight:600">Avigail Miler</div>
+                        <div style="font-size:.68rem;color:#9c7355">Administradora</div>
+                    </div>
+                </div>
+            </nav>
+            <!-- MAIN -->
+            <main class="p-2 container mt-2">
+                <header class="mb-2 mt-1 container d-flex align-items-start justify-content-between flex-wrap gap-3">
+                    <div>
+                        <p class="text-uppercase fw-bold mb-1" style="font-size:.7rem; letter-spacing:1.2px; color:#8a7060;">Productos</p>
+                        <h1 class="fw-bold mb-1">Nuevo producto</h1>
+                        <p class="text-muted mb-0">Cargá los datos para dar de alta un producto en el catálogo.</p>
+                    </div>
+                    <button class="btn d-flex align-items-center gap-2 align-self-center bg-dark text-white rounded-5 p-2 fs-6 ">
+                        <i class="bi bi-arrow-left"></i>Volver al catálogo
+                    </button>
+                </header>
+                <section id="productos" class="container">
+                    <div class="row g-4 mt-1">
+                        <!-- COLUMNA IZQUIERDA-->
+                        <div class="col-12 col-lg-8">
+                            <!--Información basica-->
+                            <div class="card bg-light mb-3">
+                                <div class="card-body">
+                                    <h4 class="fw-bold mb-4">Información básica</h4>
+                                    <!-- Campos -->
+                                    <div class="d-flex flex-column gap-2">
+                                        <label for="nombre_prod" class="form-label mb-0">Nombre del producto</label>
+                                        <input type="text" class="form-control mb-2 rounded-5" id="nombre_prod "placeholder="Ej: Alimento Balanceado ">
+                                        <label for="descripcion" class="form-label mb-0">Descripción</label>
+                                        <textarea class="form-control rounded-5 mb-2" placeholder="Descripción detallada del producto"></textarea>
+                                        <label for="categoria" class="form-label mb-0">Categoría</label>
+                                        <select class="form-select rounded-5 mb-2">
+                                            <option value="" disabled selected>Seleccione categoría</option>
+                                            <option>Perros</option>
+                                            <option>Gatos</option>
+                                            <option>Aves</option>
+                                            <option>Peces</option>
+                                            <option>Higiene</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Stock y precio-->
+                            <div class="card bg-light mb-3 ">
+                                <div class="card-body">
+                                    <h4 class="fw-bold mb-4">Precio y stock</h4>
+                                    <!-- Campos -->
+                                    <div class="d-flex flex-column gap-2">
+                                        <div class="d-flex gap-2">
+                                            <div>
+                                                <label for="nombre_prod" class="form-label mb-0">Precio</label>
+                                                <input type="number" class="form-control rounded-5" placeholder="0,00">
+                                            </div>
+                                            <div>
+                                                <label for="nombre_prod" class="form-label mb-0">Stock</label>
+                                                <input type="number" class="form-control rounded-5" placeholder="0">
+                                            </div>
+                                            <div>
+                                                <label for="nombre_prod" class="form-label mb-0">Stock mínimo</label>
+                                                <input type="number" class="form-control rounded-5" placeholder="5">
+                                            </div>   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Imagen-->
+                            <div class="card bg-light mb-3">
+                                <div class="card-body">
+                                    <h4 class="fw-bold mb-4">Imagen</h4>
+                                    <!-- Campos -->
+                                    <div class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3 bg-primary"
+                                        style="height:160px; border-style:dashed !important; cursor:pointer;">
+                                        <i class="bi bi-image text-muted" style="font-size:2rem;"></i>
+                                        <small class="text-muted mt-2">Arrastrá una imagen o hacé clic para subir</small>
+                                        <small class=" text-muted mt-1">JPG, PNG o WebP. Máx. 2 MB.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COLUMNA DERECHA-->
+                         <div class="col-12 col-lg-4">
+                             <!--Visibilidad-->
+                            <div class="card bg-light mb-3">
+                                <div class="card-body">
+                                    <h4 class="fw-bold mb-4">Visibilidad</h4>
+                                    <div class="bg-primary mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3 p-3 rounded-3">
+                                        <div>
+                                            <div class="fw-semibold lh-1">Publicado</div>
+                                            <div class="text-muted"><small>Visible en la tienda</small></div>
+                                        </div>
+                                        <div class="form-check form-switch mb-0"><input class="form-check-input" type="checkbox" checked></div>
+                                    </div>
+                                    <div class="bg-primary mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3 p-3 rounded-3">
+                                        <div >
+                                            <div class="fw-semibold lh-1">Destacado</div>
+                                            <div class="text-muted"><small>Aparece en la home</small></div>
+                                        </div>
+                                        <div class="form-check form-switch mb-0"><input class="form-check-input" type="checkbox" checked></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--resumen-->
+                            <div>
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <div class="nav-link d-flex align-items-center ">
+                                            <div class="bg-dark p-2 rounded-5 flex-shrink-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f37845" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-plus-icon lucide-package-plus"><path d="M12 22V12"/><path d="M16 17h6"/><path d="M19 14v6"/><path d="M21 10.535V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.675-.955"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/></svg>
+                                            </div>
+                                            <div class="ms-3">
+                                                <div class="fw-semibold fs-5 lh-1">Resumen</div>
+                                                <div style="font-size:.68rem; color:#b89880">Revisá los datos antes de guardar.</div>
+                                            </div>
+                                        </div>
+                                        <button class="btn text-white mt-3 px-2 w-100" style="background:#2c1a0e; border-radius:12px; ">
+                                            Guardar producto
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById("menuBtn");
+        const isLg = () => window.innerWidth >= 992;
+
+        menuBtn.addEventListener("click", () => {
+            document.body.classList.toggle("collapsed");
+        });
+
+        // en cel, empieza con sidebar oculto
+        if (!isLg()) document.body.classList.add("collapsed");
+
+        window.addEventListener("resize", () => {
+            if (isLg()) document.body.classList.remove("collapsed");
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<!-- Imagen 
+                                    
+                                    
+                                        
+
+                                    
+                                    -->
