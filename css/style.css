@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
 body{
     background-color: #fcf6e9 ;
 }
@@ -126,6 +126,23 @@ body #navinicio{
     border: none;
     font-weight: 600;
 }
+.boton-carrito{
+    background-color: #3a1807; 
+    color: white;
+}
+.boton-carrito:hover{
+    background-color: #3e2e20;
+    color: white;
+}
+.boton-cerrarSesion{
+    background-color: transparent;
+     color: #2b1f1a;
+      border: 2px solid #ddd;
+}
+.boton-cerrarSesion:hover{
+    background-color: red;
+    color: white;
+}
 /*PRODUCTOS*/
 .card-categoria {
     background-color: white;
@@ -162,4 +179,96 @@ input[type="number"]{
     background-color: #F37344;
     color: white;
     
+}
+.buttoncarrito{
+    background-color: #F37344;
+    color: white;
+}
+.buttoncarrito:hover{
+    background-color: green;
+    color: white;
+}
+.textenvio{
+    color: #F37344;
+}
+@media (max-width: 620px){
+    .img-carrito{
+        width: 120px;
+        height: 120px;
+        margin-top: 15px;
+    }
+     .controles-carrito{
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+}
+/*Registro*/
+.icono-registro{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ffd9c7;
+    color: #F37344;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.8rem;
+}
+.btn-crear{
+    background: #3b1708;
+    color: white;
+    font-weight: 600;
+}
+.btn-crear:hover{
+    background-color: #F37344;
+    color: white;
+}
+/*Nosotros*/
+/*.nosotros{
+    font-family: "Fraunces", serif;
+    font-size: 60px;
+}*/
+
+.nosotros {
+    font-family: "Fraunces", serif;
+    font-size: 50px;
+    font-weight: 700;
+    color: #2d160d;
+}
+
+.titulo-seccion {
+    color: #ff6b35;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.texto-nosotros {
+    font-size: 19px;
+    color: #6d5b50;
+}
+
+.img-nosotros {
+    width: 100%;
+    border-radius: 30px;
+}
+.article-nosotros{
+    background-color: #f0e9dc;
+   
+}
+.p-nosotros{
+    max-width: 400px;
+}
+.button-nosotros{
+    background-color: #f37344; 
+    color:white;
+     border: none;
+}
+.boton-nosotros{
+    background-color: transparent;
+     color: #2b1f1a;
+      border: 2px solid #ddd;
 }
