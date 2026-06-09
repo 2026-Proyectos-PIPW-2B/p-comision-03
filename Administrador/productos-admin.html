@@ -80,8 +80,42 @@
             <nav class="navbar navbar-expand bg-primary border-bottom px-3 sticky-top">
                 <button id="menuBtn" class="btn btn-outline-secondary me-3"><i class="bi bi-list-stars"></i></button>
                 <form class="flex-grow-1 me-3">
-                    <input type="search" class="form-control" placeholder="Buscar usuarios, productos...">
+                    <input type="search" class="form-control rounded-3" style="width: 40%;" placeholder="Buscar usuarios, productos...">
                 </form>
+                <div class="dropdown">
+                    <button class="btn position-relative p-2" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="background:none; border:none;">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="position-absolute badge rounded-pill bg-danger"
+                            style="font-size:.6rem;top:1px; right:1px;">3</span>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2" style="min-width:300px; border-radius:14px;">
+                        
+                        <li class="px-2 pb-2 border-bottom">
+                            <span class="fw-bold" style="font-size:.9rem;">Notificaciones</span>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-item rounded-3 py-2">
+                                <div class="fw-semibold" style="font-size:.85rem;">Stock bajo: Alimento Premium</div>
+                                <div class="text-muted" style="font-size:.75rem;">Quedan 6 unidades</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item rounded-3 py-2">
+                                <div class="fw-semibold" style="font-size:.85rem;">Nuevo usuario registrado</div>
+                                <div class="text-muted" style="font-size:.75rem;">Hace 10 minutos</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item rounded-3 py-2">
+                                <div class="fw-semibold" style="font-size:.85rem;">Pedido #084 recibido</div>
+                                <div class="text-muted" style="font-size:.75rem;">Hace 1 hora</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="d-flex align-items-center gap-2 px-2 py-1 rounded-pill" style="cursor:pointer">
                     <div class="av-circle">AM</div>
                     <div class="d-none d-sm-block lh-sm">
@@ -99,7 +133,7 @@
                         <p class="text-muted mb-0">Organizá el catálogo creando, editando o eliminando categorías.</p>
                     </div>
                     <button class="btn d-flex align-items-center gap-2 align-self-center bg-dark text-white rounded-5 p-2 fs-6 ">
-                        <i class="bi bi-plus"></i> Nuevo producto
+                        <i class="bi bi-plus"></i><a href="new-product-admin.html" class="nav-link">Nuevo producto</a> 
                     </button>
                 </header>
                 <section id="productos" class="container">
