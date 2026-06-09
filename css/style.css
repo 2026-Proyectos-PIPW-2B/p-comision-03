@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body{
+    background-color: #fcf6e9 ;
+}
+main{
+      min-height: 60vh;
+}
+/*LOGIN*/
+.bodylogin  h2,span{
+   font-family: "Fraunces", serif;
+}
+.bodylogin p{
+    font-family: "Inter", sans-serif;
+}
+.bodylogin h2{
+    color: #3e2e20;
+}
+.form-control:focus{
+    border-color: #F37344;
+    box-shadow: none;
+}
+
+#nav{
+    background-color: #F37344;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#link{
+    color: #F37344;
+}
+#linkk{
+    color: #F37344;
+}
+.btnlogin{
+    background-color: #3e2e20;
+    color: #fcf6e9;
+}
+.btnlogin:hover{
+    background-color: #f37344;
+    color: #fdfaf3;
+}
+.mainlogin{
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+
+}
+/*INICIO*/
+header p{
+    background-color: #743b1f;
+    color: #faf5e8;
+}
+nav a{
+    color: #3e2e20 ;
+}
+body #navinicio{
+    background-color: #fcf6e9 !important;
+}
+.hero{
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+.hero h1{
+    font-family: "Fraunces", serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.hero p{
+    font-size: 1.3rem;
+    max-width: 500px;
+}
+#mainintro{
+    width: 100%;
+    min-height: 60vh;
+}
+#buttoninicio{
+    padding: 2px;
+    background-color: #f37344;
+    border: #F37344;
+}
+.icon{
+    color:#f37344 ;
+}
+.destacado{
+    font-family: "Fraunces", serif;
+    color: #3e2e20 ;
+    font-size: 50px;
+}
+.stock{
+   background: #D8D2A4;
+    color: #2E2E2E;
+    padding: 6px;
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+    font-weight: 500;
+}
+.disponible{
+    background: #E8D2A4;
+    color: #2E2E2E;
+     padding: 6px;
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+    font-weight: 500;
+}
+.sinStock{
+    background: #FBE3D9;
+    color: #FF3B30;
+    padding: 6px;
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+    font-weight: 500;
+}
+.botonini{
+    background-color: #3a1807;
+    color: white;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    font-weight: 600;
+}
+/*PRODUCTOS*/
+.card-categoria {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 30px;
+    transition: 0.3s;
+}
+
+.icono {
+    width: 70px;
+    height: 70px;
+    background-color: #f1e5d1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.card-categoria:hover .icono {
+    background-color: #f47c3c;
+    color: white;}
+
+/*Carrito*/
+.img-carrito{
+    height: 120px;
+    width: 120px;
+}
+input[type="number"]{
+    width: 40px;
+}
+.botonCarrito:hover{
+    background-color: #F37344;
+    color: white;
+    
+}
