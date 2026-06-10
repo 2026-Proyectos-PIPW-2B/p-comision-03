@@ -17,6 +17,17 @@ body {
     overflow: hidden;
 }
 
+.icono {
+    width: 40px;
+    height: 40px;
+    background-color: #f1e5d1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
 #contenido {
     height: 100vh;
     overflow-y: auto;  
