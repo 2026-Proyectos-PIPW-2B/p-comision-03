@@ -143,6 +143,11 @@ body #navinicio{
     background-color: red;
     color: white;
 }
+.items-carrito{
+    background-color: #f37344;
+    color: white;
+     font-size: 0.7rem;
+}
 /*PRODUCTOS*/
 .card-categoria {
     background-color: white;
