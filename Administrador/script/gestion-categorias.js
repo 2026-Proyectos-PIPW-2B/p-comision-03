@@ -1,17 +1,20 @@
-import { obtenerCategorias } from './localStorage.js';
-import { guardarCategorias } from './localStorage.js';
+import { obtenerLocalStorage } from './localStorage.js';
+import { guardarLocalStorage } from './localStorage.js';
 
 const nombre_categoria= document.getElementById("nombre_categoria")
 const descripcion_categoria=document.getElementById("descripcion_categoria")
 const form = document.getElementById("formCategoria")
-
-let validaciones = []
+const contenedorCategorias = document.getElementById("contenedor_categorias")
 
 window.onload= function(){
-    incorporarListeners()
+    incorporarListenerBoton()
+    renderizarCards()
+    incorporarListenerCards()
 }
+/*Creación de categorias */
+let validaciones = []
 
-function incorporarListeners(){
+function incorporarListenerBoton(){
     form.addEventListener("submit", function (event) {
         event.preventDefault()
 
@@ -19,6 +22,7 @@ function incorporarListeners(){
 
         if (datosValidos()) {
             crearCategoria(nombre_categoria.value,descripcion_categoria.value)
+            renderizarCards()
             form.reset()
             limpiarEstados()
             mostrarMensajeExito()
@@ -153,14 +157,136 @@ function mostrarMensajeExito(){
 }
 
 function crearCategoria(nombre,descripcion){
-    const categoria={
-        nombre:nombre,
-        descripcion:descripcion
+    const categoria = {
+        id: crypto.randomUUID(),
+        nombre: nombre,
+        descripcion: descripcion,
+        icono: obtenerIcono(nombre.toLowerCase()),
+        stock: 0
     }
-
-    let bd_categorias=obtenerCategorias()
+    
+    let bd_categorias=obtenerLocalStorage("bd-categoria")
     bd_categorias.push(categoria)
-    guardarCategorias(bd_categorias)
+    guardarLocalStorage(bd_categorias, "bd-categoria")
 }
 
-console.log(obtenerCategorias())
+/*Visualización dinamica*/
+function obtenerIcono(nombreCategoria){
+
+    const iconos = {
+        perros: "bi-heart-fill",
+        gatos: "bi-stars",
+        aves: "bi-feather",
+        peces: "bi-water",
+        roedores: "bi-emoji-smile"
+    }
+
+    return iconos[nombreCategoria.toLowerCase()] || "bi-tag-fill"
+}
+
+function renderizarCards() {
+
+    const categorias = obtenerLocalStorage("bd-categoria")
+
+    contenedorCategorias.replaceChildren()
+
+    categorias.forEach(categoria => {
+
+        const col = document.createElement("div")
+        col.className = "col-12 col-sm-6"
+
+        const card = document.createElement("div")
+        card.className = "card card-categoria shadow bg-light h-100"
+
+        const body = document.createElement("div")
+        body.className = "card-body p-3"
+
+        const fila = document.createElement("div")
+        fila.className = "d-flex align-items-start gap-3"
+
+        const iconContainer = document.createElement("div")
+        iconContainer.className = "cat-icon-circle"
+
+        const icono = document.createElement("i")
+        icono.className = `bi ${categoria.icono}`
+
+        iconContainer.appendChild(icono)
+
+        const contenido = document.createElement("div")
+        contenido.className = "flex-grow-1"
+
+        // CABECERA
+        const header = document.createElement("div")
+        header.className = "d-flex justify-content-between align-items-center"
+
+        const titulo = document.createElement("h6")
+        titulo.className = "fw-bold mb-0"
+        titulo.textContent = categoria.nombre
+
+        const badge = document.createElement("span")
+        badge.className = "badge-stock"
+        badge.textContent = `${categoria.stock} productos`
+
+        header.append(titulo, badge)
+
+        // DESCRIPCION
+        const descripcion = document.createElement("p")
+        descripcion.className = "text-muted mt-2 mb-0"
+        descripcion.textContent = categoria.descripcion
+
+        // BOTONES
+        const acciones = document.createElement("div")
+        acciones.className = "acciones-categoria d-flex justify-content-center gap-2"
+
+        const btnEditar = document.createElement("button")
+        btnEditar.textContent= "Editar"
+        btnEditar.className = "btn btn-light rounded-pill shadow-sm btn-sm btn-editar"
+        btnEditar.dataset.id = categoria.id
+
+        const iconEditar = document.createElement("i")
+        iconEditar.className = "bi bi-pencil"
+
+        btnEditar.appendChild(iconEditar)
+
+        const btnEliminar = document.createElement("button")
+        btnEliminar.textContent="Eliminar"
+        btnEliminar.className = "btn text-danger btn-sm btn-eliminar"
+        btnEliminar.dataset.id = categoria.id
+
+        const iconEliminar = document.createElement("i")
+        iconEliminar.className = "bi bi-trash"
+
+        btnEliminar.appendChild(iconEliminar)
+
+        acciones.append(btnEditar, btnEliminar)
+
+        contenido.append(header, descripcion, acciones)
+
+        fila.append(iconContainer, contenido)
+
+        body.appendChild(fila)
+
+        card.appendChild(body)
+
+        col.appendChild(card)
+
+        contenedorCategorias.appendChild(col)
+    })
+}
+
+function incorporarListenerCards(){
+
+    contenedorCategorias.addEventListener("click", function(e){
+
+        const btnEliminar = e.target.closest(".btn-eliminar")
+        const btnEditar = e.target.closest(".btn-editar")
+
+        if(btnEliminar){
+            console.log("Eliminar:", btnEliminar.dataset.id)
+        }
+
+        if(btnEditar){
+            console.log("Editar:", btnEditar.dataset.id)
+        }
+    })
+}
