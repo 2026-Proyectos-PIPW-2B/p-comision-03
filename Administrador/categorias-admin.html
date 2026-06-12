@@ -137,21 +137,24 @@
                     <div class="row g-4 mt-1">
                         <!-- COLUMNA IZQUIERDA: Nueva categoría -->
                         <div class="col-12 col-lg-4">
-                            <div class="card bg-light h-100">
+                            <div class="card shadow bg-light h-100">
                                 <div class="card-body p-4">
-                                    <h4 class="fw-bold mb-4">Nueva categoría</h4>
-
-                                    <label class="form-label fw-semibold">Nombre</label>
-                                    <input type="text" class="form-control mb-3" placeholder="Ej. Roedores">
-
-                                    <label class="form-label fw-semibold">Descripción</label>
-                                    <textarea class="form-control mb-4" rows="5"
-                                        placeholder="Breve descripción de la categoría..."></textarea>
-
-                                    <button class="btn text-white fw-bold w-100 p-3 d-flex align-items-center justify-content-center gap-2"
-                                        style="background:#2c1a0e; border-radius:12px;">
-                                        <i class="bi bi-plus"></i> Crear categoría
-                                    </button>
+                                    <h3 class="card-title fw-semibold text-center mb-4">Nueva categoría</h3>
+                                    <form id="formCategoria" class="row g-3 needs-validation" novalidate>
+                                        <div class="mb-2">
+                                            <label class="form-label fw-semibold" for="nombre_categoria">Nombre</label>
+                                            <input type="text" class="form-control" placeholder="Ej. Roedores" id="nombre_categoria" required>
+                                            <div class="invalid-feedback" id="errorNombre"></div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold" for="descripcion_categoria">Descripción</label>
+                                            <textarea class="form-control" rows="5" placeholder="Breve descripción de la categoría..." id="descripcion_categoria" required></textarea>
+                                            <div class="invalid-feedback" id="errorDescripcion"></div>
+                                        </div>
+                                        <button type="submit" class="btn text-white fw-semibold p-3 d-flex align-items-center bg-dark rounded-3 justify-content-center gap-2"><i class="bi bi-plus"></i> Crear categoría
+                                        </button>
+                                        <div id="correcto" class="fw-bold mt-3"></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +206,8 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  
+    <script type="module" src="script/gestion-categorias.js"></script>
+    <script src="script/validator.min.js"></script>
 </body>
 
 </html>

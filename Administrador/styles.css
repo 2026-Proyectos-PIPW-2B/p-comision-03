@@ -205,3 +205,15 @@ body.collapsed svg {
     border-radius: 99px;
     white-space: nowrap;
 }
+
+/*Categorias - admin*/
+#correcto{
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    color:green
+}
+
+#correcto.mostrar{
+    opacity: 1;
+    color: green
+}
