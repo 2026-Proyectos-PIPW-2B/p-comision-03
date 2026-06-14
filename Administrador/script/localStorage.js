@@ -1,9 +1,9 @@
-export function obtenerCategorias(){
-    const categorias = localStorage.getItem("bd-categorias")
+export function obtenerLocalStorage(bd){
+    const bd_actual = localStorage.getItem(bd)
     let resultado
 
-    if (categorias) {
-        resultado = JSON.parse(categorias)
+    if (bd_actual) {
+        resultado = JSON.parse(bd_actual)
     } else {
         resultado = []
     }
@@ -11,6 +11,6 @@ export function obtenerCategorias(){
     return resultado
 }
 
-export function guardarCategorias(categorias){
-    localStorage.setItem("bd-categoria", JSON.stringify(categorias))
+export function guardarLocalStorage(bd_actual, bd){
+    localStorage.setItem(bd, JSON.stringify(bd_actual))
 }
