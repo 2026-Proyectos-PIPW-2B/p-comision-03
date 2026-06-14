@@ -1,5 +1,5 @@
-import { obtenerLocalStorage,  } from '../Administrador/script/localStorage.js'
-import{guardarLocalStorage}from '../Administrador/script/localStorage.js'
+import { obtenerLocalStorage } from './localStorage.js'
+import{guardarLocalStorage}from './localStorage.js'
 let errorNombre=document.getElementById("errorNom")
 let errorApellido=document.getElementById("errorApellido")
 let errorEmail=document.getElementById("errorEmail")

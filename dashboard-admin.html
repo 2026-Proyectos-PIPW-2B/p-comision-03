@@ -11,7 +11,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles2.css">
 </head>
 <body class="bg-primary">
     <div class="d-flex min-vh-100">
@@ -31,7 +31,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard-admin.html" class="nav-link d-flex text-white align-items-center">
+                    <a href="dashboard-admin.html" class="nav-link active d-flex align-items-center">
                         <i class="fa-solid fa-house fa-fw"></i>
                         <span class="menu-text ms-3">Dashboard</span>
                     </a>
@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="categorias-admin.html" class="nav-link text-white active d-flex align-items-center">
+                    <a href="categorias-admin.html" class="nav-link text-white d-flex align-items-center">
                         <i class="fa-solid fa-tags fa-fw"></i> 
                         <span class="menu-text ms-3">Categorías</span>
                     </a>
@@ -116,7 +116,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="d-flex align-items-center gap-2 px-2 py-1 rounded-pill" style="cursor:pointer">
+                <div class="d-flex align-items-center gap-2 px-2 py-1" style="cursor:pointer">
                     <div class="av-circle">AM</div>
                     <div class="d-none d-sm-block lh-sm">
                         <div style="font-size:.82rem;font-weight:600">Avigail Miler</div>
@@ -128,57 +128,100 @@
             <main class="p-2 container mt-2">
                 <header class="mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3">
                     <div>
-                        <p class="text-uppercase fw-bold mb-1" style="font-size:.7rem; letter-spacing:1.2px; color:#8a7060;">Categorías</p>
-                        <h1 class="fw-bold mb-1">Etiquetas de productos</h1>
-                        <p class="text-muted mb-0">Organizá el catálogo creando, editando o eliminando categorías.</p>
+                        <p class="text-uppercase fw-bold mb-1" style="font-size:.7rem; letter-spacing:1.2px; color:#8a7060;">Dashboard</p>
+                        <h1 class="fw-bold mb-1">Hola, Avi 🐾</h1>
+                        <p class="text-muted mb-0">Esto es lo que está pasando en Huellitas hoy.</p>
                     </div>
+                    <button class="btn d-flex align-items-center gap-2 align-self-center bg-dark text-white rounded-5 p-2 fs-6 ">
+                        <i class="bi bi-plus"></i> <a href="productos-admin.html" class="nav-link">Cargar producto</a>
+                    </button>
                 </header>
-                <section id="form-categorias" class="container">
-                    <div class="row g-4 mt-1">
-                        <!-- COLUMNA IZQUIERDA: Nueva categoría -->
-                        <div class="col-12 col-lg-4">
-                            <div class="card shadow bg-light h-100">
-                                <div class="card-body p-4">
-                                    <h3 class="card-title fw-semibold text-center mb-4">Nueva categoría</h3>
-                                    <form id="formCategoria" class="row g-3 needs-validation" novalidate>
-                                        <div class="mb-2">
-                                            <label class="form-label fw-semibold" for="nombre_categoria">Nombre</label>
-                                            <input type="text" class="form-control" placeholder="Ej. Roedores" id="nombre_categoria" required>
-                                            <div class="invalid-feedback" id="errorNombre"></div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label fw-semibold" for="descripcion_categoria">Descripción</label>
-                                            <textarea class="form-control" rows="5" placeholder="Breve descripción de la categoría..." id="descripcion_categoria" required></textarea>
-                                            <div class="invalid-feedback" id="errorDescripcion"></div>
-                                        </div>
-                                        <button type="submit" class="btn text-white fw-semibold p-3 d-flex align-items-center bg-dark rounded-3 justify-content-center gap-2"><i class="bi bi-plus"></i> Crear categoría
-                                        </button>
-                                        <div id="correcto" class="fw-bold mt-3"></div>
-                                    </form>
+                <section id="metricas" class="container">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <div class="icono mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-icon lucide-receipt"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg>
+                                    </div>
+                                    <h6 class="card-subtitle text-muted">Pedidos Hoy</h6>
+                                    <h2 class="mt-2">32</h2>
                                 </div>
                             </div>
                         </div>
-                        <!-- COLUMNA DERECHA: Grid de categorías -->
-                        <div class="col-12 col-lg-8">
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <div class="card bg-light h-100">
-                                        <div class="card-body p-3">
-                                            <div class="d-flex align-items-start gap-3">
-                                                <div class="cat-icon-circle">
-                                                    <i class="bi bi-emoji-smile"></i>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div class="d-flex justify-content-between align-items-center mb-1">
-                                                        <h6 class="fw-bold mb-0">Perros</h6>
-                                                        <span class="cat-badge">86 prod.</span>
-                                                    </div>
-                                                    <p class="text-muted mb-0" style="font-size:.83rem;">
-                                                        Alimento, accesorios y juguetes para perros.
-                                                    </p>
-                                                </div>
-                                            </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <div class="icono mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                                    </div>
+                                    <h6 class="card-subtitle text-muted">Ingresos del Mes</h6>
+                                    <h2 class="mt-2">$1.203.776</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <div class="icono mb-2">
+                                        <i class="fa-solid fa-users fa-fw"></i>
+                                    </div>
+                                    <h6 class="card-subtitle text-muted">Usuarios Registrados</h6>
+                                    <h2 class="mt-2">13</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <div class="icono mb-2">
+                                        <i class="fa-solid fa-box fa-fw"></i>  
+                                    </div>
+                                    <h6 class="card-subtitle text-muted">Productos en Stock</h6>
+                                    <h2 class="mt-2">310</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="bajostock" class="container">
+                    <div class="card bg-light mt-4">
+                        <div class="card-body">
+                            <h4 class="card-title p-2 fw-bold">Stock bajo</h3>
+                            <div class="container">
+                                <div class="row row-cols-1">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <h6 class="mb-0">Alimento Premium Adulto</h6>
+                                            <p class="text-danger ms-auto mb-0">8 u.</p>
                                         </div>
+                                        <p class="text-muted mb-1">Perros</p>
+                                        <div class="stock-bar-bg mb-2">
+                                            <div class="stock-bar " style="width:8%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <h6 class="mb-0">Alimento low cost Adulto</h6>
+                                            <p class="text-danger ms-auto mb-0">10 u.</p>
+                                        </div>
+
+                                        <p class="text-muted mb-1">Perros</p>
+                                        <div class="stock-bar-bg mb-2">
+                                            <div class="stock-bar " style="width:10%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <h6 class="mb-0">Alimento Premium Adulto</h6>
+                                            <p class="text-danger ms-auto mb-0">3 u.</p>
+                                        </div>
+
+                                        <p class="text-muted mb-1">Gatos</p>
+                                        <div class="stock-bar-bg mb-2">
+                                            <div class="stock-bar" style="width:3%"></div>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -206,8 +249,19 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="script/gestion-categorias.js"></script>
-    <script src="script/validator.min.js"></script>
+  
 </body>
 
 </html>
+
+<!--
+
+funciones js futuros sprints
+
+    -Cntidades de pedidos realizados hoy
+    -Ingresos del mes
+    -Usuarios registrados
+    -Stock total
+    -Productos con menos de 10 productos
+
+-->

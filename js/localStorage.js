@@ -1,3 +1,7 @@
+/*
+    * clave para categorias es "bd-categoria"
+*/
+
 export function obtenerLocalStorage(bd){
     const bd_actual = localStorage.getItem(bd)
     let resultado

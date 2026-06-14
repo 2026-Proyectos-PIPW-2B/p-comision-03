@@ -217,3 +217,44 @@ body.collapsed svg {
     opacity: 1;
     color: green
 }
+
+
+.badge-stock{
+    background:#E8D6B8;
+    color:#5B4632;
+
+    padding:.4rem .8rem;
+
+    border-radius:999px;
+
+    font-size:.75rem;
+    font-weight:600;
+}
+
+.acciones-categoria{
+    margin-top:1rem;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(10px);
+
+    transition:all .25s ease;
+}
+
+.card-categoria:hover .acciones-categoria{
+    opacity:1;
+    visibility:visible;
+
+    transform:translateY(0);
+}
+
+.modal-footer > button:first-child:hover{
+    background-color: var(--bs-success);
+    color: white;
+    font-weight: bold;
+}
+
+#btnGuardarEdicion:hover{
+    opacity: 0.8;
+}
