@@ -13,4 +13,3 @@ export function obtenerLocalStorage(bd){
 
 export function guardarLocalStorage(bd_actual, bd){
     localStorage.setItem(bd, JSON.stringify(bd_actual))
-}
