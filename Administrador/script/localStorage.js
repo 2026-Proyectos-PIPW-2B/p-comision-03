@@ -1,7 +1,3 @@
-/*
-    * clave para categorias es "bd-categoria"
-*/
-
 export function obtenerLocalStorage(bd){
     const bd_actual = localStorage.getItem(bd)
     let resultado
@@ -17,4 +13,3 @@ export function obtenerLocalStorage(bd){
 
 export function guardarLocalStorage(bd_actual, bd){
     localStorage.setItem(bd, JSON.stringify(bd_actual))
-}

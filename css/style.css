@@ -231,12 +231,77 @@ input[type="number"]{
     background-color: #F37344;
     color: white;
 }
-/*Nosotros*/
-/*.nosotros{
-    font-family: "Fraunces", serif;
-    font-size: 60px;
-}*/
+.overlay-exito {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
+.overlay-exito.visible {
+  opacity: 1;
+}
+
+.toast-exito {
+  background: #fff;
+  border: 1px solid #86efac;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  transform: scale(0.85);
+  transition: transform 0.3s ease;
+}
+
+.toast-exito.visible {
+  transform: scale(1);
+}
+
+.check-circle {
+  width: 60px;
+  height: 60px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.toast-titulo {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: #111;
+}
+
+.toast-subtitulo {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.barra-contenedor {
+  height: 3px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  margin-top: 1.25rem;
+  overflow: hidden;
+}
+
+.barra-progreso {
+  height: 100%;
+  background: #16a34a;
+  border-radius: 2px;
+  width: 100%;
+}
+/*Nosotros*/
 .nosotros {
     font-family: "Fraunces", serif;
     font-size: 50px;
