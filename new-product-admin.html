@@ -11,7 +11,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
 </head>
 <body class="bg-primary">
     <div class="d-flex min-vh-100">
@@ -31,7 +31,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard-admin.html" class="nav-link active d-flex align-items-center">
+                    <a href="dashboard-admin.html" class="nav-link d-flex text-white align-items-center">
                         <i class="fa-solid fa-house fa-fw"></i>
                         <span class="menu-text ms-3">Dashboard</span>
                     </a>
@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="productos-admin.html" class="nav-link text-white d-flex align-items-center">
+                    <a href="productos-admin.html" class="nav-link text-white active d-flex align-items-center">
                         <i class="fa-solid fa-box fa-fw"></i> 
                         <span class="menu-text ms-3">Productos</span>
                     </a>
@@ -116,7 +116,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="d-flex align-items-center gap-2 px-2 py-1" style="cursor:pointer">
+                <div class="d-flex align-items-center gap-2 px-2 py-1 rounded-pill" style="cursor:pointer">
                     <div class="av-circle">AM</div>
                     <div class="d-none d-sm-block lh-sm">
                         <div style="font-size:.82rem;font-weight:600">Avigail Miler</div>
@@ -126,106 +126,122 @@
             </nav>
             <!-- MAIN -->
             <main class="p-2 container mt-2">
-                <header class="mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3">
+                <header class="mb-2 mt-1 container d-flex align-items-start justify-content-between flex-wrap gap-3">
                     <div>
-                        <p class="text-uppercase fw-bold mb-1" style="font-size:.7rem; letter-spacing:1.2px; color:#8a7060;">Dashboard</p>
-                        <h1 class="fw-bold mb-1">Hola, Avi 🐾</h1>
-                        <p class="text-muted mb-0">Esto es lo que está pasando en Huellitas hoy.</p>
+                        <p class="text-uppercase fw-bold mb-1" style="font-size:.7rem; letter-spacing:1.2px; color:#8a7060;">Productos</p>
+                        <h1 class="fw-bold mb-1">Nuevo producto</h1>
+                        <p class="text-muted mb-0">Cargá los datos para dar de alta un producto en el catálogo.</p>
                     </div>
                     <button class="btn d-flex align-items-center gap-2 align-self-center bg-dark text-white rounded-5 p-2 fs-6 ">
-                        <i class="bi bi-plus"></i> <a href="productos-admin.html" class="nav-link">Cargar producto</a>
+                        <i class="bi bi-arrow-left"></i><a href="productos-admin.html" class="nav-link">Volver al catálogo</a>
                     </button>
                 </header>
-                <section id="metricas" class="container">
-                    <div class="row g-4">
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card bg-light">
+                <section id="productos" class="container">
+                    <div class="row g-4 mt-1">
+                        <!-- COLUMNA IZQUIERDA-->
+                        <div class="col-12 col-lg-8">
+                            <!--Información basica-->
+                            <div class="card bg-light mb-3">
                                 <div class="card-body">
-                                    <div class="icono mb-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-icon lucide-receipt"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg>
+                                    <h4 class="fw-bold mb-4">Información básica</h4>
+                                    <!-- Campos -->
+                                    <div class="d-flex flex-column gap-2">
+                                        <label for="nombre_prod" class="form-label mb-0">Nombre del producto</label>
+                                        <input type="text" class="form-control mb-2 rounded-5" id="nombre_prod "placeholder="Ej: Alimento Balanceado ">
+                                        <label for="descripcion" class="form-label mb-0">Descripción</label>
+                                        <textarea class="form-control rounded-5 mb-2" placeholder="Descripción detallada del producto"></textarea>
+                                        <label for="categoria" class="form-label mb-0">Categoría</label>
+                                        <select class="form-select rounded-5 mb-2">
+                                            <option value="" disabled selected>Seleccione categoría</option>
+                                            <option>Perros</option>
+                                            <option>Gatos</option>
+                                            <option>Aves</option>
+                                            <option>Peces</option>
+                                            <option>Higiene</option>
+                                        </select>
                                     </div>
-                                    <h6 class="card-subtitle text-muted">Pedidos Hoy</h6>
-                                    <h2 class="mt-2">32</h2>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card bg-light">
+                            <!--Stock y precio-->
+                            <div class="card bg-light mb-3 ">
                                 <div class="card-body">
-                                    <div class="icono mb-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                                    <h4 class="fw-bold mb-4">Precio y stock</h4>
+                                    <!-- Campos -->
+                                    <div class="d-flex flex-column gap-2">
+                                        <div class="d-flex gap-2">
+                                            <div>
+                                                <label for="nombre_prod" class="form-label mb-0">Precio</label>
+                                                <input type="number" class="form-control rounded-5" placeholder="0,00">
+                                            </div>
+                                            <div>
+                                                <label for="nombre_prod" class="form-label mb-0">Stock</label>
+                                                <input type="number" class="form-control rounded-5" placeholder="0">
+                                            </div>
+                                            <div>
+                                                <label for="nombre_prod" class="form-label mb-0">Stock mínimo</label>
+                                                <input type="number" class="form-control rounded-5" placeholder="5">
+                                            </div>   
+                                        </div>
                                     </div>
-                                    <h6 class="card-subtitle text-muted">Ingresos del Mes</h6>
-                                    <h2 class="mt-2">$1.203.776</h2>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card bg-light">
+                            <!--Imagen-->
+                            <div class="card bg-light mb-3">
                                 <div class="card-body">
-                                    <div class="icono mb-2">
-                                        <i class="fa-solid fa-users fa-fw"></i>
+                                    <h4 class="fw-bold mb-4">Imagen</h4>
+                                    <!-- Campos -->
+                                    <div class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3 bg-primary"
+                                        style="height:160px; border-style:dashed !important; cursor:pointer;">
+                                        <i class="bi bi-image text-muted" style="font-size:2rem;"></i>
+                                        <small class="text-muted mt-2">Arrastrá una imagen o hacé clic para subir</small>
+                                        <small class=" text-muted mt-1">JPG, PNG o WebP. Máx. 2 MB.</small>
                                     </div>
-                                    <h6 class="card-subtitle text-muted">Usuarios Registrados</h6>
-                                    <h2 class="mt-2">13</h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card bg-light">
+                        <!-- COLUMNA DERECHA-->
+                         <div class="col-12 col-lg-4">
+                             <!--Visibilidad-->
+                            <div class="card bg-light mb-3">
                                 <div class="card-body">
-                                    <div class="icono mb-2">
-                                        <i class="fa-solid fa-box fa-fw"></i>  
+                                    <h4 class="fw-bold mb-4">Visibilidad</h4>
+                                    <div class="bg-primary mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3 p-3 rounded-3">
+                                        <div>
+                                            <div class="fw-semibold lh-1">Publicado</div>
+                                            <div class="text-muted"><small>Visible en la tienda</small></div>
+                                        </div>
+                                        <div class="form-check form-switch mb-0"><input class="form-check-input" type="checkbox" checked></div>
                                     </div>
-                                    <h6 class="card-subtitle text-muted">Productos en Stock</h6>
-                                    <h2 class="mt-2">310</h2>
+                                    <div class="bg-primary mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3 p-3 rounded-3">
+                                        <div >
+                                            <div class="fw-semibold lh-1">Destacado</div>
+                                            <div class="text-muted"><small>Aparece en la home</small></div>
+                                        </div>
+                                        <div class="form-check form-switch mb-0"><input class="form-check-input" type="checkbox" checked></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section id="bajostock" class="container">
-                    <div class="card bg-light mt-4">
-                        <div class="card-body">
-                            <h4 class="card-title p-2 fw-bold">Stock bajo</h3>
-                            <div class="container">
-                                <div class="row row-cols-1">
-                                    <div class="col">
-                                        <div class="d-flex">
-                                            <h6 class="mb-0">Alimento Premium Adulto</h6>
-                                            <p class="text-danger ms-auto mb-0">8 u.</p>
+                            <!--resumen-->
+                            <div>
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <div class="nav-link d-flex align-items-center ">
+                                            <div class="bg-dark p-2 rounded-5 flex-shrink-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f37845" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-plus-icon lucide-package-plus"><path d="M12 22V12"/><path d="M16 17h6"/><path d="M19 14v6"/><path d="M21 10.535V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.675-.955"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/></svg>
+                                            </div>
+                                            <div class="ms-3">
+                                                <div class="fw-semibold fs-5 lh-1">Resumen</div>
+                                                <div style="font-size:.68rem; color:#b89880">Revisá los datos antes de guardar.</div>
+                                            </div>
                                         </div>
-                                        <p class="text-muted mb-1">Perros</p>
-                                        <div class="stock-bar-bg mb-2">
-                                            <div class="stock-bar " style="width:8%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="d-flex">
-                                            <h6 class="mb-0">Alimento low cost Adulto</h6>
-                                            <p class="text-danger ms-auto mb-0">10 u.</p>
-                                        </div>
-
-                                        <p class="text-muted mb-1">Perros</p>
-                                        <div class="stock-bar-bg mb-2">
-                                            <div class="stock-bar " style="width:10%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="d-flex">
-                                            <h6 class="mb-0">Alimento Premium Adulto</h6>
-                                            <p class="text-danger ms-auto mb-0">3 u.</p>
-                                        </div>
-
-                                        <p class="text-muted mb-1">Gatos</p>
-                                        <div class="stock-bar-bg mb-2">
-                                            <div class="stock-bar" style="width:3%"></div>
-                                        </div>
-                                    </div>
+                                        <button class="btn text-white mt-3 px-2 w-100" style="background:#2c1a0e; border-radius:12px; ">
+                                            Guardar producto
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </section>
             </main>
@@ -247,21 +263,14 @@
             if (isLg()) document.body.classList.remove("collapsed");
         });
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  
 </body>
-
 </html>
 
-<!--
+<!-- Imagen 
+                                    
+                                    
+                                        
 
-funciones js futuros sprints
-
-    -Cntidades de pedidos realizados hoy
-    -Ingresos del mes
-    -Usuarios registrados
-    -Stock total
-    -Productos con menos de 10 productos
-
--->
+                                    
+                                    -->

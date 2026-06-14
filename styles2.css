@@ -248,3 +248,13 @@ body.collapsed svg {
 
     transform:translateY(0);
 }
+
+.modal-footer > button:first-child:hover{
+    background-color: var(--bs-success);
+    color: white;
+    font-weight: bold;
+}
+
+#btnGuardarEdicion:hover{
+    opacity: 0.8;
+}
