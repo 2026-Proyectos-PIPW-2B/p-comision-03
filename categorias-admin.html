@@ -161,11 +161,42 @@
                         <!-- COLUMNA DERECHA: Grid de categorías -->
                         <div class="col-12 col-lg-8">
                             <div class="row g-3" id="contenedor_categorias">
+                            <div class="row g-3" id="contenedor_categorias">
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEditarCategoria" tabindex="1">
+        <div class="modal-dialog ">
+            <div class="modal-content rounded-3 bg-light">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title">Editar categoría</h5>
+                        <span class="text-muted">Modificá el nombre y la descripción de la categoría.</span>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" id="editar_nombre" class="form-control bg-light rounded-4">
+                        <div id="errorEditarNombre" class="invalid-feedback"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <textarea id="editar_descripcion" class="form-control bg-light rounded-4"></textarea>
+                        <div id="errorEditarDescripcion" class="invalid-feedback"></div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn border fw-semibold" data-bs-dismiss="modal"> Cancelar</button>
+                    <button type="button" id="btnGuardarEdicion" class="btn bg-dark text-white fw-semibold"> Guardar cambios </button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="modalEditarCategoria" tabindex="1">
