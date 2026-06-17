@@ -85,7 +85,7 @@ export function actualizarSelectCategorias(select){
     categorias.forEach(categoria => {
         const option = document.createElement("option")
 
-        option.value = categoria.id
+        option.value = categoria.nombre
         option.textContent = categoria.nombre
 
         select.appendChild(option)

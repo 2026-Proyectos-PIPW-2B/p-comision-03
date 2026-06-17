@@ -144,24 +144,47 @@
                                 <div class="card-body">
                                     <h4 class="fw-bold mb-4">Alta rápida</h4>
                                     <!-- Imagen -->
-                                    <div class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3"
-                                        style="height:160px; border-style:dashed !important; cursor:pointer; background:#f0ebe3;">
+                                    <div id="zonaImagen" class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3 bg-primary"
+                                        style="height:160px; border-style:dashed !important; cursor:pointer;">
                                         <i class="bi bi-image text-muted" style="font-size:2rem;"></i>
-                                        <small class="text-muted mt-2">Elegí una imagen del set</small>
+                                        <small class="text-muted mt-2">Hacé clic para subir</small>
+                                        <small class="text-muted mt-1">JPG, PNG o WebP. Máx. 2 MB.</small>
+                                        <input type="file" id="inputImagen" accept="image/jpeg, image/png, image/webp" class="d-none">
+                                    </div>
+                                    <div id="errorImagen" class="text-danger mt-1" style="font-size:.85rem;"></div>
+                                    <div id="previewImagen" class="mt-2 d-none">
+                                        <img id="imgPreview" src="" alt="Preview" class="rounded-3" style="max-height:160px; object-fit:cover;">
+                                        <button id="btnQuitarImagen" class="btn btn-sm btn-danger ms-2">Quitar</button>
                                     </div>
                                     <!-- Campos -->
                                     <div class="d-flex flex-column gap-2">
-                                        <input type="text" class="form-control" placeholder="Nombre del producto">
-                                        <input type="text" class="form-control" placeholder="Descripción breve">
-                                        <div class="d-flex gap-2">
-                                            <input type="number" class="form-control" placeholder="Precio">
-                                            <input type="number" class="form-control" placeholder="Stock">
+                                        <div class="mb-3">
+                                            <input type="text" id="nombre_prod" class="form-control" placeholder="Nombre del producto">
+                                            <div id="errorNombre" class="invalid-feedback"></div>
                                         </div>
-                                        <select id="categoriaAR" class="form-select">
-                                            <option value="" disabled selected>Categoría</option>
-                                        </select>
-                                        <button class="btn text-white mt-2 p-2"
-                                            style="background:#2c1a0e; border-radius:12px;">
+                                        <div class="mb-3">
+                                            <input type="text" id="descripcion" class="form-control" placeholder="Descripción breve">
+                                            <div id="errorDescripcion" class="invalid-feedback"></div>
+                                        </div>
+                                        
+                                        <div class="d-flex gap-2">
+                                            <div class="mb-3">
+                                                <input type="number" id="precio" class="form-control" placeholder="Precio">
+                                                <div id="errorPrecio" class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="number" id="stock" class="form-control" placeholder="Stock">
+                                                <div id="errorStock" class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <select id="categoria" class="form-select">
+                                                <option value="" disabled selected>Categoría</option>
+                                            </select>
+                                            <div id="errorCategoria" class="invalid-feedback"></div>
+                                        </div>
+                                        
+                                        <button id="btn_guardar" class="btn text-white bg-dark rounded-3 mt-2 p-2">
                                             Guardar producto
                                         </button>
                                     </div>
@@ -181,11 +204,6 @@
                                                 style="max-width:200px; border-radius:24px;">
                                             <select class="form-select" style="max-width:150px; border-radius:24px;">
                                                 <option value="">Categoría</option>
-                                                <option>Perros</option>
-                                                <option>Gatos</option>
-                                                <option>Aves</option>
-                                                <option>Peces</option>
-                                                <option>Higiene</option>
                                             </select>
                                         </div>
                                     </div>
@@ -201,7 +219,7 @@
                                                     <th class="fw-semibold">Acciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="lista-prod">
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center gap-2">
@@ -265,7 +283,7 @@
             </main>
         </div>
     </div>
-
+    <script type="module" src="js/gestion-productos/gestion-productos.js"></script>
     <script>
         const menuBtn = document.getElementById("menuBtn");
         const isLg = () => window.innerWidth >= 992;

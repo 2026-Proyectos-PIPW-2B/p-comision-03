@@ -131,7 +131,7 @@ export function datosCategoriasValidos(input_nombre, divError_nombre, input_desc
     return validaciones.every(v => v.formulario)
 }
 
-export function datosProductoValidos(campos) {
+export function datosProductoValidosExtendido(campos) {
     validaciones = []
     validarNombre(campos.nombre.input, campos.nombre.error)
     validarDescripcion(campos.descripcion.input, campos.descripcion.error)
@@ -139,6 +139,17 @@ export function datosProductoValidos(campos) {
     validarPrecio(campos.precio.input, campos.precio.error)
     validarStock(campos.stock.input, campos.stock.error)
     validarStockMinimo(campos.stockMinimo.input, campos.stockMinimo.error)
+    aplicarResultados(validaciones)
+    return validaciones.every(v => v.formulario)
+}
+
+export function datosProductoValidos(campos){
+    validaciones = []
+    validarNombre(campos.nombre.input, campos.nombre.error)
+    validarDescripcion(campos.descripcion.input, campos.descripcion.error)
+    validarCategoria(campos.categoria.input, campos.categoria.error)
+    validarPrecio(campos.precio.input, campos.precio.error)
+    validarStock(campos.stock.input, campos.stock.error)
     aplicarResultados(validaciones)
     return validaciones.every(v => v.formulario)
 }

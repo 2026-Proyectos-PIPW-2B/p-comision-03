@@ -4,12 +4,12 @@ export function obtenerProductos(){
     return obtenerLocalStorage("bd-productos")
 }
 
-export function crearProducto(inputNombre,inputDescripcion,selectCategorias,inputPrecio,inputStock,inputStockMinimo, checkPublicado, checkDestacado, imagen){
+export function crearProductoExtendido(inputNombre,inputDescripcion,selectCategorias,inputPrecio,inputStock,inputStockMinimo, checkPublicado, checkDestacado, imagen){
     const nuevoProducto = {
         id:           crypto.randomUUID(),
         nombre:       inputNombre.value.trim(),
         descripcion:  inputDescripcion.value.trim(),
-        categoriaId:  selectCategorias.value,
+        categoria:    selectCategorias.value,
         precio:       Number(inputPrecio.value),
         stock:        Number(inputStock.value),
         stockMinimo:  Number(inputStockMinimo.value),
@@ -17,6 +17,23 @@ export function crearProducto(inputNombre,inputDescripcion,selectCategorias,inpu
         destacado:    checkDestacado.checked,
         imagen:      imagen
     }
+    agregarProducto(nuevoProducto)
+}
+
+export function crearProducto(inputNombre,inputDescripcion,selectCategorias,inputPrecio,inputStock,imagen){
+    const nuevoProducto = {
+        id:           crypto.randomUUID(),
+        nombre:       inputNombre.value.trim(),
+        descripcion:  inputDescripcion.value.trim(),
+        categoria:    selectCategorias.value,
+        precio:       Number(inputPrecio.value),
+        stock:        Number(inputStock.value),
+        stockMinimo:  5,
+        publicado:    true,
+        destacado:    false,
+        imagen:      imagen
+    }
+
     agregarProducto(nuevoProducto)
 }
 
