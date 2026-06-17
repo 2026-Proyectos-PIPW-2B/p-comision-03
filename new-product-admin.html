@@ -145,21 +145,27 @@
                                 <div class="card-body">
                                     <h4 class="fw-bold mb-4">Información básica</h4>
                                     <!-- Campos -->
-                                    <div class="d-flex flex-column gap-2">
-                                        <label for="nombre_prod" class="form-label mb-0">Nombre del producto</label>
-                                        <input type="text" class="form-control mb-2 rounded-5" id="nombre_prod "placeholder="Ej: Alimento Balanceado ">
-                                        <label for="descripcion" class="form-label mb-0">Descripción</label>
-                                        <textarea class="form-control rounded-5 mb-2" placeholder="Descripción detallada del producto"></textarea>
-                                        <label for="categoria" class="form-label mb-0">Categoría</label>
-                                        <select class="form-select rounded-5 mb-2">
-                                            <option value="" disabled selected>Seleccione categoría</option>
-                                            <option>Perros</option>
-                                            <option>Gatos</option>
-                                            <option>Aves</option>
-                                            <option>Peces</option>
-                                            <option>Higiene</option>
-                                        </select>
-                                    </div>
+                                    <form id="formBasic" class="row g-3 needs-validation" novalidate >
+                                        <div class="d-flex flex-column gap-2">
+                                            <div class="mb-3">
+                                                <label for="nombre_prod" class="form-label mb-0">Nombre del producto</label>
+                                                <input type="text" class="form-control mb-2 rounded-4" id="nombre_prod" placeholder="Ej: Alimento Balanceado" required>
+                                                <div id="errorNombre" class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="descripcion" class="form-label mb-0">Descripción</label>
+                                                <textarea class="form-control rounded-4 mb-2" id="descripcion" placeholder="Descripción detallada del producto" required></textarea>
+                                                <div id="errorDescripcion" class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="categoria" class="form-label mb-0">Categoría</label>
+                                                <select id="categoria" class="form-select rounded-4 mb-2" required>
+                                                    <option value="" disabled selected>Seleccione categoría</option>
+                                                </select>
+                                                <div id="errorCategoria" class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!--Stock y precio-->
@@ -167,22 +173,28 @@
                                 <div class="card-body">
                                     <h4 class="fw-bold mb-4">Precio y stock</h4>
                                     <!-- Campos -->
-                                    <div class="d-flex flex-column gap-2">
-                                        <div class="d-flex gap-2">
-                                            <div>
-                                                <label for="nombre_prod" class="form-label mb-0">Precio</label>
-                                                <input type="number" class="form-control rounded-5" placeholder="0,00">
+                                    <form id="formStock" class="row g-3 needs-validation" novalidate >
+                                        <div class="d-flex flex-column gap-2">
+                                            <div class="d-flex gap-2">
+                                                <div class="mb-3">
+                                                    <label for="nombre_prod" class="form-label mb-0">Precio</label>
+                                                    <input type="number" id="precio"class="form-control rounded-4" placeholder="0,00" required>
+                                                    <div id="errorPrecio" class="invalid-feedback"></div>
+                                                </div>
+                                                <div>
+                                                    <label for="nombre_prod" class="form-label mb-0">Stock</label>
+                                                    <input type="number" id="stock"class="form-control rounded-4" placeholder="0" required>
+                                                    <div id="errorStock" class="invalid-feedback"></div>
+                                                </div>
+                                                <div>
+                                                    <label for="nombre_prod" class="form-label mb-0">Stock mínimo</label>
+                                                    <input type="number" id="stock_minimo"class="form-control rounded-4" placeholder="5" requireda>
+                                                    <div id="errorStockMinimo" class="invalid-feedback"></div>
+                                                </div>   
                                             </div>
-                                            <div>
-                                                <label for="nombre_prod" class="form-label mb-0">Stock</label>
-                                                <input type="number" class="form-control rounded-5" placeholder="0">
-                                            </div>
-                                            <div>
-                                                <label for="nombre_prod" class="form-label mb-0">Stock mínimo</label>
-                                                <input type="number" class="form-control rounded-5" placeholder="5">
-                                            </div>   
                                         </div>
-                                    </div>
+                                    </form>
+                                    
                                 </div>
                             </div>
                             <!--Imagen-->
@@ -190,11 +202,17 @@
                                 <div class="card-body">
                                     <h4 class="fw-bold mb-4">Imagen</h4>
                                     <!-- Campos -->
-                                    <div class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3 bg-primary"
+                                    <div id="zonaImagen" class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3 bg-primary"
                                         style="height:160px; border-style:dashed !important; cursor:pointer;">
                                         <i class="bi bi-image text-muted" style="font-size:2rem;"></i>
-                                        <small class="text-muted mt-2">Arrastrá una imagen o hacé clic para subir</small>
-                                        <small class=" text-muted mt-1">JPG, PNG o WebP. Máx. 2 MB.</small>
+                                        <small class="text-muted mt-2">Hacé clic para subir</small>
+                                        <small class="text-muted mt-1">JPG, PNG o WebP. Máx. 2 MB.</small>
+                                        <input type="file" id="inputImagen" accept="image/jpeg, image/png, image/webp" class="d-none">
+                                    </div>
+                                    <div id="errorImagen" class="text-danger mt-1" style="font-size:.85rem;"></div>
+                                    <div id="previewImagen" class="mt-2 d-none">
+                                        <img id="imgPreview" src="" alt="Preview" class="rounded-3" style="max-height:160px; object-fit:cover;">
+                                        <button id="btnQuitarImagen" class="btn btn-sm btn-danger ms-2">Quitar</button>
                                     </div>
                                 </div>
                             </div>
@@ -210,14 +228,14 @@
                                             <div class="fw-semibold lh-1">Publicado</div>
                                             <div class="text-muted"><small>Visible en la tienda</small></div>
                                         </div>
-                                        <div class="form-check form-switch mb-0"><input class="form-check-input" type="checkbox" checked></div>
+                                        <div class="form-check form-switch mb-0"><input id="publicado" class="form-check-input" type="checkbox" checked></div>
                                     </div>
                                     <div class="bg-primary mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3 p-3 rounded-3">
                                         <div >
                                             <div class="fw-semibold lh-1">Destacado</div>
                                             <div class="text-muted"><small>Aparece en la home</small></div>
                                         </div>
-                                        <div class="form-check form-switch mb-0"><input class="form-check-input" type="checkbox" checked></div>
+                                        <div class="form-check form-switch mb-0"><input id="destacado" class="form-check-input" type="checkbox" checked></div>
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +252,7 @@
                                                 <div style="font-size:.68rem; color:#b89880">Revisá los datos antes de guardar.</div>
                                             </div>
                                         </div>
-                                        <button class="btn text-white mt-3 px-2 w-100" style="background:#2c1a0e; border-radius:12px; ">
+                                        <button id="btn_guardar" class="btn text-white mt-3 px-2 w-100" style="background:#2c1a0e; border-radius:12px; ">
                                             Guardar producto
                                         </button>
                                     </div>
@@ -263,14 +281,7 @@
             if (isLg()) document.body.classList.remove("collapsed");
         });
     </script>
+    <script type="module" src="js/gestion-productos/gestion-productos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-<!-- Imagen 
-                                    
-                                    
-                                        
-
-                                    
-                                    -->
