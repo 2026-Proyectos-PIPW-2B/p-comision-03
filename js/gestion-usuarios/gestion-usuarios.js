@@ -1,5 +1,5 @@
-import { obtenerLocalStorage } from './localStorage.js'
-import{guardarLocalStorage}from './localStorage.js'
+import { obtenerLocalStorage } from "../core/localStorage.js";
+import { guardarLocalStorage } from "../core/localStorage.js";
 const ADMIN = {
   nombre: "Sistema",
   apellido: "Admin",
@@ -72,7 +72,7 @@ function renderPendientes() {
     //--Fila 4= botones 
     let tdAcciones=document.createElement("td")
     let btnAceptar=crearBotonAccion("aceptar",i,`<path d="M20 6 9 17l-5-5"/>`)
-    let btnEliminar=crearBotonAccion("eliminar",i, `<path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>`)
+    let btnEliminar=crearBotonAccion("eliminar",i,`<path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>`)
     tdAcciones.append(btnAceptar,btnEliminar)
     tr.append(td_Nombre,tdEmail,tdEdad,tdAcciones)
     pendienteUS.appendChild(tr)
@@ -83,13 +83,13 @@ function crearBotonAccion(tipo, index, pathSvg) {
   const btn = document.createElement("button");
   btn.classList.add("p-1", "m-1", "rounded-circle", "border-0", ` btn-${tipo}`);
   btn.dataset.index = index; 
-  btn.innerHTML = 
+  btn.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
          fill="none" stroke="currentColor" stroke-width="2"
          stroke-linecap="round" stroke-linejoin="round">
       ${pathSvg}
-    </svg>;
- 
+    </svg>
+ `
   return btn;
 }
 
@@ -150,11 +150,17 @@ function renderFinales() {
   finalUS.innerHTML = "";
 
   if (!lista.length) {
-    finalUS.innerHTML = <tr><td colspan="5" class="text-muted text-center py-3">Ningún usuario aprobado aún.</td></tr>;
-    return;
+     let tr=document.createElement("tr")
+    let td=document.createElement("td")
+    td.colSpan=5;
+    td.classList.add("text-muted","text-center","py-3")
+    td.textContent="Ningún usuario aprobado aún."
+    tr.appendChild(td);
+    finalUS.appendChild(tr);
+    return
   }
   for(let i=0;i<lista.length;i++){
-     //--Fila 1 =icono+nombre
+     //--Fila 1 =icono+nombre//
     let tr=document.createElement("tr")
     let td_Nombre=document.createElement("td")
     let div_nom=document.createElement("div")
