@@ -4,7 +4,7 @@ export function mostrarPreview(archivo, previewDiv,zonaImagen) {
     zonaImagen.classList.add("d-none")
 }
 
-export function quitarImagen(previewDiv,zonaImagen) {
+export function quitarImagen(inputImagen,imgPreview,previewDiv,zonaImagen) {
     inputImagen.value = ""
     imgPreview.src = ""
     previewDiv.classList.add("d-none")

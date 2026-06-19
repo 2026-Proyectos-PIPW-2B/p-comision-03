@@ -47,9 +47,7 @@ function agregarCategoria(categoria){
 
 export function actualizarCategoria(id, nombre, descripcion){
     const categorias = obtenerLocalStorage("bd-categoria")
-    const categoria = categorias.find(
-        categoria => categoria.id === id
-    )
+    const categoria = obtenerCategoriaPorId(id)
     if(categoria){
         categoria.nombre = nombre
         categoria.descripcion = descripcion
@@ -71,7 +69,7 @@ export function eliminarCategoria(id){
 
 export function EditarCategoria(id){
     const categorias =obtenerCategorias()
-    const categoria = categorias.find(categoria => categoria.id ===id)
+    const categoria =obtenerCategoriaPorId(id)
     if(categoria){
         let idCategoriaEditando = categoria.id
         inputEditarNombre.value = categoria.nombre

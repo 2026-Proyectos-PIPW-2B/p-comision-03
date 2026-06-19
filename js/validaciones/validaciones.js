@@ -7,8 +7,8 @@ function validarNombre(input, divError, name) {
     let validacion
     if (input.value.trim() === "" ) {
         validacion = { id: input, div: divError, mensaje: `Debe indicar un ${name}`, formulario: false }
-    } else if (input.value.trim().length < 3  || input.value.trim().length > 20) {
-        validacion = { id: input, div: divError, mensaje: "Debe contener entre 3 y 20 caracteres", formulario: false }
+    } else if (input.value.trim().length < 3  || input.value.trim().length > 30) {
+        validacion = { id: input, div: divError, mensaje: "Debe contener entre 3 y 30 caracteres", formulario: false }
     } else {
         validacion = { id: input, div: "", mensaje: "", formulario: true }
     }
@@ -108,18 +108,28 @@ function validarPassword(input_pass, divError_pass ,input_repass, divError_repas
 }
 
 // ── exports ────────────────────────────────────────────────
-export function validarImagen(input, divError) {
+export function validarImagen(input, divError, imagenExistente = false) {
     const div = document.getElementById(divError)
-    if (!input.files || input.files.length === 0) {
+
+    if ((!input.files || input.files.length === 0) && !imagenExistente) {
         div.textContent = "Debe seleccionar una imagen."
+        div.classList.remove("d-none")
         return false
     }
-    const archivo = input.files[0]
-    if (archivo.size > 2 * 1024 * 1024) {
-        div.textContent = "La imagen no puede superar los 2 MB."
-        return false
+
+    if (input.files && input.files.length > 0) {
+        const archivo = input.files[0]
+
+        if (archivo.size > 2 * 1024 * 1024) {
+            div.textContent = "La imagen no puede superar los 2 MB."
+            div.classList.remove("d-none")
+            return false
+        }
     }
+
     div.textContent = ""
+    div.classList.add("d-none")
+
     return true
 }
 

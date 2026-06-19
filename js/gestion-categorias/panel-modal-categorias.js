@@ -26,7 +26,7 @@ export function incorporarListenerModalEditar(){
             return
         }
         const categorias =obtenerCategorias()
-        const categoria = categorias.find(categoria =>categoria.id === idCategoriaEditando)
+        const categoria = obtenerCategorias(idCategoriaEditando)
         if(categoria){
             categoria.nombre = inputEditarNombre.value.trim()
             categoria.descripcion = inputEditarDescripcion.value.trim()

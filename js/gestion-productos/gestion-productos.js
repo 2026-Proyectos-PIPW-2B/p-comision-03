@@ -15,7 +15,7 @@ const imgPreview       = document.getElementById("imgPreview")
 const previewDiv       = document.getElementById("previewImagen")
 const btnQuitar        = document.getElementById("btnQuitarImagen")
 
-const tabla            = document.getElementById("lista-prod")
+
 
 const campos = {
     nombre:      { input: inputNombre,      error: "errorNombre" },
@@ -28,7 +28,12 @@ const campos = {
 window.onload = function () {
     actualizarSelectCategorias(selectCategorias)
     inicializarListeners()
-    renderizarTabla(tabla)
+    renderizarTabla()
+}
+
+export function obtenerTabla(){
+    const tabla = document.getElementById("lista-prod")
+    return tabla
 }
 
 function inicializarListeners() {

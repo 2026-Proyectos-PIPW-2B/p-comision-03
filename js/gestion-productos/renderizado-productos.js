@@ -1,4 +1,7 @@
-import { obtenerProductos } from "./servicios-productos.js"
+import { obtenerProductos,eliminarProducto,editarProducto } from "./servicios-productos.js"
+import { obtenerTabla } from "./gestion-productos.js"
+
+const contenedor=obtenerTabla()
 
 function crearFila(producto){
     const fila = document.createElement("tr")
@@ -8,9 +11,6 @@ function crearFila(producto){
     const tdPrecio = crearCeldaPrecio(producto.precio)
     const tdCategoria = crearCeldaCategoria(producto.categoria)
     const tdAcciones = crearCeldaAcciones(producto.id)
-
-    //const tdAcciones = document.createElement("td")
-    //tdAcciones.appendChild(crearBotonEliminar(index))
     
     fila.appendChild(tdNombre)
     fila.appendChild(tdCategoria)
@@ -21,13 +21,14 @@ function crearFila(producto){
     return fila
 }
 
-export function renderizarTabla(contenedor){
+
+export function renderizarTabla(){
     contenedor.innerHTML = ""
 
     let productos = obtenerProductos()
 
     if(productos.length === 0){
-        contenedor.innerHTML = "<tr><td colspan='5'>No hay productos</td></tr>"
+        contenedor.innerHTML = "<tr><td colspan='4'>No hay productos</td></tr>"
     }
 
     for(let i = 0; i < productos.length; i++){
@@ -37,28 +38,6 @@ export function renderizarTabla(contenedor){
         contenedor.appendChild(fila)
     }
 }
-
-/*function crearBotonEliminar(index){
-    const boton = document.createElement("input")
-    boton.setAttribute("type","button")
-    boton.setAttribute("value","Eliminar")
-    boton.classList.add("btn-eliminar")
-
-    boton.addEventListener("click", function(){
-        eliminarTransaccion(index)
-        renderizarTabla()
-    })
-
-    return boton
-}
-
-function eliminarTransaccion(index){
-    const transacciones = obtenerTransacciones()
-    transacciones.splice(index, 1)
-    guardarTransacciones(transacciones)
-}*/
-
-
 
 function crearCeldaNombre(nombre_prod){
     const td = document.createElement("td")
@@ -112,21 +91,9 @@ function crearCeldaAcciones(id){
     const div=document.createElement("div")
     div.classList.add("d-flex", "gap-2")
 
-    const btn_eliminar=document.createElement("button")
-    btn_eliminar.classList.add("btn", "btn-sm", "btn-action-del")
-    const iconDel= document.createElement("i")
-    iconDel.classList.add("bi", "bi-trash")
-
-    const btn_editar=document.createElement("button")
-    btn_editar.classList.add("btn", "btn-sm", "btn-action-edit")
-    const iconEdit= document.createElement("i")
-    iconEdit.classList.add("bi", "bi-pencil")
-
-    btn_eliminar.appendChild(iconDel)
-    btn_editar.appendChild(iconEdit)
-    div.appendChild(btn_editar)
-    div.appendChild(btn_eliminar)
-
+    const btn_editar=crearBotonEditar(id,div)
+    const btn_eliminar=crearBotonEliminar(id,div)
+    
     td.appendChild(div)
     return td
 }
@@ -146,4 +113,35 @@ function estilizadoStock(stock, span, stockMin){
             span.classList.add("medio")
             span.textContent=`${stock} u. - medio`
         }
+}
+
+function crearBotonEliminar(index,div){
+    const btn_eliminar=document.createElement("button")
+    btn_eliminar.classList.add("btn", "btn-sm", "btn-action-del")
+    const iconDel= document.createElement("i")
+    iconDel.classList.add("bi", "bi-trash")
+    btn_eliminar.appendChild(iconDel)
+    
+    div.appendChild(btn_eliminar)
+
+    
+    btn_eliminar.addEventListener("click", function(){
+        eliminarProducto(index)
+        renderizarTabla()
+    })
+
+    return btn_eliminar
+}
+
+function crearBotonEditar(index,div){
+    const btn_editar=document.createElement("button")
+    btn_editar.classList.add("btn", "btn-sm", "btn-action-edit")
+    const iconEdit= document.createElement("i")
+    iconEdit.classList.add("bi", "bi-pencil")
+    btn_editar.appendChild(iconEdit)
+    div.appendChild(btn_editar)
+
+    btn_editar.addEventListener("click",function(){
+        editarProducto(index)
+    })
 }

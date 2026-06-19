@@ -129,11 +129,11 @@
                 <header class="mb-2 mt-1 container d-flex align-items-start justify-content-between flex-wrap gap-3">
                     <div>
                         <p class="text-uppercase fw-bold mb-1" style="font-size:.7rem; letter-spacing:1.2px; color:#8a7060;">Productos</p>
-                        <h1 class="fw-bold mb-1">Nuevo producto</h1>
+                        <h1 id="tituloFormulario" class="fw-bold mb-1">Nuevo producto</h1>
                         <p class="text-muted mb-0">Cargá los datos para dar de alta un producto en el catálogo.</p>
                     </div>
                     <button class="btn d-flex align-items-center gap-2 align-self-center bg-dark text-white rounded-5 p-2 fs-6 ">
-                        <i class="bi bi-arrow-left"></i><a href="productos-admin.html" class="nav-link">Volver al catálogo</a>
+                        <i class="bi bi-arrow-left"></i><a id="btn-volver" href="productos-admin.html" class="nav-link">Volver al catálogo</a>
                     </button>
                 </header>
                 <section id="productos" class="container">
@@ -194,7 +194,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                    
                                 </div>
                             </div>
                             <!--Imagen-->
@@ -211,7 +210,7 @@
                                     </div>
                                     <div id="errorImagen" class="text-danger mt-1" style="font-size:.85rem;"></div>
                                     <div id="previewImagen" class="mt-2 d-none">
-                                        <img id="imgPreview" src="" alt="Preview" class="rounded-3" style="max-height:160px; object-fit:cover;">
+                                        <img id="imgPreview" alt="Preview" class="rounded-3" style="max-height:160px; object-fit:cover;">
                                         <button id="btnQuitarImagen" class="btn btn-sm btn-danger ms-2">Quitar</button>
                                     </div>
                                 </div>
