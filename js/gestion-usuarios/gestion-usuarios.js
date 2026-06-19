@@ -11,6 +11,12 @@ const ADMIN = {
 };
 let pendienteUS=document.getElementById("pendienteUS")
 let finalUS=document.getElementById("finalUS")
+let buscadorFinal = document.getElementById("buscadorFinal");
+
+
+buscadorFinal.addEventListener("input", function () {
+  renderFinales(this.value);
+});
 
 function ini(nombre, apellido) {
   return (nombre[0] + apellido[0]).toUpperCase();
@@ -145,10 +151,18 @@ function eliminarUsuario(indice) {
     renderPendientes();
 }
 
-function renderFinales() {
+function renderFinales(filtro = "") {
   let  lista = obtenerLocalStorage("usuariosfinales")||[];
   finalUS.innerHTML = "";
 
+  if (filtro.trim()) {
+    let texto = filtro.trim().toLowerCase();
+    lista = lista.filter(u =>
+      u.nombre.toLowerCase().includes(texto) ||
+      u.apellido.toLowerCase().includes(texto) ||
+      u.email.toLowerCase().includes(texto)
+    );
+  }
   if (!lista.length) {
      let tr=document.createElement("tr")
     let td=document.createElement("td")
