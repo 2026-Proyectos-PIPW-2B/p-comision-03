@@ -43,7 +43,6 @@ export function crearProducto(inputNombre,inputDescripcion,selectCategorias,inpu
         destacado:    false,
         imagen:      imagen
     }
-    console.log(selectCategorias)
     agregarProducto(nuevoProducto)
 }
 
@@ -73,7 +72,6 @@ export function editarProducto(index){
 }
 
 export function actualizarProducto(id,nombre,descripcion,categoria,precio,stock, stockMinimo, publicado,destacado, imagen){
-    console.log(precio)
     const actualizacionProducto = {
         id:           id,
         nombre:       nombre.trim(),

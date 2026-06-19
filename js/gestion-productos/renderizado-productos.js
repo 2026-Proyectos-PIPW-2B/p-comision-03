@@ -21,7 +21,6 @@ function crearFila(producto){
     return fila
 }
 
-
 export function renderizarTabla(){
     contenedor.innerHTML = ""
 
@@ -32,9 +31,7 @@ export function renderizarTabla(){
     }
 
     for(let i = 0; i < productos.length; i++){
-        console.log(productos[i])
         const fila = crearFila(productos[i])
-        
         contenedor.appendChild(fila)
     }
 }
