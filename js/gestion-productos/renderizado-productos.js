@@ -6,7 +6,7 @@ const contenedor=obtenerTabla()
 function crearFila(producto){
     const fila = document.createElement("tr")
 
-    const tdNombre = crearCeldaNombre(producto.nombre)
+    const tdNombre = crearCeldaNombre(producto.nombre, producto.imagen)
     const tdStock = crearCeldaStock(producto.stock, producto.stockMinimo)
     const tdPrecio = crearCeldaPrecio(producto.precio)
     const tdCategoria = crearCeldaCategoria(producto.categoria)
@@ -28,7 +28,7 @@ export function renderizarTabla(){
     let productos = obtenerProductos()
 
     if(productos.length === 0){
-        contenedor.innerHTML = "<tr><td colspan='4'>No hay productos</td></tr>"
+        contenedor.innerHTML = "<tr><td colspan='5'>No hay productos</td></tr>"
     }
 
     for(let i = 0; i < productos.length; i++){
@@ -39,25 +39,22 @@ export function renderizarTabla(){
     }
 }
 
-function crearCeldaNombre(nombre_prod){
+function crearCeldaNombre(nombre,imagen){
     const td = document.createElement("td")
 
     const div=document.createElement("div")
     div.classList.add("d-flex", "align-items-center", "gap-2")
     
-    const divIcon= document.createElement("div")
-    divIcon.classList.add("img-placeholder")
+    const imagenDiv = document.createElement("img")
+    imagenDiv.src = `img/${imagen}`
+    imagenDiv.alt = nombre
+    imagenDiv.classList.add("img-producto-tabla")
 
-    const iconImag= document.createElement("i")
-    iconImag.classList.add("bi", "bi-image")
+    const nombreDiv= document.createElement("strong")
+    nombreDiv.textContent=nombre
 
-    divIcon.appendChild(iconImag)
-
-    const nombre= document.createElement("strong")
-    nombre.textContent=nombre_prod
-
-    div.appendChild(divIcon)
-    div.appendChild(nombre)
+    div.appendChild(imagenDiv)
+    div.appendChild(nombreDiv)
 
     td.appendChild(div)
     return td
