@@ -200,10 +200,43 @@ function renderFinales() {
     div_habilitacion.appendChild(input_habilitacion)
     td_habilitacion.appendChild(div_habilitacion)
 
-    tr.append(td_Nombre,tdEmail,tdRol,tdAlta,td_habilitacion)
+    // -- Fila 6 = botón eliminar
+  let tdEliminar = document.createElement("td");
+  let btnEliminar = document.createElement("button");
+  btnEliminar.classList.add("p-1", "rounded-circle", "border-0");
+  btnEliminar.disabled = lista[i].rol === "admin"; // el admin no se puede eliminar
+  btnEliminar.dataset.index = i;
+  btnEliminar.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+       fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 11v6"/><path d="M14 11v6"/>
+    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+    <path d="M3 6h18"/>
+    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+  </svg>`;
+  btnEliminar.addEventListener("click", function () {
+  eliminarUsuarioFinal(Number(this.dataset.index));
+  });
+  tdEliminar.appendChild(btnEliminar);
+
+
+    tr.append(td_Nombre,tdEmail,tdRol,tdAlta,td_habilitacion,tdEliminar)
     finalUS.appendChild(tr)
   }
 
+function eliminarUsuarioFinal(indice) {
+  let usuarios = obtenerLocalStorage("usuariosfinales") || [];
+
+  if (!usuarios[indice] || usuarios[indice].rol === "admin") {
+    return; // nunca eliminar el admin
+  }
+
+  usuarios.splice(indice, 1);
+  guardarLocalStorage(usuarios, "usuariosfinales");
+
+  renderFinales();
+}
 
 function toggleHabilitado(indice, estado) {
     let usuarios = obtenerLocalStorage("usuariosfinales")||[];
