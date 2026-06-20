@@ -3,6 +3,8 @@ import { obtenerTabla } from "./gestion-productos.js"
 
 const contenedor=obtenerTabla()
 
+/*-------------------Creación celdas admin ------------------- */
+
 function crearFila(producto){
     const fila = document.createElement("tr")
 
@@ -19,21 +21,6 @@ function crearFila(producto){
     fila.appendChild(tdAcciones)
 
     return fila
-}
-
-export function renderizarTabla(){
-    contenedor.innerHTML = ""
-
-    let productos = obtenerProductos()
-
-    if(productos.length === 0){
-        contenedor.innerHTML = "<tr><td colspan='5'>No hay productos</td></tr>"
-    }
-
-    for(let i = 0; i < productos.length; i++){
-        const fila = crearFila(productos[i])
-        contenedor.appendChild(fila)
-    }
 }
 
 function crearCeldaNombre(nombre,imagen){
@@ -138,4 +125,161 @@ function crearBotonEditar(index,div){
     btn_editar.addEventListener("click",function(){
         editarProducto(index)
     })
+}
+
+/*-------------------Creación celdas usser ------------------- */
+function crearColumna(producto){
+    const div=document.createElement("div")
+    div.classList.add("col-12", "col-md-6", "col-lg-4", "col-xl-3", "d-flex")
+    const card=crearCard(producto)
+
+    div.appendChild(card)
+    return div
+}
+
+function crearCard(producto){
+    const div = document.createElement("div")
+    div.classList.add("card", "h-100", "shadow", "border-0")
+
+    const img = crearImagen(producto.imagen,producto.nombre)
+    const overlay= crearOverlayStock(producto.stock, producto.stockMinimo)
+    const body= crearBodyCard(producto)
+
+    div.append(img,overlay,body)
+
+    return div
+}   
+
+function crearImagen(imagen,nombre){
+    const img=document.createElement("img")
+    img.src = `img/${imagen}`
+    img.alt = nombre
+    img.classList.add("card-img-top")
+    return img
+}
+
+function crearOverlayStock(stock,stockMin){
+    const overlay=document.createElement("div")
+    overlay.classList.add("card-img-overlay")
+    const span=crearSpanStock(stock,stockMin)
+    overlay.appendChild(crearSpanStock(stock,stockMin))
+
+    return overlay
+}
+
+function crearSpanStock(stock, stockMin){
+    const span = document.createElement("span")
+    span.classList.add("card-text", "rounded-4")
+
+    if(stock <= stockMin){
+        span.textContent = "Pocas unidades"
+        span.classList.add("sinStock")
+    }
+    else
+        if(stock>=100){
+            span.textContent = "Disponible"
+            span.classList.add("disponible")
+        }
+        else{
+            span.textContent = "En stock"
+            span.classList.add("stock")
+        }
+
+    return span
+}
+
+function crearBodyCard(producto){
+    const cardBody = document.createElement("div")
+    cardBody.classList.add("card-body", "d-flex", "flex-column")
+
+    const categoria = document.createElement("p")
+    categoria.classList.add("card-text")
+    categoria.textContent = producto.categoria
+
+    const nombre = document.createElement("h5")
+    nombre.classList.add("card-title")
+    nombre.textContent = producto.nombre
+
+    const footer = crearFooterCard(producto)
+
+    cardBody.append(
+        categoria,
+        nombre,
+        footer
+    )
+
+    return cardBody
+}
+
+function crearFooterCard(producto){
+    const footer=document.createElement("div")
+    footer.classList.add("d-flex", "justify-content-between", "align-items-center", "mt-3")
+
+    const precio=document.createElement("h6")
+    precio.classList.add("fw-bold")
+    precio.textContent=`$ ${producto.precio}`
+
+    const carrito=document.createElement("button")
+    carrito.classList.add("botonini")
+    carrito.type="button"
+
+    const i=document.createElement("i")
+    i.classList.add("fa-solid", "fa-cart-shopping","fa-fw")
+
+    carrito.appendChild(i)
+
+    const texto = document.createTextNode(" Agregar")
+    carrito.appendChild(texto)
+        
+    footer.append(precio,carrito)
+    return footer
+}
+
+/*-------------------Exports ------------------- */
+
+export function renderizarTabla(){
+    contenedor.innerHTML = ""
+
+    let productos = obtenerProductos()
+
+    if(productos.length === 0){
+        contenedor.innerHTML = "<tr><td colspan='5'>No hay productos</td></tr>"
+    }
+
+    for(let i = 0; i < productos.length; i++){
+        const fila = crearFila(productos[i])
+        contenedor.appendChild(fila)
+    }
+}
+
+export function mostrarDetacados(contenedor){
+    contenedor.innerHTML = ""
+
+    const productos = obtenerProductos()
+
+    const destacados = productos.filter(
+        producto => producto.destacado
+    )
+
+    for(const producto of destacados){
+        contenedor.appendChild(
+            crearColumna(producto)
+        )
+    }
+}
+
+export function mostrarPublicados(contenedor){
+    contenedor.innerHTML = ""
+
+    const productos = obtenerProductos()
+
+    const destacados = productos.filter(
+        producto => producto.publicado
+    )
+
+    for(const producto of destacados){
+        contenedor.appendChild(
+            crearColumna(producto)
+        )
+    }
 }
