@@ -1,4 +1,4 @@
-import { obtenerUsuarios, guardarUsuario } from './servicios-usuarios.js'
+import { guardarUsuario } from './servicios-usuarios.js'
 import { mostrarAlertaExito } from '../UI/Alertas.js'
 import { limpiarEstados } from '../UI/UI.js'
 import { datosUsuariosValidos } from '../validaciones/validaciones.js'
@@ -37,4 +37,3 @@ function inicializar(){
         }
     });
 }
-
