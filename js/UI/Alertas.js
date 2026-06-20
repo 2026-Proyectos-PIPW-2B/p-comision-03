@@ -7,10 +7,10 @@ export function mostrarAlertaExito( msj_titulo, msj_subtitulo, ubicacion) {
 
     const toastExito= document.createElement("div")
     toastExito.id="toastExito"
-    toastExito.classList.add("toast-exito")
+   toastExito.classList.add("toast-exito", "toast-exito-success")
 
     const circle= document.createElement("div")
-    circle.classList.add("check-circle")
+    circle.classList.add("check-circle", "circle-exito")
     circle.innerHTML= 
         `<svg width="30" height="30" viewBox="0 0 24 24" fill="none"
           stroke="#16a34a" stroke-width="2.5"
@@ -31,7 +31,7 @@ export function mostrarAlertaExito( msj_titulo, msj_subtitulo, ubicacion) {
 
     const barraTiempo=document.createElement("div")
     barraTiempo.id="barraTiempo"
-    barraTiempo.classList.add("barra-progreso")
+    barraTiempo.classList.add("barra-progreso", "barra-exito")
 
     barra.appendChild(barraTiempo)
 
@@ -50,6 +50,139 @@ export function mostrarAlertaExito( msj_titulo, msj_subtitulo, ubicacion) {
       document.getElementById("toastExito").classList.add("visible");
 
       const barra = document.getElementById("barraTiempo");
+      barra.style.transition = "width 3.5s linear";
+      barra.style.width = "0%";
+    });
+  });
+
+  setTimeout(() => {
+    overlay.classList.remove("visible");
+    setTimeout(() => {
+      overlay.remove();
+      window.location.href = ubicacion;
+    }, 300);
+  }, 3000);
+}
+export function mostrarAlertaWarning(msj_titulo, msj_subtitulo, ubicacion) {
+    if (document.getElementById("overlayWarning")) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "overlayWarning";
+    overlay.classList.add("overlay-exito");
+
+    const toastWarning = document.createElement("div")
+    toastWarning.id = "toastWarning"
+    toastWarning.classList.add("toast-exito", "toast-exito-warning")
+
+    const circle = document.createElement("div")
+    circle.classList.add("check-circle", "circle-warning")
+    circle.innerHTML =
+        `<svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+          stroke="#d97706" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="8" x2="12" y2="13"/>
+          <line x1="12" y1="16.5" x2="12" y2="16.5"/>
+        </svg>`
+
+    const titulo = document.createElement("p")
+    titulo.classList.add("toast-titulo")
+    titulo.textContent = msj_titulo
+
+    const subtitulo = document.createElement("p")
+    subtitulo.classList.add("toast-subtitulo")
+    subtitulo.textContent = msj_subtitulo
+
+    const barra = document.createElement("div")
+    barra.classList.add("barra-contenedor")
+
+    const barraTiempo = document.createElement("div")
+    barraTiempo.id = "barraTiempoWarning"
+    barraTiempo.classList.add("barra-progreso", "barra-warning")
+
+    barra.appendChild(barraTiempo)
+
+    toastWarning.appendChild(circle)
+    toastWarning.appendChild(titulo)
+    toastWarning.appendChild(subtitulo)
+    toastWarning.appendChild(barra)
+
+    overlay.appendChild(toastWarning)
+
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add("visible");
+      document.getElementById("toastWarning").classList.add("visible");
+
+      const barra = document.getElementById("barraTiempoWarning");
+      barra.style.transition = "width 3.5s linear";
+      barra.style.width = "0%";
+    });
+  });
+
+  setTimeout(() => {
+    overlay.classList.remove("visible");
+    setTimeout(() => {
+      overlay.remove();
+      window.location.href = ubicacion;
+    }, 300);
+  }, 3000);
+}
+
+export function mostrarAlertaDanger(msj_titulo, msj_subtitulo, ubicacion) {
+    if (document.getElementById("overlayDanger")) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "overlayDanger";
+    overlay.classList.add("overlay-exito");
+
+    const toastDanger = document.createElement("div")
+    toastDanger.id = "toastDanger"
+    toastDanger.classList.add("toast-exito", "toast-exito-danger")
+
+    const circle = document.createElement("div")
+    circle.classList.add("check-circle", "circle-danger")
+    circle.innerHTML =
+        `<svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+          stroke="#dc2626" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>`
+
+    const titulo = document.createElement("p")
+    titulo.classList.add("toast-titulo")
+    titulo.textContent = msj_titulo
+
+    const subtitulo = document.createElement("p")
+    subtitulo.classList.add("toast-subtitulo")
+    subtitulo.textContent = msj_subtitulo
+
+    const barra = document.createElement("div")
+    barra.classList.add("barra-contenedor")
+
+    const barraTiempo = document.createElement("div")
+    barraTiempo.id = "barraTiempoDanger"
+    barraTiempo.classList.add("barra-progreso", "barra-danger")
+
+    barra.appendChild(barraTiempo)
+
+    toastDanger.appendChild(circle)
+    toastDanger.appendChild(titulo)
+    toastDanger.appendChild(subtitulo)
+    toastDanger.appendChild(barra)
+
+    overlay.appendChild(toastDanger)
+
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add("visible");
+      document.getElementById("toastDanger").classList.add("visible");
+
+      const barra = document.getElementById("barraTiempoDanger");
       barra.style.transition = "width 3.5s linear";
       barra.style.width = "0%";
     });

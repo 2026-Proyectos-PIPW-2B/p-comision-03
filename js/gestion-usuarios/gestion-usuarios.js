@@ -87,7 +87,7 @@ function renderPendientes() {
 
 function crearBotonAccion(tipo, index, pathSvg) {
   const btn = document.createElement("button");
-  btn.classList.add("p-1", "m-1", "rounded-circle", "border-0", ` btn-${tipo}`);
+  btn.classList.add("p-1", "m-1", "rounded-circle", "border-0", `btn-${tipo}`);
   btn.dataset.index = index; 
   btn.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
