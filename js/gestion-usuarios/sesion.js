@@ -1,9 +1,5 @@
 import { obtenerLocalStorage } from "../core/localStorage.js";
 import { guardarLocalStorage } from "../core/localStorage.js";
- const navLogin = document.getElementById("navLogin");
-  const navPerfil = document.getElementById("navPerfil");
-  const navCarrito = document.getElementById("navCarrito");
-  const navCerrarSesion = document.getElementById("navCerrarSesion"); 
 /**Devuelve el usuario logueado actualmente, o null si no hay sesión iniciada.**/
 export function obtenerUsuarioActual() {
   const usuario =obtenerLocalStorage("usuarioActual");
