@@ -1,18 +1,9 @@
-import {obtenerCategorias} from './servicios-categorias.js'
+import {obtenerCategorias, obtenerIcono } from './servicios-categorias.js'
+import { mostrarCategoria } from '../gestion-usuarios/productos-usser.js'
 
 const contenedorCategorias = document.getElementById("contenedor_categorias")
 
-export function renderizarCards() {
-
-    const categorias = obtenerCategorias()
-
-    contenedorCategorias.replaceChildren()
-
-    categorias.forEach(categoria => {
-        let card=crearCard(categoria)
-        contenedorCategorias.appendChild(card)
-    })
-}
+/*---------------------- creacion cards admin ---------------------- */
 
 function crearCard(categoria){
     const col = document.createElement("div")
@@ -29,11 +20,7 @@ function crearCard(categoria){
 
     const iconContainer = document.createElement("div")
     iconContainer.className = "cat-icon-circle"
-
-    const icono = document.createElement("i")
-    icono.className = `bi ${categoria.icono}`
-
-    iconContainer.appendChild(icono)
+    iconContainer.innerHTML=categoria.icono
 
     const contenido = document.createElement("div")
     contenido.className = "flex-grow-1"
@@ -94,4 +81,76 @@ function crearCard(categoria){
     col.appendChild(card)
 
     return col
+}
+
+/*---------------------- creacion cards usser ---------------------- */
+function crearColumnaCategoria(categoria){
+    const div=document.createElement("div")
+    div.classList.add("col-12", "col-md-6", "col-lg-3")
+    const card=crearCardUsser(categoria)
+
+    div.appendChild(card)
+    return div
+}
+
+function crearCardUsser(categoria){
+    const div = document.createElement("div")
+    div.classList.add("card-categoria")
+
+    const link = crearCategoria(categoria)
+
+    div.appendChild(link)
+
+    return div
+}   
+
+function crearCategoria(categoria){
+    const div = document.createElement("div")
+    div.classList.add("text-decoration-none", "text-dark")
+    
+    div.style.cursor = "pointer"
+
+    div.addEventListener("click", () => {
+        mostrarCategoria(categoria)
+    })
+
+    const divIcon = document.createElement("div")
+    divIcon.classList.add("icono")
+    divIcon.innerHTML = obtenerIcono(categoria.nombre)
+ 
+    const nombreCat = document.createElement("h3")
+    nombreCat.textContent = categoria.nombre
+
+    const stockCategoria = document.createElement("p")
+    stockCategoria.textContent= categoria.stock
+
+    div.append(divIcon,nombreCat,stockCategoria)
+        
+    return div
+}
+
+/*---------------------- exports ---------------------- */
+
+export function renderizarCards() {
+
+    const categorias = obtenerCategorias()
+
+    contenedorCategorias.replaceChildren()
+
+    categorias.forEach(categoria => {
+        let card=crearCard(categoria)
+        contenedorCategorias.appendChild(card)
+    })
+}
+
+export function mostrarCategorias(contenedor){
+    contenedor.innerHTML = ""
+
+    const categorias = obtenerCategorias()
+
+    for(const categoria of categorias){
+        contenedor.appendChild(
+            crearColumnaCategoria(categoria)
+        )
+    }
 }

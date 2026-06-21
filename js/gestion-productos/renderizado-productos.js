@@ -1,5 +1,6 @@
 import { obtenerProductos,eliminarProducto,editarProducto } from "./servicios-productos.js"
 import { obtenerTabla } from "./gestion-productos.js"
+import { agregarCarrito } from '../carrito/servicios-carrito.js'
 
 const contenedor=obtenerTabla()
 
@@ -128,7 +129,7 @@ function crearBotonEditar(index,div){
 }
 
 /*-------------------Creación celdas usser ------------------- */
-function crearColumna(producto){
+export function crearColumna(producto){
     const div=document.createElement("div")
     div.classList.add("col-12", "col-md-6", "col-lg-4", "col-xl-3", "d-flex")
     const card=crearCard(producto)
@@ -212,6 +213,7 @@ function crearBodyCard(producto){
 }
 
 function crearFooterCard(producto){
+    
     const footer=document.createElement("div")
     footer.classList.add("d-flex", "justify-content-between", "align-items-center", "mt-3")
 
@@ -230,7 +232,10 @@ function crearFooterCard(producto){
 
     const texto = document.createTextNode(" Agregar")
     carrito.appendChild(texto)
-        
+
+    carrito.addEventListener("click", () => agregarCarrito(producto))
+
+    
     footer.append(precio,carrito)
     return footer
 }
@@ -269,17 +274,30 @@ export function mostrarDetacados(contenedor){
 }
 
 export function mostrarPublicados(contenedor){
-    contenedor.innerHTML = ""
-
-    const productos = obtenerProductos()
-
-    const destacados = productos.filter(
+    const productos = obtenerProductos().filter(
         producto => producto.publicado
     )
 
-    for(const producto of destacados){
+    mostrarProductos(contenedor, productos)
+}
+
+export function mostrarProductos(contenedor, productos){
+    contenedor.innerHTML = ""
+
+    if(productos.length === 0){
+        contenedor.innerHTML = `
+            <div class="col-12 text-center">
+                <p class="text-muted">
+                    No se encontraron productos.
+                </p>
+            </div>
+        `
+        return
+    }
+
+    productos.forEach(producto => {
         contenedor.appendChild(
             crearColumna(producto)
         )
-    }
+    })
 }

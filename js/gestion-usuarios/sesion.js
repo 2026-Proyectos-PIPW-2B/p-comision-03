@@ -1,5 +1,5 @@
-import { obtenerLocalStorage } from "../core/localStorage.js";
-import { guardarLocalStorage } from "../core/localStorage.js";
+import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js";
+
 /**Devuelve el usuario logueado actualmente, o null si no hay sesión iniciada.**/
 export function obtenerUsuarioActual() {
   const usuario =obtenerLocalStorage("usuarioActual");
