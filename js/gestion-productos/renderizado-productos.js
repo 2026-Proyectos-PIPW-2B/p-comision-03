@@ -242,13 +242,20 @@ function crearFooterCard(producto){
 
 /*-------------------Exports ------------------- */
 
-export function renderizarTabla(){
+export function renderizarTabla(productosFiltrados){
     contenedor.innerHTML = ""
 
-    let productos = obtenerProductos()
+    const productos = productosFiltrados ?? obtenerProductos()
 
     if(productos.length === 0){
-        contenedor.innerHTML = "<tr><td colspan='5'>No hay productos</td></tr>"
+        const tr=document.createElement("tr")
+        const td=document.createElement("td")
+        td.colSpan=5
+        td.classList.add("text-muted","text-center","py-3")
+        td.textContent="No hay productos"
+        tr.appendChild(td)
+        contenedor.appendChild(tr)
+        return
     }
 
     for(let i = 0; i < productos.length; i++){

@@ -1,4 +1,5 @@
 import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js"
+import { actualizarStockCategorias } from "../gestion-categorias/servicios-categorias.js"
 
 export function obtenerProductos(){
     return obtenerLocalStorage("bd-productos")
@@ -52,6 +53,7 @@ function agregarProducto(producto){
     const productos = obtenerProductos()
     productos.push(producto)
     guardarLocalStorage(productos,"bd-productos")
+    actualizarStockCategorias()
 }
 
 export function eliminarProducto(index){
@@ -59,6 +61,7 @@ export function eliminarProducto(index){
     const productoEliminar= obtenerProductoPorId(index)
     productos.splice(productoEliminar, 1)
     guardarLocalStorage(productos,"bd-productos")
+    actualizarStockCategorias()
 }
 
 export function editarProducto(index){
@@ -84,7 +87,5 @@ export function actualizarProducto(id,nombre,descripcion,categoria,precio,stock,
         destacado:    destacado,
         imagen:      imagen
     }
-    
-
     agregarProducto(actualizacionProducto)
 }

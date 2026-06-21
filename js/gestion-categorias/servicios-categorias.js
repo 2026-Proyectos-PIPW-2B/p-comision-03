@@ -1,4 +1,5 @@
 import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js"
+import { obtenerProductos } from "../gestion-productos/servicios-productos.js"
 
 const btnGuardarEdicion = document.getElementById("btnGuardarEdicion")
 const inputEditarNombre = document.getElementById("editar_nombre")
@@ -90,3 +91,15 @@ export function actualizarSelectCategorias(select){
     })
 }
 
+export function actualizarStockCategorias(){
+    const categorias = obtenerCategorias()
+    const productos = obtenerProductos()
+
+    categorias.forEach(categoria => {
+        categoria.stock = productos.filter(
+            producto => producto.categoria === categoria.nombre
+        ).length
+    })
+
+    guardarLocalStorage(categorias, "bd-categoria")
+}
