@@ -1,8 +1,9 @@
 import { obtenerCarrito, obtenerCarritoPorUsuario } from "./servicios-carrito.js"
 import { obtenerUsuarioActual,protegerPagina } from "../gestion-usuarios/sesion.js"
 import { guardarLocalStorage } from "../core/localStorage.js"
-import { mostrarAlertaConfirm } from "../UI/Alertas.js"
+import { mostrarAlertaConfirm, mostrarAlertaWarning } from "../UI/Alertas.js"
 import { mostrarAlertaExito } from "../UI/Alertas.js"
+import { obtenerProductos } from "../gestion-productos/servicios-productos.js"
 let envio_gratis=20000
 let Costo_Envio=8000
 
@@ -163,12 +164,16 @@ function sumarCantidad(productoId) {
     const usuarioActual = obtenerUsuarioActual()
     const carritos = obtenerCarrito()
     const carritoUsuario = carritos.find(c => c.usuario.email === usuarioActual.email)
- 
+
     const item = carritoUsuario.compras.find(i => i.producto.id === productoId)
     if (!item) return
- 
+
+    if (item.cantidad >= item.producto.stock){
+        mostrarAlertaWarning("Sin stock","No hay más unidades disponibles","")
+        return 
+    }
     item.cantidad += 1
- 
+
     guardarCambios(carritos)
     renderizarCarrito()
 }
@@ -211,15 +216,24 @@ function eliminarDelCarrito(productoId, carritoUsuario, carritos) {
 }
 
 function confirmarCompra() {
-    const usuarioActual = obtenerUsuarioActual()
+      const usuarioActual = obtenerUsuarioActual()
     if (!usuarioActual) return
 
     const carritos = obtenerCarrito()
     const carritoUsuario = carritos.find(c => c.usuario.email === usuarioActual.email)
     if (!carritoUsuario) return
 
+    const productos = obtenerProductos()
+    carritoUsuario.compras.forEach(item => {
+        const producto = productos.find(p => p.id === item.producto.id)
+        if (producto) {
+            producto.stock -= item.cantidad
+        }
+    })
+    guardarLocalStorage(productos, "bd-productos")
+
     carritoUsuario.estado = "aprobado"
-    carritoUsuario.compras=[]
+    carritoUsuario.compras = []
     guardarLocalStorage(carritos, "carrito")
     renderizarCarrito()
     mostrarAlertaExito("¡Compra confirmada!", "Tu pedido está en camino 🐾", "index.html")

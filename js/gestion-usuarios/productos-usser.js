@@ -12,12 +12,12 @@ const inputFiltro = document.getElementById("filtro")
 
 let categoriaActual = null
 
-window.onload= function(){
+document.addEventListener("DOMContentLoaded", function(){
     actualizarNav()
     mostrarCategorias(contendorCategorias)
     mostrarPublicados(contenedorProductos)
     inputFiltro.addEventListener("input", filtrarProductos)
-}
+})
  
 export function mostrarCategoria(categoria){
     seccionCategorias.classList.add("d-none")

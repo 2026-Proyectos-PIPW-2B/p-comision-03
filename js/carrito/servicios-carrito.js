@@ -1,6 +1,7 @@
 import { guardarLocalStorage, obtenerLocalStorage } from "../core/localStorage.js"
 import { obtenerUsuarioActual } from "../gestion-usuarios/sesion.js"
 import { mostrarAlertaWarning } from'../UI/Alertas.js'
+import { actualizarBadgeCarrito } from "./nav-carrito.js"
 
 export function obtenerCarritoPorUsuario(usuario){
     return obtenerCarrito().find(
@@ -43,13 +44,18 @@ export function agregarCarrito(producto){
         item => item.producto.id === producto.id
     )
     if(producExistente){
-        producExistente.cantidad=obtenerCantidadProd(carritoUsuario,producto.id)
-    }else{
-        carritoUsuario.compras.push({"producto":producto,"cantidad":1})
+    if(producExistente.cantidad >= producto.stock){
+        mostrarAlertaWarning("Sin stock", "No hay más unidades disponibles", "")
+        return
+    }
+    producExistente.cantidad = obtenerCantidadProd(carritoUsuario, producto.id)
+    } else {
+    carritoUsuario.compras.push({"producto": producto, "cantidad": 1})
     }
     //carritoUsuario.compras.push(producto)
 
     guardarLocalStorage(carritos, "carrito")
+    actualizarBadgeCarrito()
 }
 function obtenerCantidadProd(carritoUsuario,productoId){
      const item = carritoUsuario.compras.find(

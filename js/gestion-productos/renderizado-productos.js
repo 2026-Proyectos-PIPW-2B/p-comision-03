@@ -284,7 +284,7 @@ export function mostrarDetacados(contenedor){
 
 export function mostrarPublicados(contenedor){
     const productos = obtenerProductos().filter(
-        producto => producto.publicado
+        producto => producto.publicado && producto.stock > 0  // ← agregá && producto.stock > 0
     )
 
     mostrarProductos(contenedor, productos)

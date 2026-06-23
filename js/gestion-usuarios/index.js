@@ -5,10 +5,9 @@ import { inicializarSistema } from '../core/inicializacion.js';
 
 export const contenedorDestacados = document.getElementById("prod-destacados")
 
-window.onload=function(){
-    inicializarSistema()
+document.addEventListener("DOMContentLoaded", function(){
     actualizarNav()
     mostrarDetacados(contenedorDestacados)
     actualizarBadgeCarrito()
-}
+})
     
