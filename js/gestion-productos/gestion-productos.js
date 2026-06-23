@@ -28,6 +28,7 @@ const campos = {
 }
 
 window.onload = function () {
+      if (!zonaImagen || !inputImagen || !btnGuardar) return
     actualizarSelectCategorias(selectCategorias)
     actualizarSelectCategorias(filtros_categorias)
     inicializarListeners()

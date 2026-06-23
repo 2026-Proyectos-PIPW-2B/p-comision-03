@@ -80,7 +80,7 @@ export function EditarCategoria(id){
 
 export function actualizarSelectCategorias(select){
     const categorias = obtenerCategorias()
-
+     if (!select) return 
     categorias.forEach(categoria => {
         const option = document.createElement("option")
 

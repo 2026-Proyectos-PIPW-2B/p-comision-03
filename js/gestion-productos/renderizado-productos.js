@@ -243,6 +243,7 @@ function crearFooterCard(producto){
 /*-------------------Exports ------------------- */
 
 export function renderizarTabla(productosFiltrados){
+    if (!contenedor) return 
     contenedor.innerHTML = ""
 
     const productos = productosFiltrados ?? obtenerProductos()
@@ -265,6 +266,7 @@ export function renderizarTabla(productosFiltrados){
 }
 
 export function mostrarDetacados(contenedor){
+    if (!contenedor) return  
     contenedor.innerHTML = ""
 
     const productos = obtenerProductos()

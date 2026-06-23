@@ -210,6 +210,11 @@ input[type="number"]{
         gap: 15px;
     }
 }
+
+.carritoVacio{
+    font-size: 64px;
+    color: #ccc;
+}
 /*Registro*/
 .icono-registro{
     width: 60px;

@@ -16,6 +16,7 @@ export function agregarCarrito(producto){
 
     if(!usuarioActual){
         mostrarAlertaWarning("ERROR", "Debe iniciar sesión en su cuenta","login.html")
+        return
     }
 
     const carritos = obtenerCarrito()
@@ -23,6 +24,7 @@ export function agregarCarrito(producto){
     let carritoUsuario = carritos.find(
         carrito => carrito.usuario.email === usuarioActual.email
     )
+
 
     if(!carritoUsuario){
         carritoUsuario = {
@@ -33,8 +35,30 @@ export function agregarCarrito(producto){
 
         carritos.push(carritoUsuario)
     }
-
-    carritoUsuario.compras.push(producto)
+    if(carritoUsuario.estado === "aprobado"){
+        carritoUsuario.estado = "pendiente"
+        carritoUsuario.compras = []
+    }
+    let producExistente=carritoUsuario.compras.find(
+        item => item.producto.id === producto.id
+    )
+    if(producExistente){
+        producExistente.cantidad=obtenerCantidadProd(carritoUsuario,producto.id)
+    }else{
+        carritoUsuario.compras.push({"producto":producto,"cantidad":1})
+    }
+    //carritoUsuario.compras.push(producto)
 
     guardarLocalStorage(carritos, "carrito")
+}
+function obtenerCantidadProd(carritoUsuario,productoId){
+     const item = carritoUsuario.compras.find(
+        item => item.producto.id === productoId
+    )
+
+    if(item){
+        return item.cantidad + 1
+    }
+
+    return 1
 }
