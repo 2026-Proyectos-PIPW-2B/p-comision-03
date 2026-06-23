@@ -18,12 +18,12 @@ export function obtenerProductoPorId(id){
 export function crearProductoExtendido(inputNombre,inputDescripcion,selectCategorias,inputPrecio,inputStock,inputStockMinimo, checkPublicado, checkDestacado, imagen){
     const nuevoProducto = {
         id:           crypto.randomUUID(),
-        nombre:       inputNombre.value.trim(),
-        descripcion:  inputDescripcion.value.trim(),
-        categoria:    selectCategorias.value,
-        precio:       Number(inputPrecio.value),
-        stock:        Number(inputStock.value),
-        stockMinimo:  Number(inputStockMinimo.value),
+        nombre:       inputNombre.trim(),
+        descripcion:  inputDescripcion.trim(),
+        categoria:    selectCategorias,
+        precio:       Number(inputPrecio),
+        stock:        Number(inputStock),
+        stockMinimo:  Number(inputStockMinimo),
         publicado:    checkPublicado.checked,
         destacado:    checkDestacado.checked,
         imagen:      imagen
@@ -34,11 +34,11 @@ export function crearProductoExtendido(inputNombre,inputDescripcion,selectCatego
 export function crearProducto(inputNombre,inputDescripcion,selectCategorias,inputPrecio,inputStock,imagen){
     const nuevoProducto = {
         id:           crypto.randomUUID(),
-        nombre:       inputNombre.value.trim(),
-        descripcion:  inputDescripcion.value.trim(),
-        categoria:    selectCategorias.value,
-        precio:       Number(inputPrecio.value),
-        stock:        Number(inputStock.value),
+        nombre:       inputNombre.trim(),
+        descripcion:  inputDescripcion.trim(),
+        categoria:    selectCategorias,
+        precio:       Number(inputPrecio),
+        stock:        Number(inputStock),
         stockMinimo:  5,
         publicado:    true,
         destacado:    false,

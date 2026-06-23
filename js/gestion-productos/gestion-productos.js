@@ -3,6 +3,7 @@ import { guardarProducto } from './form-productos.js'
 import { mostrarPreview, quitarImagen } from './imagen-productos.js'
 import { renderizarTabla } from './renderizado-productos.js'
 import { inicializarFiltros } from "./filtros-productos.js"
+import { crearProducto, crearProductoExtendido, obtenerProductos } from "./servicios-productos.js"
 
 const selectCategorias      = document.getElementById("categoria")
 const inputNombre           = document.getElementById("nombre_prod")
@@ -28,7 +29,7 @@ const campos = {
 }
 
 window.onload = function () {
-      if (!zonaImagen || !inputImagen || !btnGuardar) return
+    if (!zonaImagen || !inputImagen || !btnGuardar) return
     actualizarSelectCategorias(selectCategorias)
     actualizarSelectCategorias(filtros_categorias)
     inicializarListeners()
@@ -47,6 +48,3 @@ function inicializarListeners() {
     btnQuitar.addEventListener("click",     () => quitarImagen(previewDiv,zonaImagen))
     btnGuardar.addEventListener("click",    () => guardarProducto(campos))
 }
-
-
-

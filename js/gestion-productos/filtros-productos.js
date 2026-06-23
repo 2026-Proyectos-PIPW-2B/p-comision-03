@@ -8,17 +8,12 @@ const filtros = {
     texto: ""
 }
 
-export function inicializarFiltros(categoria, texto, botonLimpiar){
+export function inicializarFiltros(categoria, texto){
     filtro_categoria = categoria
     filtro_texto = texto
-    boton_limpiar = botonLimpiar
 
     filtro_categoria.addEventListener("change", aplicarFiltros)
     filtro_texto.addEventListener("input", aplicarFiltros)
-
-    boton_limpiar.addEventListener("click", limpiarFiltros)
-
-    actualizarBotonLimpiar()
 }
 
 function aplicarFiltros(){

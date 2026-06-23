@@ -1,10 +1,13 @@
 import { obtenerCarrito, obtenerCarritoPorUsuario } from "./servicios-carrito.js"
-import { obtenerUsuarioActual } from "../gestion-usuarios/sesion.js"
+import { obtenerUsuarioActual,protegerPagina } from "../gestion-usuarios/sesion.js"
 import { guardarLocalStorage } from "../core/localStorage.js"
 import { mostrarAlertaConfirm } from "../UI/Alertas.js"
 import { mostrarAlertaExito } from "../UI/Alertas.js"
 let envio_gratis=20000
 let Costo_Envio=8000
+
+
+protegerPagina();
 
 const listaCarrito = document.querySelector(".lista-carrito")
 

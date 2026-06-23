@@ -1,12 +1,17 @@
 import { obtenerLocalStorage } from '../core/localStorage.js';
 import { iniciarSesionUsuario } from './sesion.js';
 import { mostrarAlertaWarning, mostrarAlertaDanger } from '../UI/Alertas.js';
+import { inicializarSistema } from '../core/inicializacion.js';
 
 const inputMail = document.getElementById("mail");
 const inputContra = document.getElementById("contra");
 const btnLogin = document.querySelector(".btnlogin");
 const errorlogin=document.getElementById("errorlogin") 
-btnLogin.addEventListener("click", iniciarSesion);
+
+window.onload=function(){
+  inicializarSistema()
+  btnLogin.addEventListener("click", iniciarSesion);
+}
  
 function iniciarSesion() {
   errorlogin.textContent = "";

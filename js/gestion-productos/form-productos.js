@@ -12,8 +12,8 @@ export function guardarProducto(campos) {
 
     const archivo = inputImagen.files[0]
     crearProducto(
-            campos.nombre.input,  campos.descripcion.input,  campos.categoria.input,
-            campos.precio.input,  campos.stock.input ,archivo.name
+            campos.nombre.input.value,  campos.descripcion.input.value,  campos.categoria.input.value,
+            campos.precio.input.value,  campos.stock.input.value ,archivo.name
         )
     mostrarAlertaExito( campos.nombre.input.value, "Producto registrado con exitó", "productos-admin.html")
 }
@@ -49,9 +49,9 @@ export function guardarProductoExtendido(campos){
         const archivo = inputImagen.files[0]
 
         crearProductoExtendido(
-        campos.nombre.input,  campos.descripcion.input,  campos.categoria.input,
-        campos.precio.input,  campos.stock.input,  campos.stockMinimo.input,
-        campos.publicado.input, campos.destacado.input ,archivo.name
+        campos.nombre.input.value,  campos.descripcion.input.value,  campos.categoria.input.value,
+        campos.precio.input.value,  campos.stock.input.value,  campos.stockMinimo.input.value,
+        campos.publicado.input.value, campos.destacado.input.value ,archivo.name
     )
         mostrarAlertaExito( campos.nombre.input.value, "Producto registrado con exitó","productos-admin.html")
     }

@@ -1,5 +1,5 @@
 import { datosCategoriasValidos} from '../validaciones/validaciones.js'
-import { crearCategoria, actualizarCategoria, eliminarCategoria, EditarCategoria,obtenerCategoriaPorId} from './servicios-categorias.js'
+import { crearCategoria, actualizarCategoria, eliminarCategoria, EditarCategoria,obtenerCategoriaPorId,obtenerCategorias} from './servicios-categorias.js'
 import { renderizarCards } from './renderizado-categorias.js'
 import { incorporarListenerModalEditar,abrirModalEditar} from './panel-modal-categorias.js'
 import { mostrarAlertaExito} from'../UI/Alertas.js'
@@ -56,4 +56,3 @@ function incorporarListenerCards(){
         }
     })
 }
-

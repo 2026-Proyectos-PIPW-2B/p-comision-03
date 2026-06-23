@@ -2,6 +2,7 @@ import { guardarUsuario } from './servicios-usuarios.js'
 import { mostrarAlertaExito } from '../UI/Alertas.js'
 import { limpiarEstados } from '../UI/UI.js'
 import { datosUsuariosValidos } from '../validaciones/validaciones.js'
+import { inicializarSistema } from '../core/inicializacion.js'
 
 const inputNombre       = document.getElementById("nombre")
 const inputApellido     = document.getElementById("apellido")
@@ -21,6 +22,7 @@ const campos = {
 
 window.addEventListener("load", function(){
     inicializar()
+    inicializarSistema()
 })
 
 function inicializar(){
