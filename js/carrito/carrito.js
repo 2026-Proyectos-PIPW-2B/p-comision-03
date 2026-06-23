@@ -216,7 +216,7 @@ function eliminarDelCarrito(productoId, carritoUsuario, carritos) {
 }
 
 function confirmarCompra() {
-      const usuarioActual = obtenerUsuarioActual()
+    const usuarioActual = obtenerUsuarioActual()
     if (!usuarioActual) return
 
     const carritos = obtenerCarrito()
@@ -224,11 +224,35 @@ function confirmarCompra() {
     if (!carritoUsuario) return
 
     const productos = obtenerProductos()
+    let huboAjuste = false
+
+    
+    carritoUsuario.compras = carritoUsuario.compras.filter(item => {
+        const producto = productos.find(p => p.id === item.producto.id)
+        if (!producto || producto.stock === 0) {
+            huboAjuste = true
+            return false  
+        }
+        if (item.cantidad > producto.stock) {
+            item.cantidad = producto.stock 
+            huboAjuste = true
+        }
+        return true
+    })
+
+    if (huboAjuste) {
+        guardarLocalStorage(carritos, "carrito")
+        renderizarCarrito()
+        mostrarAlertaWarning(
+            "Stock insuficiente",
+            "Algunos productos fueron ajustados según el stock disponible. Revisá tu carrito antes de confirmar.",
+            ""
+        )
+        return
+    }
     carritoUsuario.compras.forEach(item => {
         const producto = productos.find(p => p.id === item.producto.id)
-        if (producto) {
-            producto.stock -= item.cantidad
-        }
+        if (producto) producto.stock -= item.cantidad
     })
     guardarLocalStorage(productos, "bd-productos")
 
