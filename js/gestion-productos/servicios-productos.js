@@ -58,8 +58,8 @@ function agregarProducto(producto){
 
 export function eliminarProducto(index){
     const productos = obtenerProductos()
-    const productoEliminar= obtenerProductoPorId(index)
-    productos.splice(productoEliminar, 1)
+    const posicion = productos.findIndex(producto => producto.id === index)
+    productos.splice(posicion, 1)
     guardarLocalStorage(productos,"bd-productos")
     actualizarStockCategorias()
 }
