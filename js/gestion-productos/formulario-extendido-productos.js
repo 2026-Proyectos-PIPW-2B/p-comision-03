@@ -28,8 +28,8 @@ const campos = {
     precio:      { input: inputPrecio,      error: "errorPrecio" },
     stock:       { input: inputStock,       error: "errorStock" },
     stockMinimo: { input: inputStockMinimo, error: "errorStockMinimo" },
-    destacado:   { input: checkDestacado},
-    publicado:   { input: checkPublicado},
+    destacado:   { input: checkDestacado.checked},
+    publicado:   { input: checkPublicado.checked},
 }
 
 window.onload = function () {

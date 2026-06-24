@@ -75,6 +75,7 @@ export function actualizarNav() {
     });
   }
 }
-function ini(nombre, apellido) {
+
+export function ini(nombre, apellido) {
   return `${nombre?.[0] ?? "?"}${apellido?.[0] ?? "?"}`.toUpperCase();
 }

@@ -1,6 +1,7 @@
 import { obtenerCategorias,crearCategoria } from "../gestion-categorias/servicios-categorias.js"
 import { obtenerProductos,crearProductoExtendido,crearProducto } from "../gestion-productos/servicios-productos.js"
 import { obtenerUsuariosFinales } from "../gestion-usuarios/servicios-usuarios.js"
+import { obtenerUsuarioActual } from "../gestion-usuarios/sesion.js";
 import { guardarLocalStorage } from "./localStorage.js";
 
 const ADMIN = {
@@ -63,4 +64,35 @@ function inicializarAdmin() {
         finales.unshift(ADMIN);
         guardarLocalStorage(finales, "usuariosfinales");
     }
+}
+
+export function inicializarUser(contenedor){
+    const usuario=obtenerUsuarioActual()
+    const div = document.createElement("div")
+    div.classList.add("d-flex","align-items-center", "gap-2", "px-2", "py-1")
+    div.style.cursor="pointer"
+    const siglas= document.createElement("div")
+    siglas.classList.add("av-circle")
+    siglas.textContent=`${ini(usuario.nombre,usuario.apellido)}`
+    
+    const bloque= document.createElement("div")
+    bloque.classList.add("d-none", "d-sm-block", "lh-sm")
+    const nombre= document.createElement("div")
+    nombre.classList.add("fw-bold")
+    nombre.textContent=`${usuario.nombre} ${usuario.apellido}`
+    const rol=document.createElement("div")
+    rol.classList.add("text-muted")
+    if(!usuario.rol)
+        rol.textContent="Usuario"
+    else
+        rol.textContent="Administrador"
+
+    bloque.append(nombre,rol)
+    div.append(siglas,bloque)
+
+    contenedor.appendChild(div)
+}
+
+export function ini(nombre, apellido) {
+    return (nombre[0] + apellido[0]).toUpperCase();
 }

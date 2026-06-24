@@ -1,6 +1,6 @@
 import { obtenerUsuariosPendientes, obtenerUsuariosFinales,toggleHabilitado,eliminarUsuarioFinal,aceptarUsuario,eliminarUsuario } from "./servicios-usuarios.js";
 import { guardarLocalStorage } from "../core/localStorage.js";
-import { ini } from "./gestion-usuarios.js";
+import { ini } from "../core/inicializacion.js";
 
 /*--------------------------creación celdas------------------------------*/
 

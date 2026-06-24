@@ -24,8 +24,8 @@ export function crearProductoExtendido(inputNombre,inputDescripcion,selectCatego
         precio:       Number(inputPrecio),
         stock:        Number(inputStock),
         stockMinimo:  Number(inputStockMinimo),
-        publicado:    checkPublicado.checked,
-        destacado:    checkDestacado.checked,
+        publicado:    checkPublicado,
+        destacado:    checkDestacado,
         imagen:      imagen
     }
     agregarProducto(nuevoProducto)
