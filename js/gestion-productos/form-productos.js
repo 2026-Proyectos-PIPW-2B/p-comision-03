@@ -51,7 +51,7 @@ export function guardarProductoExtendido(campos){
         crearProductoExtendido(
         campos.nombre.input.value,  campos.descripcion.input.value,  campos.categoria.input.value,
         campos.precio.input.value,  campos.stock.input.value,  campos.stockMinimo.input.value,
-        campos.publicado.input.value, campos.destacado.input.value ,archivo.name
+        campos.publicado.input.checked, campos.destacado.input.checked ,archivo.name
     )
         mostrarAlertaExito( campos.nombre.input.value, "Producto registrado con exitó","productos-admin.html")
     }
