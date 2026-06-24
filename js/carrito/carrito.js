@@ -15,6 +15,7 @@ const listaCarrito = document.querySelector(".lista-carrito")
  
 function formatCLP(valor) {
     return "$" + Math.round(valor).toLocaleString("es-AR")
+    
 }
 
 function crearTarjetaProducto(item) {
@@ -148,7 +149,7 @@ function actualizarResumen(compras) {
  
     document.querySelector(".subtotal-label").textContent =`Subtotal (${cantidadProductos} producto${cantidadProductos === 1 ? "" : "s"})`
     document.querySelector(".subtotal-valor").textContent = formatCLP(subtotal)
-    document.querySelector(".textenvio").textContent = envio === 0 ? "Gratis" : formatCLP(envio)
+    document.querySelector(".textenvio").textContent = envio === 0 ? "-" : formatCLP(envio)
     document.querySelector(".total-valor").textContent = formatCLP(total)
  
     const btnFinalizar = document.querySelector(".buttoncarrito")
