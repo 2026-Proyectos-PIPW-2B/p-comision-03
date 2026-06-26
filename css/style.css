@@ -137,18 +137,47 @@ body #navinicio{
     color: white;
 }
 .boton-cerrarSesion{
-    background-color: transparent;
-     color: #2b1f1a;
-      border: 2px solid #ddd;
-}
-.boton-cerrarSesion:hover{
-    background-color: red;
-    color: white;
+  border:1px solid #e0d0c0;
+  color:#c0392b;
+  font-size:13px;
+  font-weight:500;
 }
 .items-carrito{
     background-color: #f37344;
     color: white;
      font-size: 0.7rem;
+}
+.link-historial{
+    font-size:14px;
+    color:#2c1a10;
+}
+.nombreEl{
+    font-size:14px;
+    color:#f5e6d8;
+}
+.emailEl{
+    font-size:12px;
+    color:#c8a98a;
+}
+.iconoMenu{
+    width:50px;
+    height:50px;
+    background:#5a2d1a;
+    border:2px solid #e86c30;
+    color:#f5e6d8;
+    font-size:14px;
+    font-weight:500;
+}
+.conten{
+    background-color: #3E1C0D;
+}
+.menu{
+    width:260px;
+    border-radius:12px;
+    overflow:hidden;
+}
+.div_contenedor{
+    cursor: pointer;
 }
 /*PRODUCTOS*/
 .card-categoria {
