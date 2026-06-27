@@ -17,6 +17,12 @@ body {
     overflow: hidden;
 }
 
+.titulo-header{
+    font-size:.7rem; 
+    letter-spacing:1.2px; 
+    color:#8a7060;
+}
+
 .icono {
     width: 40px;
     height: 40px;
@@ -36,16 +42,29 @@ body {
 /* ── SIDEBAR ── */
 #sidebar {
     width: var(--sw);
-    position: sticky;
+    position: fixed;
+    left: 0;
     top: 0;
     height: 100vh;
     overflow: hidden;
-    transition: width .3s ease;
+    transition: width .3s ease, transform .3s ease;
     flex-shrink: 0;
+    z-index: 1040;
+}
+
+#contenido{
+    margin-left: var(--sw);
+    height: 100vh;
+    overflow-y: auto;
+    transition: margin-left .3s ease;
 }
 
 body.collapsed #sidebar {
     width: var(--sc);
+}
+
+body.collapsed #contenido{
+    margin-left: var(--sc);
 }
 
 /* en mobile: overlay */
@@ -66,6 +85,25 @@ body.collapsed #sidebar {
     }
 }
 
+#overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 1039;
+}
+
+@media (max-width:991.98px){
+
+    body:not(.collapsed) #overlay{
+        opacity:1;
+        visibility:visible;
+    }
+
+}
+
 /* ── TEXTOS QUE SE OCULTAN ── */
 .menu-text,
 .sidebar-title {
@@ -75,6 +113,12 @@ body.collapsed #sidebar {
     overflow: hidden;
 }
 
+.sidebar-subtitle{
+    font-size: .75rem;
+    color: #b89880;
+    letter-spacing: .5px;
+    margin-top: 2px;
+}
 body.collapsed .menu-text,
 body.collapsed .sidebar-title {
     opacity: 0;
@@ -338,4 +382,22 @@ body.collapsed svg {
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid #ddd;
+}
+
+.btn-ver {
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+    color: #212529;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-ver:hover {
+    background-color: var(--bs-success) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    transform: translateY(-1px);
 }
