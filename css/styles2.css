@@ -384,7 +384,7 @@ body.collapsed svg {
     border: 1px solid #ddd;
 }
 
-.btn-ver {
+.btn-ver, .linkPedidos{
     border: none;
     border-radius: 15px;
     padding: 5px 10px;
@@ -395,7 +395,7 @@ body.collapsed svg {
     z-index: 2;
 }
 
-.btn-ver:hover {
+.btn-ver:hover, .linkPedidos:hover {
     background-color: var(--bs-success) !important;
     color: white !important;
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
