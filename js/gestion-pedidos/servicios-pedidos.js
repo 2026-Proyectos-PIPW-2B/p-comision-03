@@ -43,3 +43,4 @@ export function agregarPedido(carrito) {
     pedidos.push(nuevo_pedido);
     guardarLocalStorage(pedidos,"pedidos");
 }
+

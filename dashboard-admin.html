@@ -121,7 +121,7 @@
                 <header class="mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3">
                     <div>
                         <p class="text-uppercase fw-bold mb-1" style="font-size:.7rem; letter-spacing:1.2px; color:#8a7060;">Dashboard</p>
-                        <h1 class="fw-bold mb-1">Hola, Avi 🐾</h1>
+                        <h1 class="fw-bold mb-1">¡Bienvenida a Huellitas! 🐾</h1>
                         <p class="text-muted mb-0">Esto es lo que está pasando en Huellitas hoy.</p>
                     </div>
                     <button class="btn d-flex align-items-center gap-2 align-self-center bg-dark text-white rounded-5 p-2 fs-6 ">
@@ -137,7 +137,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-icon lucide-receipt"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg>
                                     </div>
                                     <h6 class="card-subtitle text-muted">Pedidos Hoy</h6>
-                                    <h2 class="mt-2">32</h2>
+                                    <h2 class="mt-2" id="pedidos-hoy"></h2>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>
                                     </div>
                                     <h6 class="card-subtitle text-muted">Ingresos del Mes</h6>
-                                    <h2 class="mt-2">$1.203.776</h2>
+                                    <h2 class="mt-2" id="ingreso-mes"></h2>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                                         <i class="fa-solid fa-users fa-fw"></i>
                                     </div>
                                     <h6 class="card-subtitle text-muted">Usuarios Registrados</h6>
-                                    <h2 class="mt-2">13</h2>
+                                    <h2 class="mt-2" id="usuarios-totales"></h2>
                                 </div>
                             </div>
                         </div>
@@ -170,18 +170,35 @@
                                         <i class="fa-solid fa-box fa-fw"></i>  
                                     </div>
                                     <h6 class="card-subtitle text-muted">Productos en Stock</h6>
-                                    <h2 class="mt-2">310</h2>
+                                    <h2 class="mt-2" id="productos-stock"></h2>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+                <section id="pedidosRecientes" class="container mt-4">
+                    <div class="card bg-light mt-4 rounded-4">
+                        <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 p-3">
+                            <h4 class="card-title pt-1 te fw-bold">Pedidos recientes</h4>
+                            <a href="pedidos-admin.html" class="nav-link linkPedidos pt-2">Ver más <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless w-100 mb-0">
+                                        <tbody id="pedidos_recientes"></tbody>
+                                    </table>
+                                </div>     
+                            </div>
+                        </div>
+                    </div>  
+                </section>
                 <section id="bajostock" class="container">
                     <div class="card bg-light mt-4">
                         <div class="card-body">
-                            <h4 class="card-title p-2 fw-bold">Stock bajo</h3>
+                            <h4 class="card-title p-2 fw-bold">Stock bajo</h4>
                             <div class="container">
-                                <div class="row row-cols-1">
+                                <div class="row row-cols-1" id="stock_bajo">
                                     <div class="col">
                                         <div class="d-flex">
                                             <h6 class="mb-0">Alimento Premium Adulto</h6>
@@ -192,29 +209,6 @@
                                             <div class="stock-bar " style="width:8%"></div>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="d-flex">
-                                            <h6 class="mb-0">Alimento low cost Adulto</h6>
-                                            <p class="text-danger ms-auto mb-0">10 u.</p>
-                                        </div>
-
-                                        <p class="text-muted mb-1">Perros</p>
-                                        <div class="stock-bar-bg mb-2">
-                                            <div class="stock-bar " style="width:10%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="d-flex">
-                                            <h6 class="mb-0">Alimento Premium Adulto</h6>
-                                            <p class="text-danger ms-auto mb-0">3 u.</p>
-                                        </div>
-
-                                        <p class="text-muted mb-1">Gatos</p>
-                                        <div class="stock-bar-bg mb-2">
-                                            <div class="stock-bar" style="width:3%"></div>
-                                        </div>
-                                    </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -224,6 +218,7 @@
         </div>
     </div>
     <script type="module" src="js/gestion-usuarios/nav-admin.js"></script>
+    <script type="module" src="js/dashboard/gestion-dashbord.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   
 </body>

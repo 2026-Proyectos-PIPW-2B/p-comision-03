@@ -91,6 +91,7 @@ function crearCeldaAcciones(codigo){
 }
 
 function crearBotonVerMas(codigo){
+
     const btn = document.createElement("button");
 
     btn.classList.add("btn","btn-sm","btn-ver");
