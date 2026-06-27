@@ -146,7 +146,13 @@ function actualizarResumen(compras) {
  
     document.querySelector(".subtotal-label").textContent =`Subtotal (${cantidadProductos} producto${cantidadProductos === 1 ? "" : "s"})`
     document.querySelector(".subtotal-valor").textContent = formatCLP(subtotal)
-    document.querySelector(".textenvio").textContent = envio === 0 ? "-" : formatCLP(envio)
+    if (subtotal === 0) {
+        document.querySelector(".textenvio").textContent = "-"
+    } else if (subtotal >= envio_gratis) {
+        document.querySelector(".textenvio").textContent = "Gratis"
+    } else {
+        document.querySelector(".textenvio").textContent = formatCLP(Costo_Envio)
+    }
     document.querySelector(".total-valor").textContent = formatCLP(total)
  
     const btnFinalizar = document.querySelector(".buttoncarrito")
