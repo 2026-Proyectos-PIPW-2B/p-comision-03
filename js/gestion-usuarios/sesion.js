@@ -1,3 +1,4 @@
+import { obtenerIniciales } from "../core/inicializacion.js";
 import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js";
 
 /**Devuelve el usuario logueado actualmente, o null si no hay sesión iniciada.**/
@@ -69,7 +70,7 @@ export function actualizarNav() {
  
   if (haySesion && navPerfil) {
     navPerfil.classList.add("av-circle", "estiloIcono");
-    navPerfil.textContent = ini(usuario.nombre, usuario.apellido);
+    navPerfil.textContent = obtenerIniciales(usuario.nombre, usuario.apellido);
   }
  
   if (navCerrarSesion) {
@@ -77,11 +78,4 @@ export function actualizarNav() {
       e.preventDefault();
       cerrarSesion();
     });
-  }
-}
-
-export function ini(nombre, apellido) {
-  // Devuelve las iniciales del nombre y apellido en mayúsculas. Ej: "Facundo", "Ojeda" → "FO"
-// ?? significa: si el valor de la izquierda es null o undefined, usá el de la derecha. Ej: null ?? "?" → "?"
-  return `${nombre?.[0] ?? "?"}${apellido?.[0] ?? "?"}`.toUpperCase();
-}
+  }}

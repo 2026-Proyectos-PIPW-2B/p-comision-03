@@ -4,18 +4,17 @@ import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js
 import { mostrarAlertaConfirm, mostrarAlertaWarning } from "../UI/Alertas.js"
 import { mostrarAlertaExito } from "../UI/Alertas.js"
 import { obtenerProductos } from "../gestion-productos/servicios-productos.js"
-let envio_gratis=20000
-let Costo_Envio=8000
+import { agregarPedido } from "../gestion-pedidos/servicios-pedidos.js"
 
+const envio_gratis=20000
+const Costo_Envio=8000
 
 protegerPagina();
 
 const listaCarrito = document.querySelector(".lista-carrito")
-
  
 function formatCLP(valor) {
     return "$" + Math.round(valor).toLocaleString("es-AR")
-    
 }
 
 function crearTarjetaProducto(item) {
@@ -93,7 +92,6 @@ function renderizarCarrito() {
     const compras = carritoUsuario ? carritoUsuario.compras : []
  
     listaCarrito.innerHTML = ""
- 
 
     if (!carritoUsuario || carritoUsuario.estado === "aprobado" || compras.length === 0) {
         let div_card=document.createElement("div")
@@ -286,9 +284,12 @@ function confirmarCompra() {
 
     guardarLocalStorage(historial, "historial-pedidos")
 
+    agregarPedido(carritoUsuario)
     carritoUsuario.estado = "aprobado"
     carritoUsuario.compras = []
     guardarLocalStorage(carritos, "carrito")
+
+    
     renderizarCarrito()
     mostrarAlertaExito("¡Compra confirmada!", "Tu pedido está en camino 🐾", "index.html")
 }

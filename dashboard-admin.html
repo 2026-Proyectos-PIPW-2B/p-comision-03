@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Huellitas-Admin</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="css/styles2.css">
 </head>
 <body class="bg-primary">
+    <div id="overlay"></div>
     <div class="d-flex min-vh-100">
         <!-- SIDEBAR -->
         <aside id="sidebar"
@@ -26,7 +24,7 @@
                         </div>
                            <div class="sidebar-title ms-3">
                                 <div class="fw-semibold fs-5 lh-1">Huellitas</div>
-                                <div style="font-size:.68rem; color:#b89880">Panel admin</div>
+                                <div class="sidebar-subtitle">Panel admin</div>
                             </div>
                     </div>
                 </li>
@@ -54,13 +52,13 @@
                         <span class="menu-text ms-3">Productos</span>
                     </a>
                 </li>
-                <!--<li class="nav-item">
-                    <a href="#" class="nav-link text-white d-flex align-items-center">
+                <li class="nav-item">
+                    <a href="pedidos-admin.html" class="nav-link text-white d-flex align-items-center">
                         <i class="fa-solid fa-cart-shopping fa-fw"></i>
                         <span class="menu-text ms-3">Pedidos</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a href="#" class="nav-link text-white d-flex align-items-center">
                         <i class="fa-solid fa-gear fa-fw"></i>
                         <span class="menu-text ms-3">Configuración</span>
@@ -226,22 +224,6 @@
         </div>
     </div>
     <script type="module" src="js/gestion-usuarios/nav-admin.js"></script>
-    <script>
-        const menuBtn = document.getElementById("menuBtn");
-        const isLg = () => window.innerWidth >= 992;
-
-        menuBtn.addEventListener("click", () => {
-            document.body.classList.toggle("collapsed");
-        });
-
-        // en cel, empieza con sidebar oculto
-        if (!isLg()) document.body.classList.add("collapsed");
-
-        window.addEventListener("resize", () => {
-            if (isLg()) document.body.classList.remove("collapsed");
-        });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   
 </body>

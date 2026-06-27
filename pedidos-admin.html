@@ -32,13 +32,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard-admin.html" class="nav-link text-white d-flex align-items-center">
+                    <a href="dashboard-admin.html" class="nav-link active d-flex align-items-center">
                         <i class="fa-solid fa-house fa-fw"></i>
                         <span class="menu-text ms-3">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="usuarios-admin.html" class="nav-link text-white active d-flex align-items-center">
+                    <a href="usuarios-admin.html" class="nav-link text-white d-flex align-items-center">
                         <i class="fa-solid fa-users fa-fw"></i>
                         <span class="menu-text ms-3">Usuarios</span>
                     </a>
@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pedidos-admin.html" class="nav-link text-white d-flex align-items-center">
+                    <a href="#" class="nav-link text-white d-flex align-items-center">
                         <i class="fa-solid fa-cart-shopping fa-fw"></i>
                         <span class="menu-text ms-3">Pedidos</span>
                     </a>
@@ -90,6 +90,7 @@
                         <span class="position-absolute badge rounded-pill bg-danger"
                             style="font-size:.6rem;top:1px; right:1px;">3</span>
                     </button>
+
                     <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2" style="min-width:300px; border-radius:14px;">
                         
                         <li class="px-2 pb-2 border-bottom">
@@ -122,67 +123,126 @@
             <main class="p-2 container mt-2">
                 <header class="mb-4 container d-flex align-items-start justify-content-between flex-wrap gap-3">
                     <div>
-                        <p class="text-uppercase fw-bold mb-1 titulo-header">Usuarios</p>
-                        <h1 class="fw-bold mb-1">Gestión de usuarios</h1>
-                        <p class="text-muted mb-0">Dá de alta nuevos clientes, ordená por apellido y habilitá su acceso al sitio.</p>
+                        <p class="text-uppercase titulo-header fw-bold mb-1">Pedidos</p>
+                        <h1 class="fw-bold mb-1">Historial de pedidos</h1>
+                        <p class="text-muted mb-0">Filtrá por usuario, fecha o monto para encontrar cualquier pedido.</p>
                     </div>
                 </header>
-                <section id="usuarios" class="container"> 
-                    <div class="card bg-light mt-4">
+                <section id="filtros" class="container my-4">
+                    <div class="card border-0 bg-light shadow-sm">
                         <div class="card-body">
-                            <!-- Header -->
-                            <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
-                                <h4 class="card-title p-2 fw-bold mb-0">Listado para alta</h4>
+                            <div class="row g-3 align-items-center">
+                                <!-- Buscar -->
+                                <div class="col-12 col-lg-5">
+                                    <div class="input-group">
+                                        <span class="input-group-text rounded-start-pill"><i class="bi bi-search"></i></span>
+                                        <input id="filtros_nombre" type="search" class="form-control rounded-end-pill" placeholder="Buscar por usuario o N° pedido">
+                                    </div>
+                                </div>
+                                <!-- Desde -->
+                                <div class="col-6 col-md-4 col-lg-2">
+                                    <input type="date" id="filtro_fecha_desde" class="form-control rounded-pill">
+                                </div>
+                                <!-- Hasta -->
+                                <div class="col-6 col-md-4 col-lg-2">
+                                    <input type="date" id="filtro_fecha_hasta" class="form-control rounded-pill">
+                                </div> 
+                                <!-- Monto -->
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text rounded-start-pill"> <i class="bi bi-currency-dollar"></i></span>
+                                        <input type="number" id="filtros_monto" class="form-control rounded-end-pill" placeholder="Monto mínimo">
+                                    </div>
+                                </div>
                             </div>
-                            <!-- Tabla habilitacion-->
-                            <table class="table align-middle">
-                                <thead>
-                                    <tr class="text-muted" style="font-size: .85rem; font-weight: 600;">
-                                        <th class="fw-semibold">Usuario</th>
-                                        <th class="fw-semibold">Email</th>
-                                        <th class="fw-semibold">Numero</th>
-                                        <th class="fw-semibold">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="pendienteUS">
-                                </tbody>
-                            </table>
+                            <div id="contenedor-limpiar" class="d-none mt-3"></div>
                         </div>
                     </div>
                 </section>
-                <section id="usuarios" class="container"> 
-                    <div class="card bg-light mt-4">
+                <section id="listado" class="container my-4">
+                    <div class="card border-0 bg-light shadow-sm">
                         <div class="card-body">
-                            <!-- Header -->
-                            <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
-                                <h4 class="card-title p-2 fw-bold mb-0">Listado</h4>
-                                <input type="search" id="buscadorFinal" class="form-control" placeholder="Buscar por nombre o email..."
-                                    style="max-width: 280px; border-radius: 24px;">
+                            <!-- Header tabla -->
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                                <h4 class="fw-bold mb-0">Pedidos</h4>
                             </div>
-                            <!-- Tabla habilitacion-->
-                            <table class="table align-middle">
-                                <thead>
-                                    <tr class="text-muted" style="font-size: .85rem; font-weight: 600;">
-                                        <th class="fw-semibold">Usuario</th>
-                                        <th class="fw-semibold">Email</th>
-                                        <th class="fw-semibold">Rol</th>
-                                        <th class="fw-semibold">Alta</th>
-                                        <th class="fw-semibold">Habilitado</th>
-                                        <th class="fw-semibold">Eliminar</th>
-                                    </tr>
-                                </thead >
-                                <tbody id="finalUS">
-                                </tbody>
-                            </table>
+                            <!-- Tabla -->
+                            <div class="table-responsive">
+                                <table class="table align-middle">
+                                    <thead>
+                                        <tr class="fs-6">
+                                            <th class="fw-semibold">N°</th>
+                                            <th class="fw-semibold">Usuario</th>
+                                            <th class="fw-semibold">Fecha</th>
+                                            <th class="fw-semibold">Ítems</th>
+                                            <th class="fw-semibold">Total</th>
+                                            <th class="fw-semibold">Estado</th>
+                                            <th class="fw-semibold">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="lista-ped">   
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </section>
             </main>
         </div>
     </div>
+    <div class="modal fade" id="modalPedido" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-4">
+                <!-- Header -->
+                <div class="modal-header border-0">
+                    <div>
+                        <h3 class="fw-bold mb-1"> Pedido <span id="modal_codigo"></span></h3>
+                        <small class="text-muted"> Realizado el <span id="modal_fecha"></span> por <span id="modal_usuario"></span></small>
+                    </div>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Cliente -->
+                    <div class="border rounded-4 p-3 mb-3 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 id="modal_nombre" class="mb-1"></h6>
+                            <small id="modal_email" class="text-muted"></small>
+                        </div>
+                        <span id="modal_estado" class="badge rounded-pill bg-success"> Confirmado </span>
+                    </div>
+                    <!-- Productos -->
+                    <div class="border rounded-4">
+                        <div class="p-3 border-bottom">
+                            <strong>Productos</strong>
+                        </div>
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cant.</th>
+                                    <th class="text-end">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modal_productos">
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="2">Total</th>
+                                    <th class="text-end" id="modal_total"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="module" src="js/gestion-usuarios/nav-admin.js"></script>
-    <script type="module" src="js/gestion-usuarios/gestion-usuarios.js"></script>
+    <script type="module" src="js/gestion-pedidos/pedidos-admin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

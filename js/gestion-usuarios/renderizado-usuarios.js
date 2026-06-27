@@ -1,6 +1,6 @@
 import { obtenerUsuariosPendientes, obtenerUsuariosFinales,toggleHabilitado,eliminarUsuarioFinal,aceptarUsuario,eliminarUsuario } from "./servicios-usuarios.js";
 import { guardarLocalStorage } from "../core/localStorage.js";
-import { ini } from "../core/inicializacion.js";
+import { obtenerIniciales } from "../core/inicializacion.js";
 
 /*--------------------------creación celdas------------------------------*/
 
@@ -12,7 +12,7 @@ function crearNombre(nombre,apellido){
 
     const div_icono= document.createElement("div")
     div_icono.classList.add("av-circle","estiloIcono")
-    div_icono.textContent=`${ini(nombre,apellido)}`
+    div_icono.textContent=`${obtenerIniciales(nombre,apellido)}`
 
     const nombreCompleto=document.createElement("strong")
     nombreCompleto.textContent=`${apellido},${nombre}`
