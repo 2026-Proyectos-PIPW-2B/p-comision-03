@@ -1,6 +1,6 @@
 import { obtenerCarrito, obtenerCarritoPorUsuario } from "./servicios-carrito.js"
 import { obtenerUsuarioActual,protegerPagina } from "../gestion-usuarios/sesion.js"
-import { guardarLocalStorage } from "../core/localStorage.js"
+import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js"
 import { mostrarAlertaConfirm, mostrarAlertaWarning } from "../UI/Alertas.js"
 import { mostrarAlertaExito } from "../UI/Alertas.js"
 import { obtenerProductos } from "../gestion-productos/servicios-productos.js"
@@ -139,11 +139,10 @@ function actualizarResumen(compras) {
     let subtotal = 0
     let cantidadProductos = 0
  
-    compras.forEach(item => {
-        subtotal += item.producto.precio * item.cantidad
-        cantidadProductos += item.cantidad
-    })
- 
+    for (let i = 0; i < compras.length; i++) {
+        subtotal += compras[i].producto.precio * compras[i].cantidad
+        cantidadProductos += compras[i].cantidad
+    }
     const envio = subtotal === 0 || subtotal >= envio_gratis ? 0 : Costo_Envio
     const total = subtotal + envio
  
@@ -207,7 +206,13 @@ function eliminarProducto(productoId) {
 }
  
 function eliminarDelCarrito(productoId, carritoUsuario, carritos) {
-    const index = carritoUsuario.compras.findIndex(i => i.producto.id === productoId)
+    let index = -1
+    for (let i = 0; i < carritoUsuario.compras.length; i++) {
+        if (carritoUsuario.compras[i].producto.id === productoId) {
+         index = i
+            break
+        }
+    }
     if (index === -1) return
  
     carritoUsuario.compras.splice(index, 1)
@@ -256,6 +261,30 @@ function confirmarCompra() {
         if (producto) producto.stock -= item.cantidad
     })
     guardarLocalStorage(productos, "bd-productos")
+
+    const pedido = {
+    id: Date.now(),
+    fecha:new Date().toISOString(),
+    estado: "En camino",
+    // map recorre las compras y devuelve un array nuevo con solo los datos necesarios para guardar en el historial
+    productos: carritoUsuario.compras.map(item => ({
+        nombre: item.producto.nombre,
+        imagen: item.producto.imagen,
+        cantidad: item.cantidad,
+        precio: item.producto.precio
+    }))
+    }
+
+    const historial = obtenerLocalStorage("historial-pedidos") || []
+    const historialUsuario = historial.find(h => h.email === usuarioActual.email)
+
+    if (historialUsuario) {
+    historialUsuario.pedidos.unshift(pedido)
+    } else {
+    historial.push({ email: usuarioActual.email, pedidos: [pedido] })
+    }
+
+    guardarLocalStorage(historial, "historial-pedidos")
 
     carritoUsuario.estado = "aprobado"
     carritoUsuario.compras = []

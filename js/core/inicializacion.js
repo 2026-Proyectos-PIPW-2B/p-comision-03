@@ -148,7 +148,11 @@ export function inicializarUser(contenedor) {
     nombre.textContent = `${usuario.nombre} ${usuario.apellido}`;
     const rol = document.createElement("div");
     rol.classList.add("text-muted");
-    rol.textContent = usuario.rol === "cliente" ? "Usuario" : "Administrador";
+    if (usuario.rol === "cliente") {
+    rol.textContent = "Usuario"
+    } else {
+    rol.textContent = "Administrador"
+    }
     bloque.append(nombre, rol);
 
     div.append(dropdown, bloque);

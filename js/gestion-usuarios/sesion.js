@@ -35,9 +35,13 @@ export function protegerPagina(rolRequerido = null) {
  
   if (rolRequerido && usuario.rol !== rolRequerido) {
     // Lo mando a la página que le corresponde según su propio rol
-    window.location.href = usuario.rol === "admin" ? "dashboard-admin.html" : "index.html";
-    return null;
-  }
+    if (usuario.rol === "admin") {
+        window.location.href = "dashboard-admin.html"
+    } else {
+        window.location.href = "index.html"
+    }
+    return null
+}
  
   return usuario;
 }
@@ -77,5 +81,7 @@ export function actualizarNav() {
 }
 
 export function ini(nombre, apellido) {
+  // Devuelve las iniciales del nombre y apellido en mayúsculas. Ej: "Facundo", "Ojeda" → "FO"
+// ?? significa: si el valor de la izquierda es null o undefined, usá el de la derecha. Ej: null ?? "?" → "?"
   return `${nombre?.[0] ?? "?"}${apellido?.[0] ?? "?"}`.toUpperCase();
 }

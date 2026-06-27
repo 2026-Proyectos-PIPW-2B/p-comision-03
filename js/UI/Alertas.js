@@ -44,19 +44,24 @@ export function mostrarAlertaExito( msj_titulo, msj_subtitulo, ubicacion) {
 
   document.body.appendChild(overlay);
 
+  // requestAnimationFrame espera a que el navegador esté listo para dibujar antes de ejecutar el código
+  // Se anida dos veces para garantizar que el elemento ya esté en el DOM antes de agregar la clase
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
+      // Hace visible el overlay y el toast agregando la clase "visible"
       overlay.classList.add("visible");
       document.getElementById("toastExito").classList.add("visible");
 
+      // Inicia la animación de la barra de progreso reduciéndola de 100% a 0% en 3.5 segundos
       const barra = document.getElementById("barraTiempo");
       barra.style.transition = "width 3.5s linear";
       barra.style.width = "0%";
     });
   });
-
+// Después de 3 segundos, oculta el overlay quitando la clase "visible"
   setTimeout(() => {
     overlay.classList.remove("visible");
+    // Espera 300ms para que termine la animación de salida antes de eliminar el elemento y redirigir
     setTimeout(() => {
       overlay.remove();
       window.location.href = ubicacion;
