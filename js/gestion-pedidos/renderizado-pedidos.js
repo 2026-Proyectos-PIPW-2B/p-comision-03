@@ -1,5 +1,5 @@
 import { abrirModalPedido } from "./modal-pedidos.js";
-import { obtenerPedidos } from "./servicios-pedidos.js";
+import { obtenerPedidos,cambiarEstadoPedido } from "./servicios-pedidos.js";
 
 const lista = document.getElementById("lista-ped");
 
@@ -34,8 +34,8 @@ function crearFila(pedido){
     const tdNombre = crearCelda(pedido.usuario.nombre +" "+ pedido.usuario.apellido)
     const tdFecha = crearCeldaMuted(pedido.fecha)
     const tdItems= crearCelda(pedido.items)
-    const tdMonto = crearCeldaStrong(pedido.monto)
-    const tdEstado = crearCeldaEstado(pedido.estado)
+    const tdMonto = crearCeldaStrong(`$${pedido.monto}`)
+    const tdEstado = crearCeldaEstado(pedido)
     const tdAcciones = crearCeldaAcciones(pedido.codigo);
     
     fila.append(tdCodigo, tdNombre,tdFecha, tdItems, tdMonto,tdEstado, tdAcciones)
@@ -71,19 +71,89 @@ function crearCeldaMuted(mensaje){
     return td
 }
 
-function crearCeldaEstado(estado){
-    const td = document.createElement("td")
-    const span = document.createElement("span")
-    span.classList.add("badge" ,"bg-success")
-    span.textContent=estado
-    td.appendChild(span)
-    return td
+function crearCeldaEstado(pedido) {
+    const td = document.createElement("td");
+    td.classList.add("align-middle");
+
+    const dropdown = crearDropdownEstado(pedido);
+    dropdown.classList.add("d-inline-block");
+
+    td.appendChild(dropdown);
+
+    return td;
+}
+
+function crearDropdownEstado(pedido) {
+    const dropdown = document.createElement("div");
+    dropdown.classList.add("dropdown", "d-inline-block");
+
+    const boton = document.createElement("button");
+    boton.classList.add( "btn","btn-sm","dropdown-toggle","rounded-pill","border-0" );
+
+    boton.setAttribute("data-bs-toggle", "dropdown");
+    boton.setAttribute("aria-expanded", "false");
+
+    aplicarClaseEstado(boton, pedido.estado);
+
+    boton.textContent = pedido.estado;
+
+    const menu = document.createElement("ul");
+    menu.classList.add("dropdown-menu");
+
+    ["confirmado", "enviado", "en preparacion"].forEach(estado => {
+
+        const li = document.createElement("li");
+
+        const opcion = document.createElement("button");
+        opcion.classList.add("dropdown-item");
+        opcion.textContent = estado;
+
+        opcion.addEventListener("click", () => {
+
+            cambiarEstadoPedido(pedido.codigo, estado);
+
+            pedido.estado = estado;
+
+            boton.textContent = estado;
+
+            boton.classList.remove(
+                "pedidoConfirmado",
+                "pedidoEnviado",
+                "pedidoPreparacion"
+            );
+
+            aplicarClaseEstado(boton, estado);
+        });
+
+        li.appendChild(opcion);
+        menu.appendChild(li);
+    });
+
+    dropdown.append(boton, menu);
+
+    return dropdown;
+}
+
+export function aplicarClaseEstado(elemento, estado) {
+
+    switch (estado.trim()) {
+
+        case "confirmado":
+            elemento.classList.add("pedidoConfirmado");
+            break;
+
+        case "enviado":
+            elemento.classList.add("pedidoEnviado");
+            break;
+
+        case "en preparacion":
+            elemento.classList.add("pedidoPreparacion");
+            break;
+    }
 }
 
 function crearCeldaAcciones(codigo){
-                
     const td = document.createElement("td")
-
     const btn_verMas=crearBotonVerMas(codigo)
     
     td.appendChild(btn_verMas)
@@ -91,7 +161,6 @@ function crearCeldaAcciones(codigo){
 }
 
 function crearBotonVerMas(codigo){
-
     const btn = document.createElement("button");
 
     btn.classList.add("btn","btn-sm","btn-ver");

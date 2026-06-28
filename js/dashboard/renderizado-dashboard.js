@@ -1,3 +1,4 @@
+import { aplicarClaseEstado } from '../gestion-pedidos/renderizado-pedidos.js'
 import { obtenerMetricas,obtenerPedidosRecientes,obtenerProductosStockBajo } from './datos-dashboard.js'
 
 export function renderizarMetricas(pedidosHoy,ingresosMensual,usuariosTotal,productosStock) {
@@ -70,13 +71,16 @@ function crearCeldaEstado(estado) {
     td.classList.add("text-end");
 
     const span = document.createElement("span");
-    span.classList.add("badge","rounded-pill","px-3","py-2","p-2","bg-success");
-    span.textContent = estado;
+    span.classList.add("badge","rounded-pill","px-3","py-2","p-2");
+    aplicarClaseEstado(span,estado)
+    span.textContent=estado
 
     td.append(span);
 
     return td;
 }
+
+
 
 /*-------------------------------------------- */
 export function renderizarStockBajo(listaStock) {

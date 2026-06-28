@@ -401,3 +401,16 @@ body.collapsed svg {
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     transform: translateY(-1px);
 }
+
+.pedidoPreparacion{
+    background-color:rgb(255,193,7);
+}
+
+.pedidoConfirmado{
+    background-color: var(--bs-success);
+}
+
+.pedidoEnviado{
+    background-color: #1a7a3a;
+
+}

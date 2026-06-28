@@ -1,4 +1,5 @@
 import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js";
+import { renderizarTabla } from "./renderizado-pedidos.js";
 
 let cant_pedidos="000000"
 let cant_productos=""
@@ -44,3 +45,17 @@ export function agregarPedido(carrito) {
     guardarLocalStorage(pedidos,"pedidos");
 }
 
+export function cambiarEstadoPedido(codigo, nuevoEstado) {
+
+    const pedidos = obtenerPedidos();
+
+    const pedido = pedidos.find(p => p.codigo === codigo);
+
+    if (!pedido) return;
+
+    pedido.estado = nuevoEstado;
+
+    guardarLocalStorage(pedidos,"pedidos");
+
+    renderizarTabla(obtenerPedidos());
+}

@@ -11,4 +11,5 @@ document.addEventListener("DOMContentLoaded", function(){
     mostrarDetacados(contenedorDestacados)
     actualizarBadgeCarrito()
     inicializarUser(user)
+    inicializarSistema()
 })
