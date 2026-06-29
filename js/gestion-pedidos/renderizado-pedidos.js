@@ -1,5 +1,7 @@
 import { abrirModalPedido } from "./modal-pedidos.js";
 import { obtenerPedidos,cambiarEstadoPedido } from "./servicios-pedidos.js";
+import {ESTADOS,formatPrecio} from "./util-pedidos.js";
+import { aplicarClaseEstado } from "./pedido-ui.js";
 
 const lista = document.getElementById("lista-ped");
 
@@ -100,7 +102,7 @@ function crearDropdownEstado(pedido) {
     const menu = document.createElement("ul");
     menu.classList.add("dropdown-menu");
 
-    ["confirmado", "enviado", "en preparacion"].forEach(estado => {
+    Object.values(ESTADOS).forEach(estado => {
 
         const li = document.createElement("li");
 
@@ -111,16 +113,7 @@ function crearDropdownEstado(pedido) {
         opcion.addEventListener("click", () => {
 
             cambiarEstadoPedido(pedido.codigo, estado);
-
-            pedido.estado = estado;
-
             boton.textContent = estado;
-
-            boton.classList.remove(
-                "pedidoConfirmado",
-                "pedidoEnviado",
-                "pedidoPreparacion"
-            );
 
             aplicarClaseEstado(boton, estado);
         });
@@ -132,24 +125,6 @@ function crearDropdownEstado(pedido) {
     dropdown.append(boton, menu);
 
     return dropdown;
-}
-
-export function aplicarClaseEstado(elemento, estado) {
-
-    switch (estado.trim()) {
-
-        case "confirmado":
-            elemento.classList.add("pedidoConfirmado");
-            break;
-
-        case "enviado":
-            elemento.classList.add("pedidoEnviado");
-            break;
-
-        case "en preparacion":
-            elemento.classList.add("pedidoPreparacion");
-            break;
-    }
 }
 
 function crearCeldaAcciones(codigo){

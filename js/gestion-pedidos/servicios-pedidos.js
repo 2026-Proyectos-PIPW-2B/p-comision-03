@@ -1,15 +1,11 @@
 import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js";
 import { renderizarTabla } from "./renderizado-pedidos.js";
 
-let cant_pedidos="000000"
-let cant_productos=""
-let monto_compra=""
-
 export function obtenerPedidos(){
     return obtenerLocalStorage("pedidos")
 }
 
-function establecerMontoEItems(compras) {
+function calcularMontoEItems(compras) {
     let monto_compra = 0;
     let cant_productos = 0;
 
@@ -27,7 +23,7 @@ function establecerMontoEItems(compras) {
 export function agregarPedido(carrito) {
     const pedidos = obtenerPedidos();
 
-    const { monto_compra, cant_productos } = establecerMontoEItems(carrito.compras);
+    const { monto_compra, cant_productos } = calcularMontoEItems(carrito.compras);
 
     const codigo = String(pedidos.length + 1).padStart(6, "0");
 
@@ -45,17 +41,18 @@ export function agregarPedido(carrito) {
     guardarLocalStorage(pedidos,"pedidos");
 }
 
-export function cambiarEstadoPedido(codigo, nuevoEstado) {
-
+export function cambiarEstadoPedido(codigo, nuevoEstado){
     const pedidos = obtenerPedidos();
 
-    const pedido = pedidos.find(p => p.codigo === codigo);
+    const pedido = pedidos.find(
+        pedido => pedido.codigo === codigo
+    );
 
-    if (!pedido) return;
+    if(!pedido) return false;
 
     pedido.estado = nuevoEstado;
 
     guardarLocalStorage(pedidos,"pedidos");
 
-    renderizarTabla(obtenerPedidos());
+    return true;
 }

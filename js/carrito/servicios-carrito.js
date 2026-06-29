@@ -50,10 +50,9 @@ export function agregarCarrito(producto){
     }
     producExistente.cantidad = obtenerCantidadProd(carritoUsuario, producto.id)
     } else {
-    carritoUsuario.compras.push({"producto": producto, "cantidad": 1})
+    carritoUsuario.compras.push({producto: producto, cantidad: 1})
     }
-    //carritoUsuario.compras.push(producto)
-
+    
     guardarLocalStorage(carritos, "carrito")
     actualizarBadgeCarrito()
 }

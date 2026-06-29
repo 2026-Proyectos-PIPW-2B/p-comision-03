@@ -402,15 +402,19 @@ body.collapsed svg {
     transform: translateY(-1px);
 }
 
-.pedidoPreparacion{
-    background-color:rgb(255,193,7);
+.pedidoEnviado {
+    background-color: #e6f4ea;
+    color: #2d7a45;
 }
-
-.pedidoConfirmado{
-    background-color: var(--bs-success);
+.pedidoConfirmado {
+    background-color: #fff3e0;
+    color: #e65c00;
 }
-
-.pedidoEnviado{
-    background-color: #1a7a3a;
-
+.pedidoPreparacion {
+    background-color: #fce8ff;
+    color: #8b00b5;
+}
+.pedidoCamino {
+    background-color: #e8f0fe;
+    color: #1a56db;
 }

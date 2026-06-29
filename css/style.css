@@ -499,19 +499,19 @@ input[type="number"]{
     font-size:13px;
 }
 
-.entregado {
+.pedidoEnviado {
     background-color: #e6f4ea;
     color: #2d7a45;
 }
-.camino {
+.pedidoConfirmado {
     background-color: #fff3e0;
     color: #e65c00;
 }
-.preparacion {
+.pedidoPreparacion {
     background-color: #fce8ff;
     color: #8b00b5;
 }
-.proceso {
+.pedidoCamino {
     background-color: #e8f0fe;
     color: #1a56db;
 }
