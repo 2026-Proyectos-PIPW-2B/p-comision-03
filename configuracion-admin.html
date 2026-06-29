@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huellitas-Admin</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/styles2.css">
+</head>
+<body class="bg-primary">
+    <div id="overlay"></div>
+    <div class="d-flex min-vh-100">
+        <!-- SIDEBAR -->
+        <aside id="sidebar"
+            class="bg-dark text-white d-flex flex-column flex-shrink-0">
+            <ul class="nav nav-pills flex-column gap-1">
+                <li class="nav-item border-bottom">
+                    <div class="nav-link text-white d-flex align-items-center ">
+                        <div class="bg-success p-2 rounded-5 flex-shrink-0">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paw-print-icon lucide-paw-print"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg>
+                        </div>
+                           <div class="sidebar-title ms-3">
+                                <div class="fw-semibold fs-5 lh-1">Huellitas</div>
+                                <div class="sidebar-subtitle">Panel admin</div>
+                            </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard-admin.html" class="nav-link active d-flex align-items-center">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                        <span class="menu-text ms-3">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="usuarios-admin.html" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-users fa-fw"></i>
+                        <span class="menu-text ms-3">Usuarios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="categorias-admin.html" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-tags fa-fw"></i> 
+                        <span class="menu-text ms-3">Categorías</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="productos-admin.html" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-box fa-fw"></i> 
+                        <span class="menu-text ms-3">Productos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pedidos-admin.html" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-cart-shopping fa-fw"></i>
+                        <span class="menu-text ms-3">Pedidos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="configuracion-admin.html" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-gear fa-fw"></i>
+                        <span class="menu-text ms-3">Configuración</span>
+                    </a>
+                </li>
+            </ul>
+            <div class=" mt-auto m-2 p-2 border-top">
+                <a href="#" id="btnCerrarSesionAdmin" class="nav-link text-danger d-flex align-items-center">
+                    <i class="bi bi-box-arrow-left"></i>
+                        <span class="menu-text ms-3">Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+        <!-- CONTENIDO -->
+        <div id="contenido" class="flex-grow-1 overflow-auto container-fluid ">
+            <!-- NAVBAR SUPERIOR -->
+            <nav class="navbar navbar-expand bg-primary border-bottom px-3 sticky-top">
+                <button id="menuBtn" class="btn btn-outline-secondary me-3"><i class="bi bi-list-stars"></i></button>
+                <form class="flex-grow-1 me-3">
+                    <input type="search" class="form-control rounded-3" style="width: 40%;" placeholder="Buscar usuarios, productos...">
+                </form>
+                <div class="dropdown">
+                    <button class="btn position-relative p-2" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="background:none; border:none;">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="position-absolute badge rounded-pill bg-danger"
+                            style="font-size:.6rem;top:1px; right:1px;">3</span>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2" style="min-width:300px; border-radius:14px;">
+                        
+                        <li class="px-2 pb-2 border-bottom">
+                            <span class="fw-bold" style="font-size:.9rem;">Notificaciones</span>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-item rounded-3 py-2">
+                                <div class="fw-semibold" style="font-size:.85rem;">Stock bajo: Alimento Premium</div>
+                                <div class="text-muted" style="font-size:.75rem;">Quedan 6 unidades</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item rounded-3 py-2">
+                                <div class="fw-semibold" style="font-size:.85rem;">Nuevo usuario registrado</div>
+                                <div class="text-muted" style="font-size:.75rem;">Hace 10 minutos</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item rounded-3 py-2">
+                                <div class="fw-semibold" style="font-size:.85rem;">Pedido #084 recibido</div>
+                                <div class="text-muted" style="font-size:.75rem;">Hace 1 hora</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="sesion"></div>
+            </nav>
+            <main class="container py-5">
+                <!-- Header -->
+                <div class="mb-4">
+                    <p class="titulo-header mb-1">CONFIGURACIÓN</p>
+                    <h1 class="fw-bold h1-confi">Parámetros generales</h1>
+                    <p class="mb-0 p-confi">
+                    Ajustá tiempos de sesión, paginación y umbrales de stock.
+                    </p>
+                </div>
+                
+                <!-- ── SESIÓN ── -->
+                <div class="card mb-4 p-4">
+                    <p class="card-section-title mb-4">
+                    <i class="bi bi-shield-lock me-2" ></i>Sesión
+                    </p>
+                
+                    <div class="mb-3">
+                    <label class="form-label" for="tiempoSesion">Tiempo de sesión (minutos)</label>
+                    <input type="number" class="form-control" id="tiempoSesion" value="30" min="1" />
+                    </div>
+                
+                    <div class="toggle-row d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="toggle-label">Cierre automático</div>
+                        <div class="toggle-sub">Cerrar sesión al expirar el tiempo.</div>
+                    </div>
+                    <div class="form-check form-switch mb-0">
+                        <input class="form-check-input" type="checkbox" id="cierreAuto" checked />
+                    </div>
+                    </div>
+                </div>
+                
+                <!-- ── LISTADOS ── -->
+                <div class="card mb-4 p-4">
+                    <p class="card-section-title mb-4">
+                    <i class="bi bi-list-ul me-2" ></i>Listados
+                    </p>
+                
+                    <div class="mb-3">
+                    <label class="form-label" for="itemsPagina">Ítems por página</label>
+                    <input type="number" class="form-control" id="itemsPagina" />
+                    </div>
+                
+                    <div>
+                    <label class="form-label" for="montoMinimo">Monto mínimo de compra ($)</label>
+                    <input type="number" class="form-control" id="montoMinimo"/>
+                    </div>
+                </div>
+                
+                <!-- ── UMBRALES DE STOCK ── -->
+                <div class="card mb-4 p-4">
+                    <p class="card-section-title mb-4">
+                    <i class="bi bi-boxes me-2"></i>Umbrales de stock
+                    </p>
+                
+                    <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label mb-0">Stock bajo (≤)</label>
+                        <span class="stock-badge bajo" id="valBajo">8 unidades</span>
+                    </div>
+                    <input type="range" class="form-range" id="stockBajo" />
+                    </div>
+                
+                    <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label mb-0">Stock medio (≤)</label>
+                        <span class="stock-badge medio" id="valMedio">25 unidades</span>
+                    </div>
+                    <input type="range" class="form-range" id="stockMedio" />
+                    </div>
+                
+                    <!-- Leyenda -->
+                    <div class="d-flex flex-wrap gap-2 mt-1">
+                    <span class="stock-badge bajo"  id="legendBajo">Bajo: ≤ 8 u.</span>
+                    <span class="stock-badge medio" id="legendMedio">Medio: 9–25 u.</span>
+                    <span class="stock-badge alto"  id="legendNormal">Normal: &gt; 25 u.</span>
+                    </div>
+                </div>
+                
+                <!-- ── GUARDAR ── -->
+                <div class="d-flex justify-content-end">
+                    <button class="btn-guardar" id="btnGuardar">
+                    <i class="bi bi-floppy me-2"></i>Guardar cambios
+                    </button>
+                </div>
+                
+                </div>
+            </main>
+    <script type="module" src="js/gestion-usuarios/nav-admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
