@@ -401,7 +401,6 @@ body.collapsed svg {
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     transform: translateY(-1px);
 }
-
 .pedidoEnviado {
     background-color: #e6f4ea;
     color: #2d7a45;
@@ -427,3 +426,81 @@ body.collapsed svg {
 .noti-campanita{
     font-size:.85rem;
 }
+/*configuracion*/
+ .btn-guardar {
+      background-color: var(--bs-dark);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 30px;
+      font-size: .95rem;
+      font-weight: 700;
+    }
+     .btn-guardar:hover{ 
+        background-color: #533426;
+        color: #fff; 
+    }
+    /* Chrome, Safari, Edge */
+    input[type="range"]::-webkit-slider-thumb {
+         background-color: var(--bs-success);
+    }
+
+    /* Firefox */
+     input[type="range"]::-moz-range-thumb {
+     background-color: var(--bs-success);
+    }
+    input[type="range"]::-moz-range-progress {
+    background-color: var(--bs-success);
+     height: 6px;
+    }
+    .form-range:focus { 
+        box-shadow: none; }
+ 
+    .slider-value {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--bs-dark);
+      min-width: 88px;
+      text-align: right;
+    }
+     .form-check-input:checked {
+      background-color: var(--bs-dark);
+      border-color: var(--bs-dark);
+    }
+    .form-check-input:focus {
+      box-shadow: 0 0 0 3px rgba(46,25,13,.15);
+    }
+    .form-check-input {
+      width: 48px !important;
+      height: 26px !important;
+      cursor: pointer;
+    }
+     .toggle-row {
+      background-color:#f6e5c092;
+      border: 1.5px solid #c5b59f;
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .toggle-label { 
+        font-size: .95rem; 
+        font-weight: 600; 
+        color: var(--bs-dark);
+     }
+    .toggle-sub{
+         font-size: .78rem;
+         color: #785f4b; 
+         margin-top: 2px; 
+    }
+    .form-control:focus {
+      border-color: var(--bs-success);
+      box-shadow: 0 0 0 3px rgba(243,115,68,.15);
+      color: var(--bs-dark);
+    }
+    .p-confi{
+        color:#8a7060;
+        font-size:.95rem;
+    }
+    .h1-confi{
+        color:var(--bs-dark);
+        font-size:2rem;
+    }
