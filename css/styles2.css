@@ -418,3 +418,12 @@ body.collapsed svg {
     background-color: #e8f0fe;
     color: #1a56db;
 }
+
+.titulo-campanita{
+    font-size:.9rem;
+    font-weight: bold;
+}
+
+.noti-campanita{
+    font-size:.85rem;
+}

@@ -3,7 +3,7 @@ import { guardarProducto } from './form-productos.js'
 import { mostrarPreview, quitarImagen } from './imagen-productos.js'
 import { renderizarTabla } from './renderizado-productos.js'
 import { inicializarFiltros } from "./filtros-productos.js"
-import { crearProducto, crearProductoExtendido, obtenerProductos } from "./servicios-productos.js"
+import { obtenerProductos } from "./servicios-productos.js"
 
 const selectCategorias      = document.getElementById("categoria")
 const inputNombre           = document.getElementById("nombre_prod")
@@ -35,6 +35,8 @@ window.onload = function () {
     inicializarListeners()
     renderizarTabla()
     inicializarFiltros(filtros_categorias, filtros_nombre, btn_eliminar_filtros)
+
+    procesarAcciones();
 }
 
 export function obtenerTabla(){
@@ -47,4 +49,21 @@ function inicializarListeners() {
     inputImagen.addEventListener("change",  () => mostrarPreview(inputImagen.files[0],previewDiv,zonaImagen))
     btnQuitar.addEventListener("click",     () => quitarImagen(previewDiv,zonaImagen))
     btnGuardar.addEventListener("click",    () => guardarProducto(campos))
+}
+
+function procesarAcciones() {
+    const params = new URLSearchParams(window.location.search);
+    const accion = params.get("accion");
+
+    if (!accion) return;
+
+    switch (accion) {
+        case "stock-bajo":
+            renderizarTabla(obtenerProductos().filter(p => p.stock > 0 && p.stock <= p.stockMinimo));
+            break;
+
+        case "sin-stock":
+            renderizarTabla(obtenerProductos().filter(p => p.stock === 0));;
+            break;
+    }
 }

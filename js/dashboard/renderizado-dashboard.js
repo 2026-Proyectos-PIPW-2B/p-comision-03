@@ -1,5 +1,5 @@
 import { aplicarClaseEstado } from "../gestion-pedidos/pedido-ui.js"
-import { obtenerMetricas,obtenerPedidosRecientes,obtenerProductosStockBajo } from './datos-dashboard.js'
+import { obtenerMetricas,obtenerPedidosRecientes,obtenerProductosParaStockBajo } from './datos-dashboard.js'
 
 export function renderizarMetricas(pedidosHoy,ingresosMensual,usuariosTotal,productosStock) {
     const metricas = obtenerMetricas()
@@ -82,7 +82,7 @@ function crearCeldaEstado(estado) {
 
 /*-------------------------------------------- */
 export function renderizarStockBajo(listaStock) {
-    const productos = obtenerProductosStockBajo();
+    const productos = obtenerProductosParaStockBajo();
 
     listaStock.innerHTML = "";
 

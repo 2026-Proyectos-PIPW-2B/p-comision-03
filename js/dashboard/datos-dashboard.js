@@ -1,6 +1,7 @@
 import { obtenerPedidos } from '../gestion-pedidos/servicios-pedidos.js'
 import { obtenerUsuariosFinales } from '../gestion-usuarios/servicios-usuarios.js';
 import { obtenerProductos } from '../gestion-productos/servicios-productos.js'
+import { obtenerProductosSinStock,obtenerProductosBajoStock } from '../gestion-productos/util-productos.js';
 
 function calcularPedidosHoy() {
     const pedidos = obtenerPedidos()
@@ -50,8 +51,9 @@ export function obtenerPedidosRecientes() {
         .slice(0, 4);
 }
 
-export function obtenerProductosStockBajo() {
-    return obtenerProductos()
-        .filter(producto => producto.stock <= producto.stockMinimo)
-        .sort((a, b) => a.stock - b.stock);
+export function obtenerProductosParaStockBajo() {
+    const bajoStock=obtenerProductosBajoStock()
+    const sinStock= obtenerProductosSinStock()
+    return (bajoStock.concat(sinStock)).sort((a, b) => a.stock - b.stock);
 }
+
