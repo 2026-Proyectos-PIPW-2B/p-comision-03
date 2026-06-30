@@ -13,6 +13,7 @@ export function obtenerUsuarioActual() {
 /** Guarda el usuario logueado en la sesión.**/
 export function iniciarSesionUsuario(usuario) {
   guardarLocalStorage(usuario, "usuarioActual");
+  localStorage.setItem("loginTime", Date.now());
 }
  
 /**Cierra la sesión actual y redirige al login. */
@@ -79,3 +80,30 @@ export function actualizarNav() {
       cerrarSesion();
     });
   }}
+
+  export function guardarConfigSesion(minutos, cierreAuto) {
+  localStorage.setItem("sessionTimeout", minutos);
+  localStorage.setItem("cierreAuto", cierreAuto);
+}
+
+export function obtenerConfigSesion() {
+  return {
+    minutos:    parseInt(localStorage.getItem("sessionTimeout")) || 30,
+    cierreAuto: localStorage.getItem("cierreAuto") === "true"
+  };
+}
+
+export function verificarExpiracion() {
+  const cierreAuto = localStorage.getItem("cierreAuto") === "true";
+  if (!cierreAuto) return;
+
+  const loginTime = parseInt(localStorage.getItem("loginTime"));
+  const minutos   = parseInt(localStorage.getItem("sessionTimeout")) || 30;
+  const limite    = minutos * 60 * 1000;
+
+  if (!loginTime || Date.now() - loginTime > limite) {
+    localStorage.removeItem("usuarioActual");
+    localStorage.removeItem("loginTime");
+    window.location.href = "login.html";
+  }
+}

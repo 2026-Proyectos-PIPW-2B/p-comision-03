@@ -88,30 +88,7 @@
                             style="font-size:.6rem;top:1px; right:1px;">3</span>
                     </button>
 
-                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2" style="min-width:300px; border-radius:14px;">
-                        
-                        <li class="px-2 pb-2 border-bottom">
-                            <span class="fw-bold" style="font-size:.9rem;">Notificaciones</span>
-                        </li>
-
-                        <li>
-                            <a href="#" class="dropdown-item rounded-3 py-2">
-                                <div class="fw-semibold" style="font-size:.85rem;">Stock bajo: Alimento Premium</div>
-                                <div class="text-muted" style="font-size:.75rem;">Quedan 6 unidades</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item rounded-3 py-2">
-                                <div class="fw-semibold" style="font-size:.85rem;">Nuevo usuario registrado</div>
-                                <div class="text-muted" style="font-size:.75rem;">Hace 10 minutos</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item rounded-3 py-2">
-                                <div class="fw-semibold" style="font-size:.85rem;">Pedido #084 recibido</div>
-                                <div class="text-muted" style="font-size:.75rem;">Hace 1 hora</div>
-                            </a>
-                        </li>
+                    <ul id="campanita"class="dropdown-menu dropdown-menu-end shadow border-0 p-2" style="min-width:300px; border-radius:14px;">
                     </ul>
                 </div>
                 <div id="sesion"></div>
@@ -134,7 +111,8 @@
                 
                     <div class="mb-3">
                     <label class="form-label" for="tiempoSesion">Tiempo de sesión (minutos)</label>
-                    <input type="number" class="form-control" id="tiempoSesion" value="30" min="1" />
+                    <input type="number" class="form-control" id="tiempoSesion" value="30" />
+                    <div id="errorTiempo" class="invalid-feedback"></div>
                     </div>
                 
                     <div class="toggle-row d-flex justify-content-between align-items-center">
@@ -205,6 +183,7 @@
                 </div>
             </main>
     <script type="module" src="js/gestion-usuarios/nav-admin.js"></script>
+    <script type="module" src="js/configuracion-admin/configuracion-admin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

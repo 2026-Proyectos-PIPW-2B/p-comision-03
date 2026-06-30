@@ -1,4 +1,4 @@
-import { actualizarNav } from './sesion.js';
+import { actualizarNav,verificarExpiracion } from './sesion.js';
 import { mostrarDetacados } from '../gestion-productos/renderizado-productos.js'
 import { actualizarBadgeCarrito } from '../carrito/nav-carrito.js' 
 import { inicializarSistema, inicializarUser } from '../core/inicializacion.js';
@@ -12,4 +12,6 @@ document.addEventListener("DOMContentLoaded", function(){
     actualizarBadgeCarrito()
     inicializarUser(user)
     inicializarSistema()
+    verificarExpiracion();
+    setInterval(verificarExpiracion, 30 * 1000);
 })
