@@ -266,30 +266,6 @@ function confirmarCompra() {
     })
     guardarLocalStorage(productos, "bd-productos")
 
-    const pedido = {
-    id: Date.now(),
-    fecha:new Date().toISOString(),
-    estado: "En camino",
-    // map recorre las compras y devuelve un array nuevo con solo los datos necesarios para guardar en el historial
-    productos: carritoUsuario.compras.map(item => ({
-        nombre: item.producto.nombre,
-        imagen: item.producto.imagen,
-        cantidad: item.cantidad,
-        precio: item.producto.precio
-    }))
-    }
-
-    const historial = obtenerLocalStorage("historial-pedidos") || []
-    const historialUsuario = historial.find(h => h.email === usuarioActual.email)
-
-    if (historialUsuario) {
-    historialUsuario.pedidos.unshift(pedido)
-    } else {
-    historial.push({ email: usuarioActual.email, pedidos: [pedido] })
-    }
-
-    guardarLocalStorage(historial, "historial-pedidos")
-
     agregarPedido(carritoUsuario)
     carritoUsuario.estado = "aprobado"
     carritoUsuario.compras = []

@@ -504,3 +504,19 @@ body.collapsed svg {
         color:var(--bs-dark);
         font-size:2rem;
     }
+
+    .ancho-buscador-superior{
+        width: 40%;
+    }
+
+/*Notificacion*/
+.span-campanita{
+    font-size:.6rem;
+    top:1px; 
+    right:1px;
+}
+
+#campanita{
+    min-width:300px; 
+    border-radius:14px;
+}

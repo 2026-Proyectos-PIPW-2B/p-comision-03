@@ -4,6 +4,7 @@ import { mostrarPreview, quitarImagen } from './imagen-productos.js'
 import { renderizarTabla } from './renderizado-productos.js'
 import { inicializarFiltros } from "./filtros-productos.js"
 import { obtenerProductos } from "./servicios-productos.js"
+import { obtenerProductosBajoStock, obtenerProductosSinStock } from "./util-productos.js"
 
 const selectCategorias      = document.getElementById("categoria")
 const inputNombre           = document.getElementById("nombre_prod")
@@ -59,11 +60,11 @@ function procesarAcciones() {
 
     switch (accion) {
         case "stock-bajo":
-            renderizarTabla(obtenerProductos().filter(p => p.stock > 0 && p.stock <= p.stockMinimo));
+            renderizarTabla(obtenerProductosBajoStock());
             break;
 
         case "sin-stock":
-            renderizarTabla(obtenerProductos().filter(p => p.stock === 0));;
+            renderizarTabla(obtenerProductosSinStock() );
             break;
     }
 }

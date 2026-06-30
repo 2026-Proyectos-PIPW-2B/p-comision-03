@@ -5,9 +5,6 @@ import { obtenerUsuarioActual } from "../gestion-usuarios/sesion.js";
 import { guardarLocalStorage } from "./localStorage.js";
 import { cerrarSesion}from "../gestion-usuarios/sesion.js";
 import { renderizarUsuario } from "./reenderizado-usuario.js";
-import { reenderizarNotificaciones } from "./render-notificaciones-admin.js";
-import { obtenerProductosBajoStock,obtenerProductosSinStock } from "../gestion-productos/util-productos.js";
-import { obtenerUsuariosPendientes } from "../gestion-usuarios/servicios-usuarios.js";
 
 const ADMIN = {
     nombre: "Sistema",
@@ -115,45 +112,3 @@ export function MenuLateralAdmin() {
 
     actualizarLayout();
 }
-
-export function configurarNotificación(dropdown){
-    const noticaciones=obtenerNotificaciones()
-    reenderizarNotificaciones(dropdown,noticaciones)
-}
-
-function obtenerNotificaciones() {
-    const notificaciones = [];
-
-    // Productos con stock bajo
-    const bajoStock = obtenerProductosBajoStock();
-    if (bajoStock.length > 0) {
-        notificaciones.push({
-            ref: "./productos-admin.html?accion=stock-bajo",
-            titulo: "Productos con stock bajo",
-            subtitulo: `${bajoStock.length} productos requieren reposición`
-        })
-    }
-
-    // Productos sin stock
-    const sinStock = obtenerProductosSinStock();
-    if (sinStock.length > 0) {
-        notificaciones.push({
-            ref: "./productos-admin.html?accion=sin-stock",
-            titulo: "Productos sin stock",
-            subtitulo: `${sinStock.length} productos agotados`
-        });
-    }
-
-    // Usuarios pendientes de alta
-    const pendientes = obtenerUsuariosPendientes();
-    if (pendientes.length > 0) {
-        notificaciones.push({
-            ref: "./usuarios.html",
-            titulo: "Usuarios pendientes",
-            subtitulo: `${pendientes.length} usuario(s) esperan aprobación`
-        });
-    }
-
-    return notificaciones;
-}
-
