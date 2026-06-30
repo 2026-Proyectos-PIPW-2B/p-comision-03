@@ -1,9 +1,9 @@
+import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js";
 import { obtenerCategorias,crearCategoria } from "../gestion-categorias/servicios-categorias.js"
 import { obtenerProductos,crearProductoExtendido,crearProducto } from "../gestion-productos/servicios-productos.js"
 import { obtenerUsuariosFinales } from "../gestion-usuarios/servicios-usuarios.js"
-import { obtenerUsuarioActual } from "../gestion-usuarios/sesion.js";
+import { obtenerUsuarioActual,cerrarSesion } from "../gestion-usuarios/sesion.js";
 import { guardarLocalStorage } from "./localStorage.js";
-import { cerrarSesion}from "../gestion-usuarios/sesion.js";
 import { renderizarUsuario } from "./reenderizado-usuario.js";
 
 const ADMIN = {
@@ -20,6 +20,7 @@ export function inicializarSistema(){
     inicializarAdmin()
     inicalizarCategorias()
     inicializarProductos()
+    inicializarConfiguracion()
 }
 
 function inicalizarCategorias(){
@@ -111,4 +112,24 @@ export function MenuLateralAdmin() {
     window.addEventListener("resize", actualizarLayout);
 
     actualizarLayout();
+}
+
+function inicializarConfiguracion(){
+    if(obtenerConfiguracion().length===0){
+        const config={
+            sesion:{ 
+                tiempoSesion : 30,
+                cierreAuto: true
+            },
+            listado:{
+                itemsPagina: 10,
+                montoMinimo:5000,
+            },
+            stock:{
+                bajo:5,
+                medio:25
+            }
+        }
+        guardarLocalStorage(config, "configuracion")
+    }
 }

@@ -13,6 +13,7 @@ export function obtenerUsuarioActual() {
 /** Guarda el usuario logueado en la sesión.**/
 export function iniciarSesionUsuario(usuario) {
   guardarLocalStorage(usuario, "usuarioActual");
+  localStorage.setItem("loginTime", Date.now());
 }
  
 /**Cierra la sesión actual y redirige al login. */
@@ -79,3 +80,21 @@ export function actualizarNav() {
       cerrarSesion();
     });
   }}
+
+
+export function verificarExpiracion() {
+
+    const configuracion = obtenerLocalStorage("configuracion");
+
+    if (!configuracion.sesion.cierreAuto) return;
+
+    const loginTime = Number(localStorage.getItem("loginTime"));
+
+    const limite = configuracion.sesion.tiempoSesion * 60 * 1000;
+
+    if (!loginTime || Date.now() - loginTime > limite) {
+        localStorage.removeItem("usuarioActual");
+        localStorage.removeItem("loginTime");
+        window.location.href = "login.html";
+    }
+}
