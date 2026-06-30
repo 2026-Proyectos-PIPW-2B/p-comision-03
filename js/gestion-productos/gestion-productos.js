@@ -5,6 +5,7 @@ import { renderizarTabla } from './renderizado-productos.js'
 import { inicializarFiltros } from "./filtros-productos.js"
 import { obtenerProductos } from "./servicios-productos.js"
 import { obtenerProductosBajoStock, obtenerProductosSinStock } from "./util-productos.js"
+import { crearPaginador, renderPaginacion } from "../core/paginador.js";
 
 const selectCategorias      = document.getElementById("categoria")
 const inputNombre           = document.getElementById("nombre_prod")
@@ -21,6 +22,10 @@ const btn_eliminar_filtros  = document.getElementById("btn_eliminar_filtros")
 const filtros_nombre        = document.getElementById("filtros_nombre")
 const filtros_categorias    = document.getElementById("filtros_categorias")
 
+const STOCK_POR_PAGINA = 10;
+
+let paginador;
+
 const campos = {
     nombre:      { input: inputNombre,      error: "errorNombre" },
     descripcion: { input: inputDescripcion, error: "errorDescripcion" },
@@ -36,7 +41,11 @@ window.onload = function () {
     inicializarListeners()
     renderizarTabla()
     inicializarFiltros(filtros_categorias, filtros_nombre, btn_eliminar_filtros)
-
+    paginador = crearPaginador({
+            data: obtenerProductos(),
+            porPagina: STOCK_POR_PAGINA
+    });
+    render();
     procesarAcciones();
 }
 
@@ -67,4 +76,20 @@ function procesarAcciones() {
             renderizarTabla(obtenerProductosSinStock() );
             break;
     }
+}
+
+function render() {
+    renderizarTabla(
+        paginador.obtenerPagina()
+    );
+
+    renderPaginacion({
+        paginador,
+        onPaginaChange: cambiarPagina
+    });
+}
+
+function cambiarPagina(n) {
+    paginador.cambiarPagina(n);
+    render();
 }

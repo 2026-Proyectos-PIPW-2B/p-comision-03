@@ -1,56 +1,71 @@
-import { renderizarTabla } from "./renderizado-pedidos.js"
-import { obtenerPedidos } from "./servicios-pedidos.js"
+import { obtenerPedidos } from "./servicios-pedidos.js";
 
-let filtros_nombre,filtro_fecha_desde,filtro_fecha_hasta,filtros_monto
+let filtros_nombre;
+let filtro_fecha_desde;
+let filtro_fecha_hasta;
+let filtros_monto;
+let onFiltrar;
 
 const filtros = {
     nombre: "",
     monto: "",
-    desde:"",
-    hasta:""
+    desde: "",
+    hasta: ""
+};
+
+export function inicializarFiltros(
+    nombre,
+    desde,
+    hasta,
+    monto,
+    callback
+) {
+    filtros_nombre = nombre;
+    filtro_fecha_desde = desde;
+    filtro_fecha_hasta = hasta;
+    filtros_monto = monto;
+    onFiltrar = callback;
+
+    filtros_nombre.addEventListener("input", aplicarFiltros);
+    filtro_fecha_desde.addEventListener("change", aplicarFiltros);
+    filtro_fecha_hasta.addEventListener("change", aplicarFiltros);
+    filtros_monto.addEventListener("input", aplicarFiltros);
 }
 
-export function inicializarFiltros(nombre,desde,hasta,monto){
-    filtros_nombre=nombre
-    filtro_fecha_desde=desde
-    filtro_fecha_hasta=hasta
-    filtros_monto=monto
+function aplicarFiltros() {
+    leerFiltros();
 
-    filtros_nombre.addEventListener("input", aplicarFiltros)
-    filtro_fecha_desde.addEventListener("change", aplicarFiltros)
-    filtro_fecha_hasta.addEventListener("change", aplicarFiltros)
-    filtros_monto.addEventListener("input", aplicarFiltros)
+    let pedidos = obtenerPedidos();
+    pedidos = filtrarPedidos(pedidos);
+
+    onFiltrar(pedidos);
 }
 
-function aplicarFiltros(){
-    leerFiltros()
-
-    let pedidos = obtenerPedidos()
-    pedidos = filtrarPedidos(pedidos)
-
-    renderizarTabla(pedidos)
+function leerFiltros() {
+    filtros.nombre = filtros_nombre.value.toLowerCase();
+    filtros.desde = filtro_fecha_desde.value;
+    filtros.hasta = filtro_fecha_hasta.value;
+    filtros.monto = Number(filtros_monto.value);
 }
 
-function leerFiltros(){
-    filtros.nombre = filtros_nombre.value.toLowerCase()
-    filtros.desde = filtro_fecha_desde.value
-    filtros.hasta = filtro_fecha_hasta.value
-    filtros.monto = Number(filtros_monto.value)
+function filtrarPedidos(pedidos) {
+    return pedidos.filter(cumpleFiltros);
 }
 
-function filtrarPedidos(pedidos){
-    return pedidos.filter(cumpleFiltros)
-}
+function cumpleFiltros(pedido) {
 
-function cumpleFiltros(pedidos){
-    const fechaPedido = convertirFecha(pedidos.fecha);
+    const fechaPedido = convertirFecha(pedido.fecha);
 
-    if(filtros.monto && pedidos.monto <= filtros.monto)
-        return false
-    
-    if (filtros.nombre && !pedidos.usuario.nombre.toLowerCase().includes(filtros.nombre) && !pedidos.codigo.includes(filtros.nombre))
+    if (filtros.monto && pedido.monto <= filtros.monto)
         return false;
-    
+
+    if (
+        filtros.nombre &&
+        !pedido.usuario.nombre.toLowerCase().includes(filtros.nombre) &&
+        !pedido.codigo.includes(filtros.nombre)
+    )
+        return false;
+
     if (filtros.desde) {
         const desde = new Date(filtros.desde);
         if (fechaPedido < desde)
@@ -63,7 +78,7 @@ function cumpleFiltros(pedidos){
             return false;
     }
 
-    return true
+    return true;
 }
 
 function convertirFecha(fecha) {

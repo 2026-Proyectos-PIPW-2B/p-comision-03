@@ -1,33 +1,18 @@
-import { renderPaginacion } from "./historial.js";
-import {formatPrecio,calcularResumenPedido} from "./util-pedidos.js";
+import { formatPrecio, calcularResumenPedido } from "./util-pedidos.js";
 import { badgeEstado } from "./pedido-ui.js";
 
-export function renderPedidos({pedidos,paginaActual,porPagina,onPaginaChange}) {
+export function renderPedidos(pedidosPagina) {
     const lista = document.getElementById("lista-pedidos");
     lista.innerHTML = "";
 
-    if (!pedidos.length) {
+    if (pedidosPagina.length === 0) {
         lista.appendChild(crearMensajeSinPedidos());
         return;
     }
 
-    const inicio = (paginaActual - 1) * porPagina;
-    const pagina = pedidos.slice(inicio, inicio + porPagina);
-
-    pagina.forEach(p => {
-        lista.appendChild(crearTarjetaPedido(p));
+    pedidosPagina.forEach(pedido => {
+        lista.appendChild(crearTarjetaPedido(pedido));
     });
-
-    renderPaginacion({total: pedidos.length,paginaActual,porPagina,onPaginaChange});
-}
-
-function obtenerPedidosPagina() {
-    const inicio = (paginaActual - 1) * PEDIDOS_POR_PAGINA;
-
-    return pedidosFiltrados.slice(
-        inicio,
-        inicio + PEDIDOS_POR_PAGINA
-    );
 }
 
 function crearTarjetaPedido(pedido) {
@@ -53,7 +38,16 @@ function crearTarjetaPedido(pedido) {
 function crearCabeceraPedido(pedido) {
 
     const cabecera = document.createElement("div");
-    cabecera.classList.add("d-flex","align-items-center","justify-content-between","flex-wrap", "gap-2","px-3","py-2","div_a");
+    cabecera.classList.add(
+        "d-flex",
+        "align-items-center",
+        "justify-content-between",
+        "flex-wrap",
+        "gap-2",
+        "px-3",
+        "py-2",
+        "div_a"
+    );
 
     const info = document.createElement("div");
 
@@ -78,7 +72,12 @@ function crearCabeceraPedido(pedido) {
 function crearDetallePedido(pedido) {
 
     const contenedor = document.createElement("div");
-    contenedor.classList.add("px-3","pt-2","pb-1","div_b_historial");
+    contenedor.classList.add(
+        "px-3",
+        "pt-2",
+        "pb-1",
+        "div_b_historial"
+    );
 
     pedido.compras.forEach(item => {
         contenedor.appendChild(crearProductoPedido(item));
@@ -87,23 +86,36 @@ function crearDetallePedido(pedido) {
     return contenedor;
 }
 
-function crearProductoPedido(compras) {
+function crearProductoPedido(compra) {
 
     const fila = document.createElement("div");
-    fila.classList.add("d-flex","align-items-center","gap-3","py-2","border-bottom");
+    fila.classList.add(
+        "d-flex",
+        "align-items-center",
+        "gap-3",
+        "py-2",
+        "border-bottom"
+    );
 
     const cantidad = document.createElement("span");
-    cantidad.classList.add("rounded-2","d-flex","align-items-center","justify-content-center","flex-shrink-0","span_a");
-    cantidad.textContent = `x${compras.cantidad}`;
+    cantidad.classList.add(
+        "rounded-2",
+        "d-flex",
+        "align-items-center",
+        "justify-content-center",
+        "flex-shrink-0",
+        "span_a"
+    );
+    cantidad.textContent = `x${compra.cantidad}`;
 
     const nombre = document.createElement("span");
     nombre.classList.add("flex-grow-1", "span_b");
-    nombre.textContent = compras.producto.nombre;
+    nombre.textContent = compra.producto.nombre;
 
     const subtotal = document.createElement("span");
     subtotal.classList.add("span_c");
     subtotal.textContent = formatPrecio(
-        compras.producto.precio * compras.cantidad
+        compra.producto.precio * compra.cantidad
     );
 
     fila.append(cantidad, nombre, subtotal);
@@ -111,12 +123,19 @@ function crearProductoPedido(compras) {
     return fila;
 }
 
-
 function crearPiePedido(pedido) {
+
     const { total, cantidad } = calcularResumenPedido(pedido);
 
     const pie = document.createElement("div");
-    pie.classList.add("d-flex","align-items-center","justify-content-between","px-3","py-2","div_c_historial");
+    pie.classList.add(
+        "d-flex",
+        "align-items-center",
+        "justify-content-between",
+        "px-3",
+        "py-2",
+        "div_c_historial"
+    );
 
     const izquierda = crearCantidadProductos(cantidad);
 
@@ -146,17 +165,36 @@ function crearCantidadProductos(cantidad) {
 }
 
 function crearMensajeSinPedidos() {
-    let div_contenedor=document.createElement("div")
-    div_contenedor.classList.add("text-center","py-5","contenedorhistorial")
-    let i=document.createElement("i")
-    i.classList.add("bi","bi-bag-x","iconhistorial")
-    let p=document.createElement("p")
-    p.classList.add("mb-3")
-    p.textContent="Todavía no realizaste ninguna compra."
-    let a=document.createElement("a")
-    a.href="producto.html"
-    a.classList.add("btn","rounded-pill","px-4","a_historial")
-    a.textContent="Ver productos"
-    div_contenedor.append(i,p,a)
-    return (div_contenedor)
+
+    const div = document.createElement("div");
+    div.classList.add(
+        "text-center",
+        "py-5",
+        "contenedorhistorial"
+    );
+
+    const icono = document.createElement("i");
+    icono.classList.add(
+        "bi",
+        "bi-bag-x",
+        "iconhistorial"
+    );
+
+    const texto = document.createElement("p");
+    texto.classList.add("mb-3");
+    texto.textContent = "Todavía no realizaste ninguna compra.";
+
+    const boton = document.createElement("a");
+    boton.href = "producto.html";
+    boton.classList.add(
+        "btn",
+        "rounded-pill",
+        "px-4",
+        "a_historial"
+    );
+    boton.textContent = "Ver productos";
+
+    div.append(icono, texto, boton);
+
+    return div;
 }

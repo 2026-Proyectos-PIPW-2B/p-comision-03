@@ -1,3 +1,4 @@
+import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js"
 import { obtenerLocalStorage,guardarLocalStorage } from "../core/localStorage.js"
 import { actualizarStockCategorias } from "../gestion-categorias/servicios-categorias.js"
 
@@ -39,7 +40,7 @@ export function crearProducto(inputNombre,inputDescripcion,selectCategorias,inpu
         categoria:    selectCategorias,
         precio:       Number(inputPrecio),
         stock:        Number(inputStock),
-        stockMinimo:  5,
+        stockMinimo:  obtenerConfiguracion().stock.bajo,
         publicado:    true,
         destacado:    false,
         imagen:      imagen

@@ -5,11 +5,14 @@ import { mostrarAlertaConfirm, mostrarAlertaWarning } from "../UI/Alertas.js"
 import { mostrarAlertaExito } from "../UI/Alertas.js"
 import { obtenerProductos } from "../gestion-productos/servicios-productos.js"
 import { agregarPedido } from "../gestion-pedidos/servicios-pedidos.js"
+import { visualizarMontoMinimo } from "../core/inicializacion.js"
+import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js"
 
-const envio_gratis=20000
+const envio_gratis=obtenerConfiguracion().listado.montoMinimo
 const Costo_Envio=8000
 
 protegerPagina();
+visualizarMontoMinimo()
 
 const listaCarrito = document.querySelector(".lista-carrito")
  

@@ -1,10 +1,11 @@
 import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js";
 import { obtenerCategorias,crearCategoria } from "../gestion-categorias/servicios-categorias.js"
 import { obtenerProductos,crearProductoExtendido,crearProducto } from "../gestion-productos/servicios-productos.js"
-import { obtenerUsuariosFinales } from "../gestion-usuarios/servicios-usuarios.js"
+import { obtenerUsuariosFinales, obtenerUsuariosPendientes } from "../gestion-usuarios/servicios-usuarios.js"
 import { obtenerUsuarioActual,cerrarSesion } from "../gestion-usuarios/sesion.js";
 import { guardarLocalStorage } from "./localStorage.js";
 import { renderizarUsuario } from "./reenderizado-usuario.js";
+import { formatPrecio } from '../gestion-pedidos/util-pedidos.js';
 
 const ADMIN = {
     nombre: "Sistema",
@@ -15,12 +16,32 @@ const ADMIN = {
     alta: "01/01/2024",
     habilitado: true,
 };
+const UsuarioFinal = {
+    nombre: "Usuario",
+    apellido: "Final",
+    email: "final@user.com",
+    password: "Final1234",
+    rol: "cliente",
+    alta: "01/07/2026",
+    habilitado: true,
+};
+
+const UsuarioPendiente = {
+    nombre: "Usuario",
+    apellido: "Pendiente",
+    email: "pendiente@user.com",
+    password: "Pendiente1234",
+    edad: 123,  
+    estado: "pendiente"
+};
+
 
 export function inicializarSistema(){
     inicializarAdmin()
     inicalizarCategorias()
     inicializarProductos()
     inicializarConfiguracion()
+    crearUsuarios()
 }
 
 function inicalizarCategorias(){
@@ -132,4 +153,22 @@ function inicializarConfiguracion(){
         }
         guardarLocalStorage(config, "configuracion")
     }
+}
+
+function crearUsuarios(){
+    const final=obtenerUsuariosFinales()
+    const pendiente=obtenerUsuariosPendientes()
+    if(final.length===1){
+        final.push(UsuarioFinal)
+        guardarLocalStorage(final,"usuariosfinales")
+    }
+    if(pendiente.length===0){
+        pendiente.push(UsuarioPendiente)
+        guardarLocalStorage(pendiente,"usuariospendientes")
+    }
+}
+
+export function visualizarMontoMinimo(){
+    const span=document.getElementById("envioGratis")
+    span.textContent=`${formatPrecio(obtenerConfiguracion().listado.montoMinimo)}`
 }

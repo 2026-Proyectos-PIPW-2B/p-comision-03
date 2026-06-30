@@ -10,7 +10,6 @@ export function guardarConfiguracion(config) {
     guardarLocalStorage(config, "configuracion");
 }
 
-
 export function guardarCambios(campos){
 
     if(!validarConfiguracion(campos)){
