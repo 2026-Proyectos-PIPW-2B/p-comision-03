@@ -39,11 +39,30 @@ const UsuarioPendiente = {
 export function inicializarSistema(){
     inicializarAdmin()
     inicalizarCategorias()
-    inicializarProductos()
     inicializarConfiguracion()
+    inicializarProductos()
     crearUsuarios()
 }
 
+function inicializarConfiguracion(){
+    if(obtenerConfiguracion().length===0){
+        const config={
+            sesion:{ 
+                tiempoSesion : 30,
+                cierreAuto: true
+            },
+            listado:{
+                itemsPagina: 10,
+                montoMinimo:5000,
+            },
+            stock:{
+                bajo:5,
+                medio:25
+            }
+        }
+        guardarLocalStorage(config, "configuracion")
+    }
+}
 function inicalizarCategorias(){
     if(obtenerCategorias().length===0){
         const perros=crearCategoria("Perros","Todo lo que tu mejor amigo necesita para una vida feliz, saludable y llena de aventuras.")
