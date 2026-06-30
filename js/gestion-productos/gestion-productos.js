@@ -62,6 +62,22 @@ function inicializarListeners() {
 }
 
 function procesarAcciones() {
+
+    const q = localStorage.getItem("busquedaGlobal") || "";
+    localStorage.removeItem("busquedaGlobal");
+
+    if (q) {
+        const texto = q.trim().toLowerCase();
+        if (filtros_nombre) filtros_nombre.value = q;
+        renderizarTabla(
+            obtenerProductos().filter(p =>
+                (p.nombre && p.nombre.toLowerCase().includes(texto)) ||
+                (p.categoria && p.categoria.toLowerCase().includes(texto))
+            )
+        );
+        return;
+    }
+
     const params = new URLSearchParams(window.location.search);
     const accion = params.get("accion");
 

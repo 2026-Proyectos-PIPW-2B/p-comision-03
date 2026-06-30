@@ -80,8 +80,7 @@ export function actualizarNav() {
       cerrarSesion();
     });
   }}
-
-
+  
 export function verificarExpiracion() {
 
     const configuracion = obtenerLocalStorage("configuracion");

@@ -4,6 +4,14 @@ import { renderPendientes,renderFinales } from "./renderizado-usuarios.js";
 
 const buscadorFinal = document.getElementById("buscadorFinal");
 
+
+window.onload= function(){
+    renderPendientes()
+    const q = localStorage.getItem("busquedaGlobal") || "";
+    localStorage.removeItem("busquedaGlobal");
+    if (q && buscadorFinal) buscadorFinal.value = q;
+    renderFinales(q)
+}
 const USUARIOS_POR_PAGINA = 8;
 
 let pendientes = [];

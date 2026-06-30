@@ -1,4 +1,4 @@
-import { inicializarUser,MenuLateralAdmin } from '../core/inicializacion.js';
+import { inicializarUser,MenuLateralAdmin, buscarGlobal, previsualizarBusquedaGlobal } from '../core/inicializacion.js';
 import { configurarNotificación } from '../core/notificaciones.js';
 import { cerrarSesion, protegerPagina,verificarExpiracion } from './sesion.js';
 
@@ -15,6 +15,26 @@ MenuLateralAdmin()
 configurarNotificación(notificacion,cant_not)
 inicializarUser(contenedor)
 
+const formBuscador = document.getElementById("formBuscadorGlobal");
+const inputBuscador = document.getElementById("buscadorGlobal");
+const dropdownBuscador = document.getElementById("dropdownBuscadorGlobal");
+
+if (formBuscador && inputBuscador) {
+  inputBuscador.addEventListener("input", () => {
+    previsualizarBusquedaGlobal(inputBuscador.value, dropdownBuscador);
+  });
+
+  formBuscador.addEventListener("submit", (e) => {
+    e.preventDefault();
+    buscarGlobal(inputBuscador.value);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (dropdownBuscador && !formBuscador.contains(e.target)) {
+      dropdownBuscador.style.display = "none";
+    }
+  });
+}
 
 if (btnCerrarSesion) {
     btnCerrarSesion.addEventListener("click", (e) => {

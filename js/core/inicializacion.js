@@ -39,11 +39,30 @@ const UsuarioPendiente = {
 export function inicializarSistema(){
     inicializarAdmin()
     inicalizarCategorias()
-    inicializarProductos()
     inicializarConfiguracion()
+    inicializarProductos()
     crearUsuarios()
 }
 
+function inicializarConfiguracion(){
+    if(obtenerConfiguracion().length===0){
+        const config={
+            sesion:{ 
+                tiempoSesion : 30,
+                cierreAuto: true
+            },
+            listado:{
+                itemsPagina: 10,
+                montoMinimo:5000,
+            },
+            stock:{
+                bajo:5,
+                medio:25
+            }
+        }
+        guardarLocalStorage(config, "configuracion")
+    }
+}
 function inicalizarCategorias(){
     if(obtenerCategorias().length===0){
         const perros=crearCategoria("Perros","Todo lo que tu mejor amigo necesita para una vida feliz, saludable y llena de aventuras.")
@@ -135,24 +154,135 @@ export function MenuLateralAdmin() {
     actualizarLayout();
 }
 
-function inicializarConfiguracion(){
-    if(obtenerConfiguracion().length===0){
-        const config={
-            sesion:{ 
-                tiempoSesion : 30,
-                cierreAuto: true
-            },
-            listado:{
-                itemsPagina: 10,
-                montoMinimo:5000,
-            },
-            stock:{
-                bajo:5,
-                medio:25
-            }
-        }
-        guardarLocalStorage(config, "configuracion")
+
+function obtenerResultadosBusqueda(texto){
+    const termino = (texto || "").trim().toLowerCase();
+    if (!termino) return { termino, usuariosMatch: [], productosMatch: [] };
+ 
+    const usuariosMatch = obtenerUsuariosFinales().filter(u =>
+        (u.nombre && u.nombre.toLowerCase().includes(termino)) ||
+        (u.apellido && u.apellido.toLowerCase().includes(termino)) ||
+        (u.email && u.email.toLowerCase().includes(termino))
+    );
+ 
+    const productosMatch = obtenerProductos().filter(p =>
+        (p.nombre && p.nombre.toLowerCase().includes(termino)) ||
+        (p.categoria && p.categoria.toLowerCase().includes(termino))
+    );
+ 
+    return { termino, usuariosMatch, productosMatch };
+}
+
+export function buscarGlobal(texto){
+    const { termino, usuariosMatch, productosMatch } = obtenerResultadosBusqueda(texto);
+    if (!termino) return;
+ 
+    localStorage.setItem("busquedaGlobal", termino);
+ 
+    if (usuariosMatch.length > 0) {
+        window.location.href = "usuarios-admin.html";
+        return;
     }
+ 
+    if (productosMatch.length > 0) {
+        window.location.href = "productos-admin.html";
+        return;
+    }
+ 
+    window.location.href = "usuarios-admin.html";
+}
+
+export function previsualizarBusquedaGlobal(texto, dropdown) {
+    if (!dropdown) return;
+
+    const { termino, usuariosMatch, productosMatch } = obtenerResultadosBusqueda(texto);
+
+    if (!termino) {
+        dropdown.style.display = "none";
+        dropdown.innerHTML = "";
+        return;
+    }
+
+    const MAX_ITEMS = 5;
+    dropdown.innerHTML = ""; 
+
+    if (usuariosMatch.length === 0 && productosMatch.length === 0) {
+        const span = document.createElement("span");
+        span.classList.add("list-group-item", "text-muted", "small");
+        span.textContent = `Sin resultados para "${termino}"`;
+        dropdown.appendChild(span); 
+
+    } else {
+        if (usuariosMatch.length > 0) {
+            const titulo = document.createElement("span");
+            titulo.classList.add("list-group-item", "disabled", "text-uppercase", "small", "text-muted", "py-1");
+            titulo.textContent = "Usuarios";
+            dropdown.appendChild(titulo);
+
+            usuariosMatch.slice(0, MAX_ITEMS).forEach(u => {
+                const a = document.createElement("a");
+                a.href = "usuarios-admin.html";
+                a.classList.add("list-group-item", "list-group-item-action", "py-2");
+                a.dataset.busqueda = termino;
+
+                const icono = document.createElement("i");
+                icono.classList.add("fa-solid", "fa-user", "fa-fw", "text-muted", "me-2");
+
+                const nombre = document.createElement("strong");
+                nombre.textContent = `${u.nombre} ${u.apellido}`;
+
+                const email = document.createElement("small");
+                email.classList.add("text-muted", "d-block");
+                email.textContent = u.email;
+
+                a.append(icono, nombre, email);
+
+                a.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    localStorage.setItem("busquedaGlobal", a.dataset.busqueda);
+                    window.location.href = a.href;
+                });
+
+                dropdown.appendChild(a);
+            });
+        }
+
+        if (productosMatch.length > 0) {
+            const titulo = document.createElement("span");
+            titulo.classList.add("list-group-item", "disabled", "text-uppercase", "small", "text-muted", "py-1");
+            titulo.textContent = "Productos";
+            dropdown.appendChild(titulo);
+
+            productosMatch.slice(0, MAX_ITEMS).forEach(p => {
+                const a = document.createElement("a");
+                a.href = "productos-admin.html";
+                a.classList.add("list-group-item", "list-group-item-action", "py-2");
+                a.dataset.busqueda = termino;
+
+                const icono = document.createElement("i");
+                icono.classList.add("fa-solid", "fa-box", "fa-fw", "text-muted", "me-2");
+
+                const nombre = document.createElement("strong");
+                nombre.textContent = p.nombre;
+
+                const categoria = document.createElement("small");
+                categoria.classList.add("text-muted", "d-block");
+                categoria.textContent = p.categoria;
+
+                a.append(icono, nombre, categoria);
+
+                a.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    localStorage.setItem("busquedaGlobal", a.dataset.busqueda);
+                    window.location.href = a.href;
+                });
+
+                dropdown.appendChild(a);
+            });
+        }
+    }
+
+    dropdown.style.display = "block";
 }
 
 function crearUsuarios(){
