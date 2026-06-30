@@ -106,17 +106,25 @@ body #navinicio{
 .disponible{
     background: #E8D2A4;
     color: #2E2E2E;
-     padding: 6px;
-   font-family: 'Poppins', sans-serif;
-   font-size: 14px;
+    padding: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
     font-weight: 500;
 }
-.sinStock{
-    background: #FBE3D9;
+.pocoStock{
+    background: #f5dcaf;
     color: #FF3B30;
     padding: 6px;
-   font-family: 'Poppins', sans-serif;
-   font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sinStock{
+    background: #eeb59d;
+    padding: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
     font-weight: 500;
 }
 .botonini{

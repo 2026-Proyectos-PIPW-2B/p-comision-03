@@ -215,6 +215,7 @@ body.collapsed svg {
 .stock-badge.bajo  { background: #fde8e8; color: #c0392b; }
 .stock-badge.medio { background: #fef3cd; color: #856404; }
 .stock-badge.alto  { background: #e0f5e9; color: #1a7a3a; }
+.stock-badge.sinStock{ background: #e0f5e9; color: #e65c00; }
 
 /* Botones acciones */
 .btn-action-edit {

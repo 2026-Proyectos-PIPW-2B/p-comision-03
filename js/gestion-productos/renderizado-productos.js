@@ -84,10 +84,15 @@ function crearCeldaAcciones(id){
 function estilizadoStock(stock, span, stockMin){
     span.classList.add("stock-badge")
     const stockMax=obtenerConfiguracion().stock.medio
-    if(Number(stock)<=Number(stockMin)){
-        span.classList.add("bajo")
-        span.textContent=`${stock} u. - bajo`
+    if(Number(stock)===0){
+        span.classList.add("sinStock")
+        span.textContent="Sin stock"
     }
+    else 
+        if(Number(stock)<=Number(stockMin)){
+            span.classList.add("bajo")
+            span.textContent=`${stock} u. - bajo`
+        }
     else 
         if(Number(stock)>=stockMax){
             span.classList.add("alto")
@@ -175,19 +180,24 @@ function crearSpanStock(stock, stockMin){
     const span = document.createElement("span")
     span.classList.add("card-text", "rounded-4")
 
-    if(stock <= stockMin){
-        span.textContent = "Pocas unidades"
-        span.classList.add("sinStock")
+    if(Number(stock)===0){
+        span.textContent = "Sin stock"
+        span.classList.add("sinStock", "text-danger")
     }
-    else
-        if(stock>=stockMax){
-            span.textContent = "Disponible"
-            span.classList.add("disponible")
+    else 
+        if(stock <= stockMin){
+            span.textContent = "Pocas unidades"
+            span.classList.add("pocoStock")
         }
-        else{
-            span.textContent = "En stock"
-            span.classList.add("stock")
-        }
+        else
+            if(stock>=stockMax){
+                span.textContent = "Disponible"
+                span.classList.add("disponible")
+            }
+            else{
+                span.textContent = "En stock"
+                span.classList.add("stock")
+            }
 
     return span
 }
