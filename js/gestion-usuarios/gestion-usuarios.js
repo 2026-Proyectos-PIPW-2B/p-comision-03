@@ -9,7 +9,10 @@ const buscadorFinal = document.getElementById("buscadorFinal");
 
 window.onload= function(){
     renderPendientes()
-    renderFinales()
+    const q = localStorage.getItem("busquedaGlobal") || "";
+    localStorage.removeItem("busquedaGlobal");
+    if (q && buscadorFinal) buscadorFinal.value = q;
+    renderFinales(q)
 }
 
 buscadorFinal.addEventListener("input", function () {
