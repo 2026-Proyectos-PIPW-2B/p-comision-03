@@ -1,6 +1,7 @@
 import { obtenerProductos,eliminarProducto,editarProducto } from "./servicios-productos.js"
 import { obtenerTabla } from "./gestion-productos.js"
 import { agregarCarrito } from '../carrito/servicios-carrito.js'
+import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js"
 
 const contenedor=obtenerTabla()
 
@@ -82,12 +83,13 @@ function crearCeldaAcciones(id){
 
 function estilizadoStock(stock, span, stockMin){
     span.classList.add("stock-badge")
+    const stockMax=obtenerConfiguracion().stock.medio
     if(Number(stock)<=Number(stockMin)){
         span.classList.add("bajo")
         span.textContent=`${stock} u. - bajo`
     }
     else 
-        if(Number(stock)>=100){
+        if(Number(stock)>=stockMax){
             span.classList.add("alto")
             span.textContent=`${stock} u. - alto`
         }
@@ -169,6 +171,7 @@ function crearOverlayStock(stock,stockMin){
 }
 
 function crearSpanStock(stock, stockMin){
+    const stockMax=obtenerConfiguracion().stock.medio
     const span = document.createElement("span")
     span.classList.add("card-text", "rounded-4")
 
@@ -177,7 +180,7 @@ function crearSpanStock(stock, stockMin){
         span.classList.add("sinStock")
     }
     else
-        if(stock>=100){
+        if(stock>=stockMax){
             span.textContent = "Disponible"
             span.classList.add("disponible")
         }

@@ -1,33 +1,66 @@
-import { mostrarPublicados,crearColumna, mostrarProductos } from "../gestion-productos/renderizado-productos.js"
-import { actualizarNav } from "./sesion.js"
-import { obtenerProductos } from "../gestion-productos/servicios-productos.js"
-import { obtenerIcono } from "../gestion-categorias/servicios-categorias.js"
-import { mostrarCategorias } from '../gestion-categorias/renderizado-categorias.js'
+import { mostrarPublicados, mostrarProductos } from "../gestion-productos/renderizado-productos.js";
+import { actualizarNav } from "./sesion.js";
+import { obtenerProductos } from "../gestion-productos/servicios-productos.js";
+import { obtenerIcono } from "../gestion-categorias/servicios-categorias.js";
+import { mostrarCategorias } from "../gestion-categorias/renderizado-categorias.js";
+import { crearPaginador, renderPaginacion } from "../core/Paginador.js";
+import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js";
 
-const contendorCategorias=document.getElementById("categorias")
-const seccionCategorias = document.getElementById("seccion-categorias")
-const infoCategoria = document.getElementById("info-categoria")
-const contenedorProductos = document.getElementById("prod-publicados")
-const inputFiltro = document.getElementById("filtro")
+const contenedorCategorias = document.getElementById("categorias");
+const seccionCategorias = document.getElementById("seccion-categorias");
+const infoCategoria = document.getElementById("info-categoria");
+const contenedorProductos = document.getElementById("prod-publicados");
+const inputFiltro = document.getElementById("filtro");
 
-let categoriaActual = null
+let categoriaActual = null;
+let paginador = null;
+let productosActuales = [];
 
-document.addEventListener("DOMContentLoaded", function(){
-    actualizarNav()
-    mostrarCategorias(contendorCategorias)
-    mostrarPublicados(contenedorProductos)
-    inputFiltro.addEventListener("input", filtrarProductos)
-})
- 
-export function mostrarCategoria(categoria){
-    seccionCategorias.classList.add("d-none")
-    infoCategoria.classList.remove("d-none")
+document.addEventListener("DOMContentLoaded", () => {
+    actualizarNav();
+    mostrarCategorias(contenedorCategorias);
 
-    categoriaActual = categoria.nombre
+    const publicados = obtenerProductos().filter(p => p.publicado);
+    inicializarPaginacion(publicados);
 
-    const productos = obtenerProductos().filter(producto => producto.categoria === categoria.nombre && producto.publicado)
+    inputFiltro.addEventListener("input", filtrarProductos);
+});
 
-    mostrarProductos( contenedorProductos, productos)
+function inicializarPaginacion(productos) {
+    productosActuales = productos;
+
+    paginador = crearPaginador({
+        data: productosActuales,
+        porPagina: obtenerConfiguracion().listado.itemsPagina
+    });
+
+    renderPagina();
+}
+
+function renderPagina() {
+    const pagina = paginador.obtenerPagina();
+
+    mostrarProductos(contenedorProductos, pagina);
+
+    renderPaginacion({
+        paginador,
+        onPaginaChange: (n) => {
+            if (paginador.cambiarPagina(n)) {
+                renderPagina();
+            }
+        }
+    });
+}
+
+export function mostrarCategoria(categoria) {
+    seccionCategorias.classList.add("d-none");
+    infoCategoria.classList.remove("d-none");
+
+    categoriaActual = categoria.nombre;
+
+    const productos = obtenerProductos().filter(
+        p => p.categoria === categoria.nombre && p.publicado
+    );
 
     infoCategoria.innerHTML = `
         <div class="categoria-info shadow-sm">
@@ -35,46 +68,46 @@ export function mostrarCategoria(categoria){
                 ${obtenerIcono(categoria.nombre)}
             </div>
 
-            <h2 class="categoria-titulo">
-                ${categoria.nombre}
-            </h2>
+            <h2>${categoria.nombre}</h2>
+            <p>${categoria.descripcion}</p>
 
-            <p class="categoria-descripcion">
-                ${categoria.descripcion}
-            </p>
-
-            <button
-                id="btnVolverCategorias"
-                class="btn btn-outline-secondary rounded-pill px-4"
-            >
-                <i class="bi bi-arrow-left"></i>
-                Volver
+            <button id="btnVolverCategorias" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="bi bi-arrow-left"></i> Volver
             </button>
         </div>
-        `
+    `;
 
-    document.getElementById("btnVolverCategorias").addEventListener("click", volverInicio)
+    document.getElementById("btnVolverCategorias")
+        .addEventListener("click", volverInicio);
+
+    inicializarPaginacion(productos);
 }
 
-function volverInicio(){
-    categoriaActual = null
-    seccionCategorias.classList.remove("d-none")
-    infoCategoria.classList.add("d-none")
-    infoCategoria.innerHTML = ""
+function volverInicio() {
+    categoriaActual = null;
 
-    mostrarCategorias(contendorCategorias)
-    mostrarPublicados(contenedorProductos)
+    seccionCategorias.classList.remove("d-none");
+    infoCategoria.classList.add("d-none");
+    infoCategoria.innerHTML = "";
+
+    mostrarCategorias(contenedorCategorias);
+
+    const publicados = obtenerProductos().filter(p => p.publicado);
+    inicializarPaginacion(publicados);
 }
 
-function filtrarProductos(){
-    const texto = document.getElementById("filtro").value.trim().toLowerCase()
+function filtrarProductos() {
+    const texto = inputFiltro.value.trim().toLowerCase();
 
-    let productos = obtenerProductos().filter(producto => producto.publicado)
+    let productos = obtenerProductos().filter(p => p.publicado);
 
-    if(categoriaActual)
-        productos = productos.filter( producto => producto.categoria === categoriaActual)
-    
-    productos = productos.filter( producto => producto.nombre.toLowerCase().includes(texto))
+    if (categoriaActual) {
+        productos = productos.filter(p => p.categoria === categoriaActual);
+    }
 
-    mostrarProductos(contenedorProductos,productos)
+    productos = productos.filter(p =>
+        p.nombre.toLowerCase().includes(texto)
+    );
+
+    inicializarPaginacion(productos);
 }

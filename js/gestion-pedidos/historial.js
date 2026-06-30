@@ -1,66 +1,61 @@
-import { actualizarNav, protegerPagina, obtenerUsuarioActual } from '../gestion-usuarios/sesion.js'
-import { obtenerPedidos } from './servicios-pedidos.js'
-import { actualizarBadgeCarrito } from '../carrito/nav-carrito.js'
-import { renderPedidos } from './renderizado-historial-usuario.js'
-import { parseFecha } from './util-pedidos.js'
+import { actualizarNav, protegerPagina, obtenerUsuarioActual } from "../gestion-usuarios/sesion.js";
+import { obtenerPedidos } from "./servicios-pedidos.js";
+import { actualizarBadgeCarrito } from "../carrito/nav-carrito.js";
+import { renderPedidos } from "./renderizado-historial-usuario.js";
+import { parseFecha } from "./util-pedidos.js";
+import { crearPaginador, renderPaginacion } from "../core/Paginador.js";
 
-const PEDIDOS_POR_PAGINA = 4
-let paginaActual = 1
-let pedidos = []
-let pedidosFiltrados = [] 
+const PEDIDOS_POR_PAGINA = 4;
+
+let pedidos = [];
+let pedidosFiltrados = [];
+let paginador;
 
 document.addEventListener("DOMContentLoaded", () => {
-    protegerPagina()
-    actualizarNav()
-    actualizarBadgeCarrito()
-    cargarHistorial()
+    protegerPagina();
+    actualizarNav();
+    actualizarBadgeCarrito();
 
-    document.getElementById("btnFiltrar").addEventListener("click", aplicarFiltros)
-    document.getElementById("btnLimpiar").addEventListener("click", limpiarFiltros)
-})
+    cargarHistorial();
 
-function limpiarFiltros() {
-    document.getElementById("filtroDesde").value = ""
-    document.getElementById("filtroHasta").value = ""
-    document.getElementById("filtroMontoMin").value = ""
-    document.getElementById("filtroMontoMax").value = ""
+    document
+        .getElementById("btnFiltrar")
+        .addEventListener("click", aplicarFiltros);
 
-    pedidosFiltrados = [...pedidos]
-    paginaActual = 1
-    actualizarSubtitulo()
-    render()
-}
+    document
+        .getElementById("btnLimpiar")
+        .addEventListener("click", limpiarFiltros);
+});
 
-function actualizarSubtitulo() {
-    const subtitulo = document.getElementById("subtitulo")
-    const total = pedidosFiltrados.length
-    if (total === 0) {
-    subtitulo.textContent = "No se encontraron compras."
-    } else{
-        if (total === 1) {
-        subtitulo.textContent = "1 compra en total"
-        } else {
-        subtitulo.textContent = `${total} compras en total`
-        }
-    } 
-}
-/*-------------------------------------------------- */
 function cargarHistorial() {
     const usuario = obtenerUsuarioActual();
+
     pedidos = obtenerPedidos().filter(
-    p => p.usuario.email === usuario.email
-);
+        p => p.usuario.email === usuario.email
+    );
+
     pedidosFiltrados = [...pedidos];
 
-    paginaActual = 1;
+    crearPaginacion();
+
     render();
 }
 
+function crearPaginacion() {
+    paginador = crearPaginador({
+        data: pedidosFiltrados,
+        porPagina: PEDIDOS_POR_PAGINA
+    });
+}
+
 function render() {
-    renderPedidos({
-        pedidos: pedidosFiltrados,
-        paginaActual,
-        porPagina: PEDIDOS_POR_PAGINA,
+
+    renderPedidos(
+        paginador.obtenerPagina()
+    );
+
+    renderPaginacion({
+        paginador,
         onPaginaChange: cambiarPagina
     });
 
@@ -68,80 +63,65 @@ function render() {
 }
 
 function cambiarPagina(n) {
-    const total = Math.ceil(pedidosFiltrados.length / PEDIDOS_POR_PAGINA);
-
-    if (n < 1 || n > total) return;
-
-    paginaActual = n;
+    paginador.cambiarPagina(n);
     render();
 }
 
 function aplicarFiltros() {
+
     const desde = document.getElementById("filtroDesde").value;
     const hasta = document.getElementById("filtroHasta").value;
-    const montoMin = Number(document.getElementById("filtroMontoMin").value) || 0;
-    const montoMax = Number(document.getElementById("filtroMontoMax").value) || Infinity;
+
+    const montoMin =
+        Number(document.getElementById("filtroMontoMin").value) || 0;
+
+    const montoMax =
+        Number(document.getElementById("filtroMontoMax").value) || Infinity;
 
     pedidosFiltrados = pedidos.filter(p => {
+
         const fecha = parseFecha(p.fecha);
 
-        const fechaDesde = desde ? new Date(desde + "T00:00:00") : null;
-        const fechaHasta = hasta ? new Date(hasta + "T23:59:59") : null;
-
-        const total = p.monto
-
         if (desde && fecha < new Date(desde + "T00:00:00")) return false;
+
         if (hasta && fecha > new Date(hasta + "T23:59:59")) return false;
-        if (total < montoMin) return false;
-        if (total > montoMax) return false;
+
+        if (p.monto < montoMin) return false;
+
+        if (p.monto > montoMax) return false;
 
         return true;
     });
-    paginaActual = 1;
+
+    crearPaginacion();
+
     render();
 }
 
-/*------------------------------------------- */
+function limpiarFiltros() {
 
+    document.getElementById("filtroDesde").value = "";
+    document.getElementById("filtroHasta").value = "";
+    document.getElementById("filtroMontoMin").value = "";
+    document.getElementById("filtroMontoMax").value = "";
 
-export function renderPaginacion({
-    total,
-    paginaActual,
-    porPagina,
-    onPaginaChange
-}) {
-    const totalPaginas = Math.ceil(total / porPagina);
-    const pag = document.getElementById("paginacion");
+    pedidosFiltrados = [...pedidos];
 
-    pag.innerHTML = "";
+    crearPaginacion();
 
-    if (totalPaginas <= 1) return;
+    render();
+}
 
-    const crearBtn = (label, disabled, action, active = false) => {
-        const btn = document.createElement("button");
-        btn.classList.add("btn", "btn-sm", "btn-pag");
-        btn.textContent = label;
-        if (active) btn.classList.add("btn-pag-activo");
-        btn.disabled = disabled;
-        btn.addEventListener("click", action);
-        return btn;
-    };
+function actualizarSubtitulo() {
 
-    pag.appendChild(
-        crearBtn("‹", paginaActual === 1, () =>
-            onPaginaChange(paginaActual - 1)
-        )
-    );
+    const subtitulo = document.getElementById("subtitulo");
+    const total = pedidosFiltrados.length;
 
-    for (let i = 1; i <= totalPaginas; i++) {
-        pag.appendChild(
-            crearBtn(i, false, () => onPaginaChange(i), i === paginaActual)
-        );
+    if (total === 0) {
+        subtitulo.textContent = "No se encontraron compras.";
+    } else if (total === 1) {
+        subtitulo.textContent = "1 compra en total";
+    } else {
+        subtitulo.textContent = `${total} compras en total`;
     }
-
-    pag.appendChild(
-        crearBtn("›", paginaActual === totalPaginas, () =>
-            onPaginaChange(paginaActual + 1)
-        )
-    );
 }

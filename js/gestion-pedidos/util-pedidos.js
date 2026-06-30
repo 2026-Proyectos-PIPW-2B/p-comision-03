@@ -1,3 +1,5 @@
+import { obtenerPedidos } from "./servicios-pedidos.js";
+
 export const ESTADOS = {
     CONFIRMADO: "confirmado",
     EN_PREPARACION: "en preparacion",
@@ -36,4 +38,8 @@ export function obtenerClaseEstado(estado) {
         case ESTADOS.CAMINO:
             return "pedidoCamino";
     }
+}
+
+export function obtenerPedidosRecientes(){
+    return obtenerPedidos().filter(pedido =>(pedido.estado==="confirmado"))
 }

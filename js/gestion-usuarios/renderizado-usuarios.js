@@ -133,8 +133,7 @@ function celdaVacia(mensaje,col){
 }
 
 /*--------------------------exports------------------------------*/
-export function renderFinales(filtro = "") {
-  let  lista = obtenerUsuariosFinales();
+export function renderFinales(lista,filtro = "") {
   finalUS.innerHTML = "";
 
 if (filtro.trim()) {
@@ -165,8 +164,7 @@ if (filtro.trim()) {
   }
 }
 
-export function renderPendientes() {
-  const lista = obtenerUsuariosPendientes();
+export function renderPendientes(lista) {
   pendienteUS.innerHTML = "";
 
   if (!lista.length) {

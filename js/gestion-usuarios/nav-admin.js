@@ -1,13 +1,18 @@
-import { configurarNotificación, inicializarUser,MenuLateralAdmin, buscarGlobal, previsualizarBusquedaGlobal } from '../core/inicializacion.js';
+import { inicializarUser,MenuLateralAdmin, buscarGlobal, previsualizarBusquedaGlobal } from '../core/inicializacion.js';
+import { configurarNotificación } from '../core/notificaciones.js';
 import { cerrarSesion, protegerPagina,verificarExpiracion } from './sesion.js';
+
+
+const contenedor=document.getElementById("sesion")
+const btnCerrarSesion = document.getElementById("btnCerrarSesionAdmin");
+const notificacion=document.getElementById("campanita")
+const cant_not=document.getElementById("cant-not")
 
 protegerPagina("admin");
 verificarExpiracion();
 setInterval(verificarExpiracion, 30 * 1000);
-const contenedor=document.getElementById("sesion")
-const notificacion=document.getElementById("campanita")
 MenuLateralAdmin()
-configurarNotificación(notificacion)
+configurarNotificación(notificacion,cant_not)
 inicializarUser(contenedor)
 
 const formBuscador = document.getElementById("formBuscadorGlobal");
@@ -31,10 +36,9 @@ if (formBuscador && inputBuscador) {
   });
 }
 
-const btnCerrarSesion = document.getElementById("btnCerrarSesionAdmin");
 if (btnCerrarSesion) {
-  btnCerrarSesion.addEventListener("click", (e) => {
-    e.preventDefault();
-    cerrarSesion();
-  });
+    btnCerrarSesion.addEventListener("click", (e) => {
+        e.preventDefault();
+        cerrarSesion();
+    });
 }

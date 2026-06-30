@@ -504,3 +504,33 @@ body.collapsed svg {
         color:var(--bs-dark);
         font-size:2rem;
     }
+
+    .ancho-buscador-superior{
+        width: 40%;
+    }
+
+/*Notificacion*/
+.span-campanita{
+    font-size:.6rem;
+    top:1px; 
+    right:1px;
+}
+
+#campanita{
+    min-width:300px; 
+    border-radius:14px;
+}
+
+/*Paginado*/
+
+.btn-pag {
+    border: 1px solid #ede4dc;
+    background-color: #fff;
+    color: #2c1a10;
+}
+
+.btn-pag-activo {
+    border: 1px solid #3E1C0D;
+    background-color: #3E1C0D;
+    color: #f5e6d8;
+}

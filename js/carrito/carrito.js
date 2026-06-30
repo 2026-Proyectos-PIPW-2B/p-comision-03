@@ -5,11 +5,14 @@ import { mostrarAlertaConfirm, mostrarAlertaWarning } from "../UI/Alertas.js"
 import { mostrarAlertaExito } from "../UI/Alertas.js"
 import { obtenerProductos } from "../gestion-productos/servicios-productos.js"
 import { agregarPedido } from "../gestion-pedidos/servicios-pedidos.js"
+import { visualizarMontoMinimo } from "../core/inicializacion.js"
+import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js"
 
-const envio_gratis=20000
+const envio_gratis=obtenerConfiguracion().listado.montoMinimo
 const Costo_Envio=8000
 
 protegerPagina();
+visualizarMontoMinimo()
 
 const listaCarrito = document.querySelector(".lista-carrito")
  
@@ -265,30 +268,6 @@ function confirmarCompra() {
         if (producto) producto.stock -= item.cantidad
     })
     guardarLocalStorage(productos, "bd-productos")
-
-    const pedido = {
-    id: Date.now(),
-    fecha:new Date().toISOString(),
-    estado: "En camino",
-    // map recorre las compras y devuelve un array nuevo con solo los datos necesarios para guardar en el historial
-    productos: carritoUsuario.compras.map(item => ({
-        nombre: item.producto.nombre,
-        imagen: item.producto.imagen,
-        cantidad: item.cantidad,
-        precio: item.producto.precio
-    }))
-    }
-
-    const historial = obtenerLocalStorage("historial-pedidos") || []
-    const historialUsuario = historial.find(h => h.email === usuarioActual.email)
-
-    if (historialUsuario) {
-    historialUsuario.pedidos.unshift(pedido)
-    } else {
-    historial.push({ email: usuarioActual.email, pedidos: [pedido] })
-    }
-
-    guardarLocalStorage(historial, "historial-pedidos")
 
     agregarPedido(carritoUsuario)
     carritoUsuario.estado = "aprobado"

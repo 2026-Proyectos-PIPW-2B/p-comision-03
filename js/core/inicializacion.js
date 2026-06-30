@@ -1,13 +1,11 @@
+import { obtenerConfiguracion } from "../configuracion/servicios-configuracion-admin.js";
 import { obtenerCategorias,crearCategoria } from "../gestion-categorias/servicios-categorias.js"
 import { obtenerProductos,crearProductoExtendido,crearProducto } from "../gestion-productos/servicios-productos.js"
-import { obtenerUsuariosFinales } from "../gestion-usuarios/servicios-usuarios.js"
-import { obtenerUsuarioActual } from "../gestion-usuarios/sesion.js";
+import { obtenerUsuariosFinales, obtenerUsuariosPendientes } from "../gestion-usuarios/servicios-usuarios.js"
+import { obtenerUsuarioActual,cerrarSesion } from "../gestion-usuarios/sesion.js";
 import { guardarLocalStorage } from "./localStorage.js";
-import { cerrarSesion}from "../gestion-usuarios/sesion.js";
 import { renderizarUsuario } from "./reenderizado-usuario.js";
-import { reenderizarNotificaciones } from "./render-notificaciones-admin.js";
-import { obtenerProductosBajoStock,obtenerProductosSinStock } from "../gestion-productos/util-productos.js";
-import { obtenerUsuariosPendientes } from "../gestion-usuarios/servicios-usuarios.js";
+import { formatPrecio } from '../gestion-pedidos/util-pedidos.js';
 
 const ADMIN = {
     nombre: "Sistema",
@@ -18,11 +16,32 @@ const ADMIN = {
     alta: "01/01/2024",
     habilitado: true,
 };
+const UsuarioFinal = {
+    nombre: "Usuario",
+    apellido: "Final",
+    email: "final@user.com",
+    password: "Final1234",
+    rol: "cliente",
+    alta: "01/07/2026",
+    habilitado: true,
+};
+
+const UsuarioPendiente = {
+    nombre: "Usuario",
+    apellido: "Pendiente",
+    email: "pendiente@user.com",
+    password: "Pendiente1234",
+    edad: 123,  
+    estado: "pendiente"
+};
+
 
 export function inicializarSistema(){
     inicializarAdmin()
     inicalizarCategorias()
     inicializarProductos()
+    inicializarConfiguracion()
+    crearUsuarios()
 }
 
 function inicalizarCategorias(){
@@ -115,6 +134,7 @@ export function MenuLateralAdmin() {
 
     actualizarLayout();
 }
+
 
 function obtenerResultadosBusqueda(texto){
     const termino = (texto || "").trim().toLowerCase();
@@ -246,45 +266,20 @@ export function previsualizarBusquedaGlobal(texto, dropdown) {
     dropdown.style.display = "block";
 }
 
-
-export function configurarNotificación(dropdown){
-    const noticaciones=obtenerNotificaciones()
-    reenderizarNotificaciones(dropdown,noticaciones)
+function crearUsuarios(){
+    const final=obtenerUsuariosFinales()
+    const pendiente=obtenerUsuariosPendientes()
+    if(final.length===1){
+        final.push(UsuarioFinal)
+        guardarLocalStorage(final,"usuariosfinales")
+    }
+    if(pendiente.length===0){
+        pendiente.push(UsuarioPendiente)
+        guardarLocalStorage(pendiente,"usuariospendientes")
+    }
 }
 
-function obtenerNotificaciones() {
-    const notificaciones = [];
-
-    // Productos con stock bajo
-    const bajoStock = obtenerProductosBajoStock();
-    if (bajoStock.length > 0) {
-        notificaciones.push({
-            ref: "./productos-admin.html?accion=stock-bajo",
-            titulo: "Productos con stock bajo",
-            subtitulo: `${bajoStock.length} productos requieren reposición`
-        })
-    }
-
-    // Productos sin stock
-    const sinStock = obtenerProductosSinStock();
-    if (sinStock.length > 0) {
-        notificaciones.push({
-            ref: "./productos-admin.html?accion=sin-stock",
-            titulo: "Productos sin stock",
-            subtitulo: `${sinStock.length} productos agotados`
-        });
-    }
-
-    // Usuarios pendientes de alta
-    const pendientes = obtenerUsuariosPendientes();
-    if (pendientes.length > 0) {
-        notificaciones.push({
-            ref: "./usuarios.html",
-            titulo: "Usuarios pendientes",
-            subtitulo: `${pendientes.length} usuario(s) esperan aprobación`
-        });
-    }
-
-    return notificaciones;
+export function visualizarMontoMinimo(){
+    const span=document.getElementById("envioGratis")
+    span.textContent=`${formatPrecio(obtenerConfiguracion().listado.montoMinimo)}`
 }
-
