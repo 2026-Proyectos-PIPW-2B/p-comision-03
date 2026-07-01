@@ -59,6 +59,7 @@ function crearBotonHabilitacion(habilitado,rol,index){
     input_habilitacion.disabled = rol === "admin";
     input_habilitacion.addEventListener("change", function () {
        toggleHabilitado(index, this.checked);
+       window.location.href = "usuarios-admin.html"
     });
 
     div_habilitacion.appendChild(input_habilitacion)
