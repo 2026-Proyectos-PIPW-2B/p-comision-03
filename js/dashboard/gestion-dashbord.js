@@ -1,6 +1,6 @@
 import {renderizarMetricas,renderizarPedidosRecientes,renderizarStockBajo} from "./renderizado-dashboard.js";
 import { obtenerProductosParaStockBajo } from "./servicios-dashboard.js";
-import { crearPaginador, renderPaginacion } from "../core/paginador.js";
+import { crearPaginador, renderPaginacion } from "../core/Paginador.js";
 
 const pedidosHoy = document.getElementById("pedidos-hoy");
 const ingresosMensual = document.getElementById("ingreso-mes");

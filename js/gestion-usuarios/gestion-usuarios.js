@@ -1,4 +1,4 @@
-import { crearPaginador, renderPaginacion } from "../core/paginador.js";
+import { crearPaginador, renderPaginacion } from "../core/Paginador.js";
 import { obtenerUsuariosPendientes,obtenerUsuariosFinales } from "./servicios-usuarios.js";
 import { renderPendientes,renderFinales } from "./renderizado-usuarios.js";
 

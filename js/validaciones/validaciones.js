@@ -93,14 +93,19 @@ function validarEdad(input, divError){
 function validarPassword(input_pass, divError_pass ,input_repass, divError_repass){
     let validacionPass
     let validacionRePass
-
-    if (input_pass.value !== input_repass.value || input_pass.value === "") {
-        validacionPass= { id: input_pass, div:divError_pass, mensaje: "Las contraseñas no coinciden", formulario: false}
-        validacionRePass = { id: input_repass, div: divError_repass, mensaje: "Las contraseñas no coinciden", formulario: false}
-    }
+    
+    if(!validator.isStrongPassword(password.value, {minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 0})){
+        validacionPass={id: input_pass,div:divError_pass,mensaje:"La contraseña debe incluir al menos 8 caracteres, un carater en minuscula,uno en mayuscula y un numero"}
+    }  
     else{
-        validacionPass = { id: input_pass, div: "", mensaje: "", formulario: true}
-        validacionRePass = { id: input_pass, div: "", mensaje: "", formulario: true}
+        if (input_pass.value !== input_repass.value) {
+            validacionPass= { id: input_pass, div:divError_pass, mensaje: "Las contraseñas no coinciden", formulario: false}
+            validacionRePass = { id: input_repass, div: divError_repass, mensaje: "Las contraseñas no coinciden", formulario: false}
+        }
+        else{
+            validacionPass = { id: input_pass, div: "", mensaje: "", formulario: true}
+            validacionRePass = { id: input_pass, div: "", mensaje: "", formulario: true}
+        }
     }
 
     validaciones.push(validacionPass)
