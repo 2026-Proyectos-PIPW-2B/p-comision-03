@@ -15,7 +15,7 @@ const ADMIN = {
     rol: "admin",
     alta: "01/01/2024",
     habilitado: true,
-};
+}
 const UsuarioFinal = {
     nombre: "Usuario",
     apellido: "Final",
@@ -24,8 +24,7 @@ const UsuarioFinal = {
     rol: "cliente",
     alta: "01/07/2026",
     habilitado: true,
-};
-
+}
 const UsuarioPendiente = {
     nombre: "Usuario",
     apellido: "Pendiente",
@@ -33,7 +32,7 @@ const UsuarioPendiente = {
     password: "Pendiente1234",
     edad: 123,  
     estado: "pendiente"
-};
+}
 
 
 export function inicializarSistema(){

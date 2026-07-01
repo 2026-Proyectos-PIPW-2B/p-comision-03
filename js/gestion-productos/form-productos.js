@@ -6,14 +6,12 @@ import { obtenerLocalStorage } from "../core/localStorage.js"
 
 export function guardarProducto(campos) {
     const formularioValido = datosProductoValidos(campos)
-    const imagenValida     = validarImagen(inputImagen, "errorImagen")
+    const imagenValida = validarImagen(campos.imagen.valor, campos.imagen.error);
 
     if (!formularioValido || !imagenValida) return
-
-    const archivo = inputImagen.files[0]
     crearProducto(
             campos.nombre.input.value,  campos.descripcion.input.value,  campos.categoria.input.value,
-            campos.precio.input.value,  campos.stock.input.value ,archivo.name
+            campos.precio.input.value,  campos.stock.input.value ,campos.imagen.valor
         )
     mostrarAlertaExito( campos.nombre.input.value, "Producto registrado con exitó", "productos-admin.html")
 }
@@ -21,20 +19,25 @@ export function guardarProducto(campos) {
 
 export function guardarProductoExtendido(campos){
     const formularioValido = datosProductoValidosExtendido(campos)
-    const imagenAnterior = localStorage.getItem("imagenProductoEditar")
+    const imagenAnterior = localStorage.getItem("imagenProductoEditar");
 
-    const imagenExistente = !!imagenAnterior
+    const imagenValida = validarImagen(campos.imagen.valor,campos.imagen.error,!!imagenAnterior);
 
-    if (!formularioValido || !validarImagen(inputImagen, "errorImagen", imagenExistente)) return
+    if (!formularioValido || !imagenValida) {
+        return;
+    }
+
 
     const productoListEdit = obtenerProductoEditar()
 
     if(productoListEdit.length>0){
         const productoEditar=productoListEdit[0]
-        let nombreImagen = localStorage.getItem("imagenProductoEditar")
-        if(inputImagen.files.length > 0)
-            nombreImagen = inputImagen.files[0].name
+        let nombreImagen = localStorage.getItem("imagenProductoEditar");
 
+        if(campos.imagen.valor !== ""){
+            nombreImagen = campos.imagen.valor;
+            campos.imagen.error = "";
+        }
         actualizarProducto(
             productoEditar.id, campos.nombre.input.value, campos.descripcion.input.value,
             campos.categoria.input.value, campos.precio.input.value, campos.stock.input.value,
@@ -46,17 +49,13 @@ export function guardarProductoExtendido(campos){
         mostrarAlertaExito(productoEditar.nombre , "Producto actualizado con exitó","productos-admin.html")
     } 
     else{
-        const archivo = inputImagen.files[0]
-
         crearProductoExtendido(
         campos.nombre.input.value,  campos.descripcion.input.value,  campos.categoria.input.value,
         campos.precio.input.value,  campos.stock.input.value,  campos.stockMinimo.input.value,
-        campos.publicado.input.checked, campos.destacado.input.checked ,archivo.name
+        campos.publicado.input.checked, campos.destacado.input.checked ,campos.imagen.valor
     )
         mostrarAlertaExito( campos.nombre.input.value, "Producto registrado con exitó","productos-admin.html")
     }
-
-    
 }
 
 

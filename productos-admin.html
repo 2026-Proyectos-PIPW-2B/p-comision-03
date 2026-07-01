@@ -80,16 +80,10 @@
             <!-- NAVBAR SUPERIOR -->
             <nav class="navbar navbar-expand bg-primary border-bottom px-3 sticky-top">
                 <button id="menuBtn" class="btn btn-outline-secondary me-3"><i class="bi bi-list-stars"></i></button>
-                  <form id="formBuscadorGlobal" class="flex-grow-1 me-3 position-relative">
-                        <input type="search" id="buscadorGlobal"
-                            class="form-control rounded-3" style="width: 40%;"
-                            placeholder="Buscar usuarios, productos..."
-                            autocomplete="off">
-                        <div id="dropdownBuscadorGlobal"
-                            class="list-group position-absolute shadow-sm"
-                            style="width:40%; max-height:320px; overflow-y:auto; z-index:1050; display:none;">
-                        </div>
-                    </form>
+                <form id="formBuscadorGlobal" class="flex-grow-1 me-3 position-relative">
+                    <input type="search" id="buscadorGlobal"class="form-control rounded-3"placeholder="Buscar usuarios, productos..." autocomplete="off">
+                    <div id="dropdownBuscadorGlobal"class="list-group position-absolute shadow-sm, buscadorGlobalNav"></div>
+                </form>
                 <div class="dropdown">
                     <button class="btn position-relative p-2  bg-transparent border-0" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-bell-fill"></i>
@@ -121,18 +115,20 @@
                                 <div class="card-body">
                                     <h4 class="fw-bold mb-4">Alta rápida</h4>
                                     <!-- Imagen -->
-                                    <div id="zonaImagen" class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3 bg-primary"
-                                        style="height:160px; border-style:dashed !important; cursor:pointer;">
-                                        <i class="bi bi-image text-muted" style="font-size:2rem;"></i>
+                                    <div id="zonaImagen" class="border rounded-3 d-flex flex-column align-items-center justify-content-center mb-3 bg-primary"">
+                                        <i class="bi bi-image text-muted"></i>
                                         <small class="text-muted mt-2">Hacé clic para subir</small>
                                         <small class="text-muted mt-1">JPG, PNG o WebP. Máx. 2 MB.</small>
-                                        <input type="file" id="inputImagen" accept="image/jpeg, image/png, image/webp" class="d-none">
                                     </div>
-                                    <div id="errorImagen" class="text-danger mt-1" style="font-size:.85rem;"></div>
+                                    <div class="mb-3">
+                                        <label class="form-label d-none">Seleccionar imagen</label>
+                                        <div id="listaImagenes" class="d-flex flex-wrap gap-2 d-none"></div>
+                                    </div>
                                     <div id="previewImagen" class="mt-2 d-none">
-                                        <img id="imgPreview" src="" alt="Preview" class="rounded-3" style="max-height:160px; object-fit:cover;">
+                                        <img id="imgPreview" src="" alt="Preview" class="rounded-3">
                                         <button id="btnQuitarImagen" class="btn btn-sm btn-danger ms-2">Quitar</button>
                                     </div>
+                                    <div id="errorImagen" class="text-danger mb-3"></div> 
                                     <!-- Campos -->
                                     <div class="d-flex flex-column gap-2">
                                         <div class="mb-3">
@@ -187,7 +183,7 @@
                                     <div class="table-responsive">
                                         <table class="table align-middle">
                                             <thead>
-                                                <tr class="text-muted" style="font-size:.85rem;">
+                                                <tr class="text-muted tabla-admin">
                                                     <th class="fw-semibold">Producto</th>
                                                     <th class="fw-semibold">Categoría</th>
                                                     <th class="fw-semibold">Precio</th>

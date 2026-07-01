@@ -108,29 +108,19 @@ function validarPassword(input_pass, divError_pass ,input_repass, divError_repas
 }
 
 // ── exports ────────────────────────────────────────────────
-export function validarImagen(input, divError, imagenExistente = false) {
-    const div = document.getElementById(divError)
+export function validarImagen(nombreImagen, divError, imagenExistente = false) {
+    const div = document.getElementById(divError);
 
-    if ((!input.files || input.files.length === 0) && !imagenExistente) {
-        div.textContent = "Debe seleccionar una imagen."
-        div.classList.remove("d-none")
-        return false
+    if (!nombreImagen && !imagenExistente) {
+        div.textContent = "Debe seleccionar una imagen.";
+        div.classList.remove("d-none");
+        return false;
     }
 
-    if (input.files && input.files.length > 0) {
-        const archivo = input.files[0]
+    div.textContent = "";
+    div.classList.add("d-none");
 
-        if (archivo.size > 2 * 1024 * 1024) {
-            div.textContent = "La imagen no puede superar los 2 MB."
-            div.classList.remove("d-none")
-            return false
-        }
-    }
-
-    div.textContent = ""
-    div.classList.add("d-none")
-
-    return true
+    return true;
 }
 
 export function datosCategoriasValidos(input_nombre, divError_nombre, input_descripcion, divError_descripcion) {
