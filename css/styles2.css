@@ -566,7 +566,10 @@ body.collapsed svg {
 
 /*Imagen alta productos*/
 #zonaImagen{
-    font-size:.7rem; 
+    height:160px; 
+    border-style:dashed !important; 
+    cursor:pointer;
+    font-size:.9rem; 
     letter-spacing:1.2px; 
     color:#8a7060;
 }
@@ -576,10 +579,14 @@ body.collapsed svg {
     object-fit:cover;
 }
 
+.tamañoiconImag{
+    font-size:2rem;
+}
+
 /*resumen alta extendida producto*/
 
 .subtitle-resumen-prod{
-    font-size:.68rem; 
+    font-size:.9rem; 
     color:#b89880
 }
 
