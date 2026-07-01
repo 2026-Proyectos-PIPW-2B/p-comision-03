@@ -52,7 +52,7 @@ function iniciarSesion() {
  
   // Existe, la contraseña es correcta, pero está deshabilitado
   if (!usuario.habilitado) {
-    mostrarAlertaDanger("Tu cuenta esta deshabilitada","El administrador deshabilito tu cuenta por algun incumplimiento","/index.html")
+    mostrarAlertaDanger("Tu cuenta esta deshabilitada","El administrador deshabilito tu cuenta por algun incumplimiento","index.html")
     return;
   }
  
