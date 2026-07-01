@@ -19,10 +19,22 @@ export function renderizarPedidosRecientes(tablaPedidos) {
     const pedidos = obtenerPedidosRecientes();
 
     tablaPedidos.innerHTML = "";
+    if(pedidos.length===0){
+        tablaPedidos.appendChild(crearCeldaVaciaPedidos())
+    }
 
     pedidos.forEach(pedido => {
         tablaPedidos.appendChild(crearFila(pedido));
     });
+}
+
+function crearCeldaVaciaPedidos(){
+    const tr = document.createElement("tr");
+    tr.classList.add("align-middle","text-muted","text-center", "fw-bold","fs-5");
+
+    tr.colSpan=3
+    tr.textContent="No hay pedidos recientes"
+    return tr
 }
 
 function crearFila(pedido) {
@@ -84,9 +96,21 @@ function crearCeldaEstado(estado) {
 export function renderizarStockBajo(listaStock, productos) {
     listaStock.innerHTML = "";
 
+    if(productos.length===0)
+        listaStock.appendChild(crearCeldaVaciaCStock())
+
     productos.forEach(producto => {
         listaStock.appendChild(crearProductoStock(producto));
     });
+}
+
+function crearCeldaVaciaCStock(){
+    const tr = document.createElement("tr");
+    tr.classList.add("align-middle","text-muted","text-center", "fw-bold","fs-5");
+
+    tr.colSpan=3
+    tr.textContent="No hay producto con bajo stock actualmente"
+    return tr
 }
 
 function crearProductoStock(producto) {

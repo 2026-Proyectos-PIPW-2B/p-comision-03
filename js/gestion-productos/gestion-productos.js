@@ -1,11 +1,14 @@
 import { actualizarSelectCategorias } from "../gestion-categorias/servicios-categorias.js"
 import { guardarProducto } from './form-productos.js'
-import { mostrarPreview, quitarImagen } from './imagen-productos.js'
+import { quitarImagen,cargarMiniaturas } from './imagen-productos.js'
 import { renderizarTabla } from './renderizado-productos.js'
 import { inicializarFiltros } from "./filtros-productos.js"
 import { obtenerProductos } from "./servicios-productos.js"
 import { obtenerProductosBajoStock, obtenerProductosSinStock } from "./util-productos.js"
 import { crearPaginador, renderPaginacion } from "../core/paginador.js";
+
+const listaImagenes = document.getElementById("listaImagenes");
+let imagenSeleccionada = "";
 
 const selectCategorias      = document.getElementById("categoria")
 const inputNombre           = document.getElementById("nombre_prod")
@@ -14,7 +17,6 @@ const inputPrecio           = document.getElementById("precio")
 const inputStock            = document.getElementById("stock")
 const btnGuardar            = document.getElementById("btn_guardar")
 const zonaImagen            = document.getElementById("zonaImagen")
-const inputImagen           = document.getElementById("inputImagen")
 const imgPreview            = document.getElementById("imgPreview")
 const previewDiv            = document.getElementById("previewImagen")
 const btnQuitar             = document.getElementById("btnQuitarImagen")
@@ -23,7 +25,6 @@ const filtros_nombre        = document.getElementById("filtros_nombre")
 const filtros_categorias    = document.getElementById("filtros_categorias")
 
 const STOCK_POR_PAGINA = 10;
-
 let paginador;
 
 const campos = {
@@ -32,10 +33,11 @@ const campos = {
     categoria:   { input: selectCategorias, error: "errorCategoria" },
     precio:      { input: inputPrecio,      error: "errorPrecio" },
     stock:       { input: inputStock,       error: "errorStock" },
+    imagen:      { valor: "",               error:"errorImagen"}
 }
 
 window.onload = function () {
-    if (!zonaImagen || !inputImagen || !btnGuardar) return
+    if (!zonaImagen || !btnGuardar) return
     actualizarSelectCategorias(selectCategorias)
     actualizarSelectCategorias(filtros_categorias)
     inicializarListeners()
@@ -44,9 +46,10 @@ window.onload = function () {
     paginador = crearPaginador({
             data: obtenerProductos(),
             porPagina: STOCK_POR_PAGINA
-    });
-    render();
-    procesarAcciones();
+    })
+    render()
+    procesarAcciones()
+    cargarMiniaturas(listaImagenes,campos,imgPreview,previewDiv,zonaImagen)
 }
 
 export function obtenerTabla(){
@@ -55,14 +58,15 @@ export function obtenerTabla(){
 }
 
 function inicializarListeners() {
-    zonaImagen.addEventListener("click",    () => inputImagen.click())
-    inputImagen.addEventListener("change",  () => mostrarPreview(inputImagen.files[0],previewDiv,zonaImagen))
-    btnQuitar.addEventListener("click",     () => quitarImagen(previewDiv,zonaImagen))
+    zonaImagen.addEventListener("click", () => {
+        listaImagenes.classList.remove("d-none");
+        zonaImagen.classList.add("d-none")
+    });
+    btnQuitar.addEventListener("click",     () => quitarImagen(imgPreview,previewDiv,zonaImagen,campos))
     btnGuardar.addEventListener("click",    () => guardarProducto(campos))
 }
 
 function procesarAcciones() {
-
     const q = localStorage.getItem("busquedaGlobal") || "";
     localStorage.removeItem("busquedaGlobal");
 
@@ -109,3 +113,4 @@ function cambiarPagina(n) {
     paginador.cambiarPagina(n);
     render();
 }
+
