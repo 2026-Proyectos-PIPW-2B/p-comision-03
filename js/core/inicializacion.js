@@ -35,6 +35,23 @@ const UsuarioPendiente = {
     estado: "pendiente"
 };
 
+const APP_KEYS = [
+    'bd-categoria',
+    'bd-productos',
+    'usuariosfinales',
+    'usuariospendientes',
+    'usuarioActual',
+    'loginTime',
+    'busquedaGlobal',
+    'configuracion',
+    'carrito',
+    'pedidos'
+]
+
+export function resetearApp(){
+    APP_KEYS.forEach(key => localStorage.removeItem(key))
+    inicializarSistema()
+}
 
 export function inicializarSistema(){
     inicializarAdmin()
@@ -188,9 +205,7 @@ export function buscarGlobal(texto){
         window.location.href = "productos-admin.html";
         return;
     }
- 
-    window.location.href = "usuarios-admin.html";
-}
+ }
 
 export function previsualizarBusquedaGlobal(texto, dropdown) {
     if (!dropdown) return;
@@ -198,7 +213,7 @@ export function previsualizarBusquedaGlobal(texto, dropdown) {
     const { termino, usuariosMatch, productosMatch } = obtenerResultadosBusqueda(texto);
 
     if (!termino) {
-        dropdown.style.display = "none";
+        dropdown,classList.add("d-none")
         dropdown.innerHTML = "";
         return;
     }

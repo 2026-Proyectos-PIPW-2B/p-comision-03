@@ -84,7 +84,7 @@ export function actualizarNav() {
 export function verificarExpiracion() {
 
     const configuracion = obtenerLocalStorage("configuracion");
-
+    if(!obtenerUsuarioActual())return
     if (!configuracion.sesion.cierreAuto) return;
 
     const loginTime = Number(localStorage.getItem("loginTime"));

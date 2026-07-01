@@ -1,6 +1,6 @@
 :root {
     --sw: clamp(200px, 18vw, 280px);
-    --sc: clamp(54px, 5vw, 72px);
+    --sc: clamp(70px, 5vw, 72px);
 
     --bs-primary:     #fcf6e9;
     --bs-primary-rgb: 252, 246, 233;

@@ -19,6 +19,10 @@ export function agregarCarrito(producto){
         mostrarAlertaWarning("ERROR", "Debe iniciar sesión en su cuenta","login.html")
         return
     }
+     if(producto.stock === 0){
+        mostrarAlertaWarning("Sin stock", "Este producto no tiene unidades disponibles por el momento", "")
+        return
+    }
 
     const carritos = obtenerCarrito()
 
