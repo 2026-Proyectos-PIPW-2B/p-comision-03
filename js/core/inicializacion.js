@@ -306,7 +306,7 @@ function crearUsuarios(){
         final.push(UsuarioFinal)
         guardarLocalStorage(final,"usuariosfinales")
     }
-    if(pendiente.length===0){
+    if(pendiente===null ){
         pendiente.push(UsuarioPendiente)
         guardarLocalStorage(pendiente,"usuariospendientes")
     }

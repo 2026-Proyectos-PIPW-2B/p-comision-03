@@ -72,7 +72,6 @@ export function aceptarUsuario(indice){
     }
     guardarLocalStorage(pendientes, "usuariospendientes");
     guardarLocalStorage(finales, "usuariosfinales");
-
     
 }
 
