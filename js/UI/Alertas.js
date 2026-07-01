@@ -54,7 +54,7 @@ export function mostrarAlertaExito( msj_titulo, msj_subtitulo, ubicacion) {
 
       // Inicia la animación de la barra de progreso reduciéndola de 100% a 0% en 3.5 segundos
       const barra = document.getElementById("barraTiempo");
-      barra.style.transition = "width 1.5s linear";
+      barra.style.transition = "width 1s linear";
       barra.style.width = "0%";
     });
   });
@@ -66,7 +66,7 @@ export function mostrarAlertaExito( msj_titulo, msj_subtitulo, ubicacion) {
       overlay.remove();
       window.location.href = ubicacion;
     }, 300);
-  }, 1500);
+  }, 1000);
 }
 export function mostrarAlertaWarning(msj_titulo, msj_subtitulo, ubicacion) {
     if (document.getElementById("overlayWarning")) return;
@@ -121,7 +121,7 @@ export function mostrarAlertaWarning(msj_titulo, msj_subtitulo, ubicacion) {
       document.getElementById("toastWarning").classList.add("visible");
 
       const barra = document.getElementById("barraTiempoWarning");
-      barra.style.transition = "width 1.5s linear";
+      barra.style.transition = "width 1s linear";
       barra.style.width = "0%";
     });
   });
@@ -132,7 +132,7 @@ export function mostrarAlertaWarning(msj_titulo, msj_subtitulo, ubicacion) {
       overlay.remove();
       window.location.href = ubicacion;
     }, 300);
-  }, 1500);
+  }, 1000);
 }
 
 export function mostrarAlertaDanger(msj_titulo, msj_subtitulo, ubicacion) {
@@ -188,7 +188,7 @@ export function mostrarAlertaDanger(msj_titulo, msj_subtitulo, ubicacion) {
       document.getElementById("toastDanger").classList.add("visible");
 
       const barra = document.getElementById("barraTiempoDanger");
-      barra.style.transition = "width 1.5s linear";
+      barra.style.transition = "width 1s linear";
       barra.style.width = "0%";
     });
   });
@@ -199,7 +199,7 @@ export function mostrarAlertaDanger(msj_titulo, msj_subtitulo, ubicacion) {
       overlay.remove();
       window.location.href = ubicacion;
     }, 300);
-  }, 1500);
+  }, 1000);
 }
 
 

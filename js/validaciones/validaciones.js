@@ -94,11 +94,11 @@ function validarPassword(input_pass, divError_pass ,input_repass, divError_repas
     let validacionPass
     let validacionRePass
     
-    if(!validator.isStrongPassword(input_pass.value,{minLength:8, minLowerCase:1,minUppercase:1,minNumbers:1,minSymbol:0})){
+    if(!validator.isStrongPassword(password.value, {minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 0})){
         validacionPass={id: input_pass,div:divError_pass,mensaje:"La contraseña debe incluir al menos 8 caracteres, un carater en minuscula,uno en mayuscula y un numero"}
     }  
     else{
-        if (input_pass.value !== input_repass.value || input_pass.value === "") {
+        if (input_pass.value !== input_repass.value) {
             validacionPass= { id: input_pass, div:divError_pass, mensaje: "Las contraseñas no coinciden", formulario: false}
             validacionRePass = { id: input_repass, div: divError_repass, mensaje: "Las contraseñas no coinciden", formulario: false}
         }
