@@ -5,7 +5,7 @@ import { renderizarTabla } from './renderizado-productos.js'
 import { inicializarFiltros } from "./filtros-productos.js"
 import { obtenerProductos } from "./servicios-productos.js"
 import { obtenerProductosBajoStock, obtenerProductosSinStock } from "./util-productos.js"
-import { crearPaginador, renderPaginacion } from "../core/paginador.js";
+import { crearPaginador, renderPaginacion } from "../core/Paginador.js";
 
 const listaImagenes = document.getElementById("listaImagenes");
 let imagenSeleccionada = "";
