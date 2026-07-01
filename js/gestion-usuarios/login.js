@@ -40,7 +40,7 @@ function iniciarSesion() {
  
   // No existe ningún perfil aprobado con ese email -> avisa y manda a registro
   if (!usuario) {
-    mostrarAlertaWarning("No tenés cuesta registrada","Te vamos a redirigir al registro","/registroUF.html")
+    mostrarAlertaWarning("No tenés cuesta registrada","Te vamos a redirigir al registro","registroUF.html")
     return;
   }
  
@@ -52,7 +52,7 @@ function iniciarSesion() {
  
   // Existe, la contraseña es correcta, pero está deshabilitado
   if (!usuario.habilitado) {
-    mostrarAlertaDanger("Tu cuenta esta deshabilitada","El administrador deshabilito tu cuenta por algun incumplimiento","/index.html")
+    mostrarAlertaDanger("Tu cuenta esta deshabilitada","El administrador deshabilito tu cuenta por algun incumplimiento","index.html")
     return;
   }
  
