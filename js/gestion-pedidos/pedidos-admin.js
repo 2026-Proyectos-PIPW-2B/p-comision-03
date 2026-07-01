@@ -2,7 +2,7 @@ import { renderizarTabla } from "./renderizado-pedidos.js";
 import { inicializarFiltros } from "./filtros-pedidos.js";
 import { obtenerPedidos } from "./servicios-pedidos.js";
 import { obtenerPedidosRecientes } from "./util-pedidos.js";
-import { crearPaginador, renderPaginacion } from "../core/paginador.js";
+import { crearPaginador, renderPaginacion } from "../core/Paginador.js";
 
 const PEDIDOS_POR_PAGINA = 10;
 
